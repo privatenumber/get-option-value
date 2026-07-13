@@ -271,7 +271,7 @@ One flag is exported per readable Node CLI option. Each links to its definition 
 
 ### How does it work?
 
-Two layers, both pinned to real Node behavior. A build step downloads every supported major (18-26), dumps its internal option schema with `--expose-internals`, and bakes a per-option descriptor into `src/flags.ts` — every spelling that affects the option (aliases, `=`-forms, negation, implications), derived by resolving probe arguments through Node's parsing rules (aliases, negation, implications) rather than hand-inverting its tables. At runtime, a slim scanner reads `NODE_OPTIONS` and `process.execArgv` for just the flag you asked about. See [CONTRIBUTING.md](https://github.com/privatenumber/get-option-value/blob/master/CONTRIBUTING.md) for the full architecture.
+Two layers, both pinned to real Node behavior. A build step downloads every supported major (18-26), dumps its internal option schema with `--expose-internals`, and bakes a per-option descriptor into `src/flags.ts` — every spelling that affects the option (aliases, `=`-forms, negation, implications), derived by resolving probe arguments through Node's parsing rules (aliases, negation, implications) rather than hand-inverting its tables. At runtime, a slim scanner reads `NODE_OPTIONS` and `process.execArgv` for just the flag you asked about. See [CONTRIBUTING.md](https://github.com/privatenumber/get-option-value/blob/develop/CONTRIBUTING.md) for the full architecture.
 
 ### How accurate is it?
 
