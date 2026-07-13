@@ -1,0 +1,48 @@
+{
+  "name": "get-option-value",
+  "version": "0.0.0-semantic-release",
+  "description": "Type-safe, tree-shakable reader of Node.js CLI option values",
+  "keywords": [
+    "node",
+    "options",
+    "cli",
+    "flags",
+    "getOptionValue",
+    "argv",
+    "NODE_OPTIONS",
+    "execArgv"
+  ],
+  "license": "MIT",
+  "repository": "privatenumber/get-option-value",
+  "author": {
+    "name": "Hiroki Osame",
+    "email": "hiroki.osame@gmail.com"
+  },
+  "files": [
+    "dist",
+    "skills"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./flags": {
+      "types": "./dist/flags.d.mts",
+      "default": "./dist/flags.mjs"
+    }
+  },
+  "imports": {
+    "#get-option-value": {
+      "default": "./dist/index.mjs"
+    },
+    "#get-option-value/flags": {
+      "default": "./dist/flags.mjs"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
