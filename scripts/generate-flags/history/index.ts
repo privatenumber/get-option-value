@@ -30,6 +30,7 @@ const normalizeOption = ({
 	impliesNot,
 	negationImplies,
 	negationImpliesNot,
+	environment,
 	helpText,
 }: OptionSpec): OptionSpec => ({
 	type,
@@ -38,6 +39,7 @@ const normalizeOption = ({
 	...(impliesNot && { impliesNot }),
 	...(negationImplies && { negationImplies }),
 	...(negationImpliesNot && { negationImpliesNot }),
+	...(environment && { environment }),
 	...(helpText && { helpText }),
 });
 

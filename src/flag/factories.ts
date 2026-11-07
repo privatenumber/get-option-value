@@ -34,6 +34,33 @@ export const booleanFlag = (
 	fold: setByEffect,
 });
 
+/**
+ * A boolean whose starting value Node reads from an environment variable
+ * (`"1"` sets it) before parsing NODE_OPTIONS and argv, such as
+ * NODE_PRESERVE_SYMLINKS
+ * (https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L2528-L2546).
+ * Read on every call, like NODE_OPTIONS. Separate from booleanFlag so flags
+ * without a variable never reference `process`.
+ */
+export const environmentBooleanFlag = (
+	variable: string,
+	forms: readonly Form[],
+): Flag<boolean> => ({
+	forms,
+	init: () => process.env[variable] === '1',
+	fold: setByEffect,
+});
+
+/** A string whose starting value is an environment variable's raw value. */
+export const environmentStringFlag = (
+	variable: string,
+	forms: readonly Form[],
+): Flag<string> => ({
+	forms,
+	init: () => process.env[variable] ?? '',
+	fold: returnRaw,
+});
+
 export const stringListFlag = (
 	forms: readonly Form[],
 ): Flag<string[]> => ({

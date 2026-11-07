@@ -14,7 +14,7 @@
  * Run: pnpm generate
  */
 import { readHistory } from './history/index.ts';
-import { readNodeOptionsSource } from './implications.ts';
+import { readNodeSource } from './implications.ts';
 import { compareVersions } from './version.ts';
 import { emit } from './emit.ts';
 
@@ -27,5 +27,5 @@ const releases = [...history.keys()].sort(compareVersions);
 await emit({
 	releases,
 	schemas: releases.map(release => history.get(release)!),
-	readSource: readNodeOptionsSource,
+	readSource: readNodeSource,
 });

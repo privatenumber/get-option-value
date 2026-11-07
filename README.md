@@ -57,7 +57,7 @@ getOptionValue(titleFlag)
 getOptionValue(inspectPortFlag)
 ```
 
-The value is computed from the option's real default plus `process.env.NODE_OPTIONS` and `process.execArgv`, applied in [the order Node applies them at startup](https://github.com/nodejs/node/blob/v24.15.0/src/node.cc#L952-L967).
+The value is computed from the option's real default plus `process.env.NODE_OPTIONS` and `process.execArgv`, applied in [the order Node applies them at startup](https://github.com/nodejs/node/blob/v24.15.0/src/node.cc#L952-L967). A few options also start from an environment variable that Node reads before parsing, and the flag reads it too: `NODE_PENDING_DEPRECATION`, `NODE_PRESERVE_SYMLINKS`, `NODE_PRESERVE_SYMLINKS_MAIN`, `NODE_REDIRECT_WARNINGS`, `NODE_USE_ENV_PROXY`, `NODE_USE_SYSTEM_CA`, and `NODE_ICU_DATA`, on the releases that read them ([source](https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L2528-L2546)).
 
 - **Naming** — a flag is the camelCased option name plus a `Flag` suffix: `--inspect-brk` → `inspectBrkFlag`, `--import` → `importFlag`.
 - **Negation** — booleans are read directly; for a `--no-<name>` check, negate the value: `!getOptionValue(addonsFlag)`.
@@ -313,19 +313,20 @@ One flag is exported per readable Node CLI option. Each links to its definition 
 
 ### How does it work?
 
-Two layers, both pinned to real Node behavior. A recorder downloads every Node release since 18.0.0 (every minor and patch, not one per major), dumps its internal option schema with `--expose-internals`, and commits it as a per-release history. A build step bakes a per-option descriptor into `src/flags.ts` — every spelling that affects the option (aliases, `=`-forms, negation, implications), derived by resolving probe arguments through Node's parsing rules (aliases, negation, implications) rather than hand-inverting its tables. At runtime, a slim scanner reads `NODE_OPTIONS` and `process.execArgv` for just the flag you asked about. See [CONTRIBUTING.md](https://github.com/privatenumber/get-option-value/blob/develop/CONTRIBUTING.md) for the full architecture.
+Two layers, both pinned to real Node behavior. A recorder downloads every Node release since 18.0.0 (every minor and patch, not one per major), dumps its internal option schema with `--expose-internals`, and commits it as a per-release history. A build step bakes a per-option descriptor into `src/flags.ts` — every spelling that affects the option (aliases, `=`-forms, negation, implications), derived by resolving probe arguments through Node's parsing rules (aliases, negation, implications) rather than hand-inverting its tables. At runtime, a slim scanner reads `NODE_OPTIONS` and `process.execArgv` (and the option's environment variable, if it has one) for just the flag you asked about. See [CONTRIBUTING.md](https://github.com/privatenumber/get-option-value/blob/develop/CONTRIBUTING.md) for the full architecture.
 
 ### How accurate is it?
 
-Exact on every Node release from 18.0.0 through the newest recorded release, verified against the real internal binding for *every* flag on pinned releases: the first release of every version branch, plus the newest release of each major. Node changes options in minor and patch releases, not only in majors: `--env-file` became a list in 24.12.0 and 25.2.0, and type stripping was enabled by default in 22.18.0. So each flag that changed branches on the exact release where it changed. A scheduled job records new Node releases and opens a PR.
+Exact on every Node release from 18.0.0 through the newest recorded release, verified against the real internal binding for *every* flag on pinned releases: the fewest releases that run every version branch where its option exists, plus the newest release of each major. Node changes options in minor and patch releases, not only in majors: `--env-file` became a list in 24.12.0 and 25.2.0, and type stripping was enabled by default in 22.18.0. So each flag that changed branches on the exact release where it changed. A scheduled job records new Node releases and opens a PR.
 
 Known gaps:
-- An option that doesn't exist on the running release (newer, or removed) reads a neighboring release's default instead of `undefined`. This is unobservable, because that release can't boot with the option.
-- Three flags keep their published `string[]` type on old EOL releases where Node stored a single string: `--experimental-loader` below 18.6.0, and `--allow-fs-read` / `--allow-fs-write` below 20.7.0. There they read `["x"]` where Node has `"x"`.
-- Prereleases and releases newer than the recorded history read the newest recorded behavior.
+- An option that doesn't exist on the running release (newer, or removed) returns a neighboring release's default, where Node's binding returns `undefined`. Don't use the value to detect whether the running Node supports an option. A renamed option is the exception: its old and new exports read the same option on every release.
+- Three flags keep their published `string[]` type on old EOL releases where Node stored a single string: `--experimental-loader` below 18.6.0, and `--allow-fs-read` / `--allow-fs-write` below 20.7.0. There they return every occurrence (`--allow-fs-read=/a --allow-fs-read=/b` gives `["/a", "/b"]`), where Node keeps only the last (`"/b"`).
+- Options set in a Node config file ([`--config-file`](https://nodejs.org/download/release/v26.13.0/docs/api/cli.html)) aren't seen: Node applies them without adding them to `process.execArgv` or `NODE_OPTIONS`.
+- A prerelease, or a release newer than the recorded history, reads the data of the newest recorded release at or below its version number (`27.0.0-alpha.0.0.0` reads as 27.0.0).
 - The data comes from official Node builds. Runtimes that report a Node version, such as Deno, Bun, or Electron, can parse options differently.
 
-A renamed option keeps its export: `experimentalConfigFileFlag` is the same flag as `configFileFlag`, because Node 26.12.0 kept `--experimental-config-file` as an alias.
+A renamed option keeps its export, and both names read the same option on every release: `experimentalConfigFileFlag` is the same flag as `configFileFlag`, because Node 26.12.0 kept `--experimental-config-file` as an alias of `--config-file`.
 
 ### Why not just parse `process.execArgv` myself?
 

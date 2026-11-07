@@ -1,3 +1,4 @@
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, test, expect } from 'manten';
@@ -41,6 +42,7 @@ const readFlags = async (
 	flags: string[],
 	environment = '',
 	requireComplete = false,
+	variables: Record<string, string> = {},
 ): Promise<Comparison> => {
 	const { stdout } = await spawn(
 		nodePath,
@@ -48,6 +50,7 @@ const readFlags = async (
 		{
 			cwd: fixturesDirectory,
 			env: {
+				...variables,
 				NODE_OPTIONS: environment,
 				FLAG_MAP: flagMap,
 				REQUIRE_COMPLETE_FLAG_MAP: requireComplete ? '1' : '',
@@ -118,6 +121,19 @@ const supportsImport = async (nodePath: string) => {
 	return stdout === 'true';
 };
 
+// Every variable HandleEnvOptions reads in some recorded release; a release
+// that doesn't read one ignores it, which the parity check also covers
+const optionVariables = {
+	// Any directory: official builds embed ICU data and ignore a missing file
+	NODE_ICU_DATA: os.tmpdir(),
+	NODE_PENDING_DEPRECATION: '1',
+	NODE_PRESERVE_SYMLINKS: '1',
+	NODE_PRESERVE_SYMLINKS_MAIN: '1',
+	NODE_REDIRECT_WARNINGS: os.devNull,
+	NODE_USE_ENV_PROXY: '1',
+	NODE_USE_SYSTEM_CA: '1',
+};
+
 // Pinned by the generator: the newest release of each major plus the first
 // release of every flag's version segment, so each emitted branch runs
 // against a real binary and a new Node release can't change the test matrix.
@@ -141,6 +157,21 @@ for (const version of flagsMeta.testReleases) {
 			expect(comparison['--require'].ours).toStrictEqual(['./noop.cjs']);
 			expect(comparison['--import'].ours).toStrictEqual(hasImport ? ['./noop.mjs'] : []);
 			expect(comparison['--inspect'].ours).toBe(true);
+			assertParity(comparison, version);
+		});
+
+		// Node reads these before NODE_OPTIONS and argv, which still override
+		test('every flag matches under option environment variables', async () => {
+			const comparison = await readFlags(
+				nodePath,
+				['--no-preserve-symlinks'],
+				'',
+				true,
+				optionVariables,
+			);
+			expect(comparison['--pending-deprecation'].ours).toBe(true);
+			expect(comparison['--preserve-symlinks'].ours).toBe(false);
+			expect(comparison['--redirect-warnings'].ours).toBe(optionVariables.NODE_REDIRECT_WARNINGS);
 			assertParity(comparison, version);
 		});
 	});

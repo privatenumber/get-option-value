@@ -54,7 +54,21 @@ Cross-check: Node's generated docs record some of these changes. [`cli.json` for
 
 `https://nodejs.org/dist/index.json` listed `v27.0.0-alpha.0.0.0` (dated 2026-10-29) as its first entry on 2026-11-07. The recorder excludes versions that are not plain `x.y.z`.
 
+## Observed: options that start from environment variables
+
+Node reads some options from environment variables before it parses the config file, `NODE_OPTIONS`, and argv ([node.cc:921](https://github.com/nodejs/node/blob/v26.13.0/src/node.cc#L921) calls `HandleEnvOptions` first). Flags then override the starting value. Two code paths do this:
+
+- `HandleEnvOptions` in `node_options.cc` ([v26.13.0 L2528-L2546](https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L2528-L2546)): `NODE_PENDING_DEPRECATION`, `NODE_PRESERVE_SYMLINKS`, `NODE_PRESERVE_SYMLINKS_MAIN`, and `NODE_REDIRECT_WARNINGS` since 18.0.0; `NODE_USE_ENV_PROXY` and `NODE_USE_SYSTEM_CA` in later releases. A boolean is set when the variable is exactly `"1"`; a string takes the raw value.
+- `node.cc`: in some releases it read `NODE_USE_SYSTEM_CA` into a per-process option ([v22.23.4 L927-L935](https://github.com/nodejs/node/blob/v22.23.4/src/node.cc#L927-L935), with a TODO to move it into `HandleEnvOptions`). It reads `NODE_ICU_DATA` into `--icu-data-dir` when that option is empty ([v26.13.0 L1084-L1086](https://github.com/nodejs/node/blob/v26.13.0/src/node.cc#L1084-L1086)). An explicit empty value is rejected (Node 26.13.0: `--icu-data-dir= requires an argument`), so this also acts as a starting value.
+
+Which release reads which variable is recorded per release in the history's `environment` field. For example, `--use-system-ca` reads `NODE_USE_SYSTEM_CA` from 22.19.0 on the 22 line and from 24.6.0 on the 24 line (observed with the real-binary oracle: Node 22.23.4 and 25.1.0 returned `true` with the variable set).
+
+Since 26.9.0, `node_options.cc` registers boolean options with a `BOOL_FIELD(field)` macro ([v26.13.0 L798](https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L798)) instead of `&EnvironmentOptions::field`. A source parser that maps fields to options must accept both.
+
+## Observed: config-file options are invisible to the process
+
+Node 26.13.0 with `node.config.json` containing `{"nodeOptions":{"max-http-header-size":10,"conditions":["cfg"]}}` and `--config-file=node.config.json`: the internal binding reports `10` and `["cfg"]`, while `process.execArgv` only contains `--config-file=node.config.json` and `NODE_OPTIONS` is unset. With `--experimental-default-config-file`, Node rewrites `process.execArgv` to `--config-file=node.config.json`.
+
 ## Evidence gaps
 
-- **Platform:** the 222 dumps were recorded on macOS arm64. Defaults can depend on the build (`HAVE_AMARO`), so a platform difference is possible. The Linux CI oracle test compares real Linux binaries on the pinned `testReleases` against this data. A local Docker cross-check was not run.
-- **Config and env files:** Node config files (`--config-file`) and `--env-file` can supply options. Whether those options appear in `process.execArgv` or `NODE_OPTIONS` was not checked.
+- **Platform:** the 222 dumps were recorded on macOS arm64. Defaults can depend on the build (`HAVE_AMARO`), so a platform difference is possible. The Linux CI oracle test passed on all pinned `testReleases` with this data (PR #1), so no difference has been observed.

@@ -2,51 +2,31 @@
 	"version": "26.13.0",
 	"testReleases": [
 		"18.0.0",
-		"18.1.0",
-		"18.17.0",
 		"18.20.8",
-		"19.0.0",
+		"19.4.0",
 		"19.9.0",
-		"20.0.0",
-		"20.19.0",
+		"20.18.3",
 		"20.20.2",
-		"21.0.0",
 		"21.7.3",
-		"22.0.0",
-		"22.7.0",
-		"22.10.0",
-		"22.12.0",
-		"22.13.0",
+		"22.11.0",
 		"22.18.0",
-		"22.19.0",
 		"22.23.4",
-		"23.0.0",
-		"23.4.0",
-		"23.6.0",
-		"23.9.0",
+		"23.3.0",
+		"23.8.0",
 		"23.11.1",
-		"24.0.0",
-		"24.5.0",
-		"24.12.0",
-		"24.19.0",
 		"24.22.2",
-		"25.0.0",
-		"25.2.0",
-		"25.5.0",
+		"25.1.0",
 		"25.9.0",
-		"26.0.0",
-		"26.1.0",
-		"26.5.0",
-		"26.9.0",
-		"26.11.0",
+		"26.8.2",
+		"26.10.0",
 		"26.13.0"
 	],
 	"flags": [
 		{
 			"export": "abortOnUncaughtExceptionFlag",
 			"option": "--abort-on-uncaught-exception",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "aborting instead of exiting causes a core file to be generated for analysis",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1535"
@@ -55,8 +35,8 @@
 			"export": "addonsFlag",
 			"option": "--addons",
 			"display": "--no-addons",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "disable loading native addons",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L995"
@@ -64,8 +44,8 @@
 		{
 			"export": "allowAddonsFlag",
 			"option": "--allow-addons",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow use of addons when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L882"
@@ -73,8 +53,8 @@
 		{
 			"export": "allowChildProcessFlag",
 			"option": "--allow-child-process",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow use of child process when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L888"
@@ -82,8 +62,8 @@
 		{
 			"export": "allowFfiFlag",
 			"option": "--allow-ffi",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow use of FFI when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L895"
@@ -91,8 +71,8 @@
 		{
 			"export": "allowFsReadFlag",
 			"option": "--allow-fs-read",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"inexactBelow": "20.7.0",
 			"description": "allow permissions to read the filesystem",
@@ -101,8 +81,8 @@
 		{
 			"export": "allowFsVfsFlag",
 			"option": "--allow-fs-vfs",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow mounting a virtual file system when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L876"
@@ -110,8 +90,8 @@
 		{
 			"export": "allowFsWriteFlag",
 			"option": "--allow-fs-write",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"inexactBelow": "20.7.0",
 			"description": "allow permissions to write in the filesystem",
@@ -120,8 +100,8 @@
 		{
 			"export": "allowInspectorFlag",
 			"option": "--allow-inspector",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow use of inspector when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L902"
@@ -129,8 +109,8 @@
 		{
 			"export": "allowNetFlag",
 			"option": "--allow-net",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow use of network when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L908"
@@ -138,8 +118,8 @@
 		{
 			"export": "allowOpensslStoreFlag",
 			"option": "--allow-openssl-store",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow use of OpenSSL STORE loaders when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L931"
@@ -147,8 +127,8 @@
 		{
 			"export": "allowWasiFlag",
 			"option": "--allow-wasi",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow wasi when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L914"
@@ -156,8 +136,8 @@
 		{
 			"export": "allowWorkerFlag",
 			"option": "--allow-worker",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "allow worker threads when any permissions are set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L920"
@@ -166,8 +146,8 @@
 			"export": "asyncContextFrameFlag",
 			"option": "--async-context-frame",
 			"display": "--no-async-context-frame",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Improve AsyncLocalStorage performance with AsyncContextFrame",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L946"
@@ -175,8 +155,8 @@
 		{
 			"export": "benchFlag",
 			"option": "--bench",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "launch benchmark runner on startup",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1129"
@@ -184,8 +164,8 @@
 		{
 			"export": "benchIsolationFlag",
 			"option": "--bench-isolation",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "configures the type of benchmark isolation used in the benchmark runner",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1136"
@@ -193,8 +173,8 @@
 		{
 			"export": "benchNamePatternFlag",
 			"option": "--bench-name-pattern",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "run benchmarks whose name matches this regular expression",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1143"
@@ -202,8 +182,8 @@
 		{
 			"export": "benchReporterFlag",
 			"option": "--bench-reporter",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "report benchmark output using the given reporter",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1149"
@@ -211,8 +191,8 @@
 		{
 			"export": "benchReporterDestinationFlag",
 			"option": "--bench-reporter-destination",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "report the given benchmark reporter to the given destination",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1155"
@@ -220,8 +200,8 @@
 		{
 			"export": "benchSamplesFlag",
 			"option": "--bench-samples",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "specify the number of measured benchmark samples",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1162"
@@ -229,8 +209,8 @@
 		{
 			"export": "benchWarmupFlag",
 			"option": "--bench-warmup",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "specify the number of unreported benchmark warmup samples",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1171"
@@ -238,8 +218,8 @@
 		{
 			"export": "buildSeaFlag",
 			"option": "--build-sea",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Build a Node.js single executable application",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1820"
@@ -247,8 +227,8 @@
 		{
 			"export": "buildSnapshotFlag",
 			"option": "--build-snapshot",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Generate a snapshot blob when the process exits.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1598"
@@ -256,8 +236,8 @@
 		{
 			"export": "buildSnapshotConfigFlag",
 			"option": "--build-snapshot-config",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Generate a snapshot blob when the process exits using aJSON configuration in the specified path.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1602"
@@ -265,8 +245,8 @@
 		{
 			"export": "checkFlag",
 			"option": "--check",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "syntax check script without executing",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1433"
@@ -274,8 +254,8 @@
 		{
 			"export": "completionBashFlag",
 			"option": "--completion-bash",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "print source-able bash completion script",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1661"
@@ -283,8 +263,8 @@
 		{
 			"export": "conditionsFlag",
 			"option": "--conditions",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "additional user conditions for conditional exports and imports",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L678"
@@ -292,8 +272,8 @@
 		{
 			"export": "configFileFlag",
 			"option": "--config-file",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set config file path",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1118"
@@ -301,8 +281,8 @@
 		{
 			"export": "cpuProfFlag",
 			"option": "--cpu-prof",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Start the V8 CPU profiler on start up, and write the CPU profile to disk before exit. If --cpu-prof-dir is not specified, write the profile to the current working directory.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1045"
@@ -310,8 +290,8 @@
 		{
 			"export": "cpuProfDirFlag",
 			"option": "--cpu-prof-dir",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Directory where the V8 profiles generated by --cpu-prof will be placed. Does not affect --prof.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1061"
@@ -319,8 +299,8 @@
 		{
 			"export": "cpuProfIntervalFlag",
 			"option": "--cpu-prof-interval",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "specified sampling interval in microseconds for the V8 CPU profile generated with --cpu-prof. (default: 1000)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1056"
@@ -328,8 +308,8 @@
 		{
 			"export": "cpuProfNameFlag",
 			"option": "--cpu-prof-name",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "specified file name of the V8 CPU profile generated with --cpu-prof",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1051"
@@ -337,8 +317,8 @@
 		{
 			"export": "debugFlag",
 			"option": "--debug",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L646"
@@ -346,8 +326,8 @@
 		{
 			"export": "debugArraybufferAllocationsFlag",
 			"option": "--debug-arraybuffer-allocations",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1637"
@@ -355,8 +335,8 @@
 		{
 			"export": "debugBrkFlag",
 			"option": "--debug-brk",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L648"
@@ -365,8 +345,8 @@
 			"export": "deprecationFlag",
 			"option": "--deprecation",
 			"display": "--no-deprecation",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "silence deprecation warnings",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L979"
@@ -374,8 +354,8 @@
 		{
 			"export": "diagnosticDirFlag",
 			"option": "--diagnostic-dir",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set dir for all output files (default: current working directory)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L707"
@@ -383,8 +363,8 @@
 		{
 			"export": "disableProtoFlag",
 			"option": "--disable-proto",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "disable Object.prototype.__proto__",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1641"
@@ -392,8 +372,8 @@
 		{
 			"export": "disableSigusr1Flag",
 			"option": "--disable-sigusr1",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Disable inspector thread to be listening for SIGUSR1 signal",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L712"
@@ -401,8 +381,8 @@
 		{
 			"export": "disableWarningFlag",
 			"option": "--disable-warning",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "silence specific process warnings",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1010"
@@ -410,8 +390,8 @@
 		{
 			"export": "disableWasmTrapHandlerFlag",
 			"option": "--disable-wasm-trap-handler",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Disable trap-handler-based WebAssembly bound checks. V8 will insert inline bound checks when compiling WebAssembly which may slow down performance.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1812"
@@ -419,8 +399,8 @@
 		{
 			"export": "dnsResultOrderFlag",
 			"option": "--dns-result-order",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set default value of verbatim in dns.lookup. Options are 'ipv4first' (IPv4 addresses are placed before IPv6 addresses) 'ipv6first' (IPv6 addresses are placed before IPv4 addresses) 'verbatim' (addresses are in the order the DNS resolver returned)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L717"
@@ -428,8 +408,8 @@
 		{
 			"export": "enableFipsFlag",
 			"option": "--enable-fips",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable FIPS crypto at startup",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1738"
@@ -437,8 +417,8 @@
 		{
 			"export": "enableFipsIndicatorEventsFlag",
 			"option": "--enable-fips-indicator-events",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "publish FIPS indicator results to the crypto.fips.indicator diagnostics channel",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1742"
@@ -446,8 +426,8 @@
 		{
 			"export": "enableNetworkFamilyAutoselectionFlag",
 			"option": "--enable-network-family-autoselection",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Enable network address family autodetection algorithm",
 			"url": "https://github.com/nodejs/node/blob/v19.9.0/src/node_options.cc#L361"
@@ -455,8 +435,8 @@
 		{
 			"export": "enableSourceMapsFlag",
 			"option": "--enable-source-maps",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Source Map V3 support for stack traces",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L737"
@@ -464,8 +444,8 @@
 		{
 			"export": "entryUrlFlag",
 			"option": "--entry-url",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Treat the entrypoint as a URL",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L741"
@@ -473,9 +453,9 @@
 		{
 			"export": "envFileFlag",
 			"option": "--env-file",
-			"factories": [
-				"stringFlag",
-				"stringListFlag"
+			"types": [
+				"string",
+				"string[]"
 			],
 			"description": "set environment variables from supplied file",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1110"
@@ -483,9 +463,9 @@
 		{
 			"export": "envFileIfExistsFlag",
 			"option": "--env-file-if-exists",
-			"factories": [
-				"stringFlag",
-				"stringListFlag"
+			"types": [
+				"string",
+				"string[]"
 			],
 			"description": "set environment variables from supplied file",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1114"
@@ -493,8 +473,8 @@
 		{
 			"export": "evalFlag",
 			"option": "--eval",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "evaluate script",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1444"
@@ -503,8 +483,8 @@
 			"export": "experimentalAddonModulesFlag",
 			"option": "--experimental-addon-modules",
 			"display": "--no-experimental-addon-modules",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental import support for addons",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L745"
@@ -512,8 +492,8 @@
 		{
 			"export": "experimentalAsyncContextFrameFlag",
 			"option": "--experimental-async-context-frame",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Improve AsyncLocalStorage performance with AsyncContextFrame",
 			"url": "https://github.com/nodejs/node/blob/v23.11.1/src/node_options.cc#L529"
@@ -521,8 +501,8 @@
 		{
 			"export": "experimentalBenchFlag",
 			"option": "--experimental-bench",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental node:bench module and benchmark runner",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L749"
@@ -530,8 +510,8 @@
 		{
 			"export": "experimentalConfigFileFlag",
 			"option": "--experimental-config-file",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set config file path",
 			"url": "https://github.com/nodejs/node/blob/v26.11.1/src/node_options.cc#L1118"
@@ -539,9 +519,9 @@
 		{
 			"export": "experimentalDefaultConfigFileFlag",
 			"option": "--experimental-default-config-file",
-			"factories": [
-				"booleanFlag",
-				"stringFlag"
+			"types": [
+				"boolean",
+				"string"
 			],
 			"description": "set config file from default config file",
 			"url": "https://github.com/nodejs/node/blob/v26.0.0/src/node_options.cc#L890"
@@ -549,8 +529,8 @@
 		{
 			"export": "experimentalDefaultTypeFlag",
 			"option": "--experimental-default-type",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set module system to use by default",
 			"url": "https://github.com/nodejs/node/blob/v23.3.0/src/node_options.cc#L763"
@@ -559,8 +539,8 @@
 			"export": "experimentalDetectModuleFlag",
 			"option": "--experimental-detect-module",
 			"display": "--no-experimental-detect-module",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "when ambiguous modules fail to evaluate because they contain ES module syntax, try again to evaluate them as ES modules",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L683"
@@ -568,8 +548,8 @@
 		{
 			"export": "experimentalEventsourceFlag",
 			"option": "--experimental-eventsource",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental EventSource API",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L754"
@@ -577,9 +557,9 @@
 		{
 			"export": "experimentalFetchFlag",
 			"option": "--experimental-fetch",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L759"
@@ -588,8 +568,8 @@
 			"export": "experimentalFfiFlag",
 			"option": "--experimental-ffi",
 			"display": "--no-experimental-ffi",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental node:ffi module",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L761"
@@ -597,9 +577,9 @@
 		{
 			"export": "experimentalGlobalCustomeventFlag",
 			"option": "--experimental-global-customevent",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L777"
@@ -608,8 +588,8 @@
 			"export": "experimentalGlobalNavigatorFlag",
 			"option": "--experimental-global-navigator",
 			"display": "--no-experimental-global-navigator",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "expose experimental Navigator API on the global scope",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L832"
@@ -617,9 +597,9 @@
 		{
 			"export": "experimentalGlobalWebcryptoFlag",
 			"option": "--experimental-global-webcrypto",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L837"
@@ -627,8 +607,8 @@
 		{
 			"export": "experimentalImportMetaResolveFlag",
 			"option": "--experimental-import-meta-resolve",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental ES Module import.meta.resolve() parentURL support",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L851"
@@ -636,8 +616,8 @@
 		{
 			"export": "experimentalImportTextFlag",
 			"option": "--experimental-import-text",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental support for importing source as text with import attributes",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L846"
@@ -645,8 +625,8 @@
 		{
 			"export": "experimentalInspectorNetworkResourceFlag",
 			"option": "--experimental-inspector-network-resource",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental load network resources via the inspector",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1075"
@@ -654,8 +634,8 @@
 		{
 			"export": "experimentalLoaderFlag",
 			"option": "--experimental-loader",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"inexactBelow": "18.6.0",
 			"description": "use the specified module as a custom loader",
@@ -664,8 +644,8 @@
 		{
 			"export": "experimentalNetworkImportsFlag",
 			"option": "--experimental-network-imports",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental https: support for the ES Module loader",
 			"url": "https://github.com/nodejs/node/blob/v22.5.1/src/node_options.cc#L450"
@@ -673,8 +653,8 @@
 		{
 			"export": "experimentalNetworkInspectionFlag",
 			"option": "--experimental-network-inspection",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental network inspection support",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1066"
@@ -682,8 +662,8 @@
 		{
 			"export": "experimentalPackageMapFlag",
 			"option": "--experimental-package-map",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "use the specified file for package map resolution",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1124"
@@ -691,8 +671,8 @@
 		{
 			"export": "experimentalPermissionFlag",
 			"option": "--experimental-permission",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable the permission system",
 			"url": "https://github.com/nodejs/node/blob/v23.4.0/src/node_options.cc#L454"
@@ -700,8 +680,8 @@
 		{
 			"export": "experimentalPolicyFlag",
 			"option": "--experimental-policy",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "use the specified file as a security policy",
 			"url": "https://github.com/nodejs/node/blob/v22.1.0/src/node_options.cc#L448"
@@ -709,8 +689,8 @@
 		{
 			"export": "experimentalPrintRequiredTlaFlag",
 			"option": "--experimental-print-required-tla",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Print pending top-level await. If --require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to find and print top-level await in the graph",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L689"
@@ -718,9 +698,9 @@
 		{
 			"export": "experimentalQuicFlag",
 			"option": "--experimental-quic",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L813"
@@ -729,8 +709,8 @@
 			"export": "experimentalReplAwaitFlag",
 			"option": "--experimental-repl-await",
 			"display": "--no-experimental-repl-await",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental await keyword support in REPL",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L926"
@@ -739,8 +719,8 @@
 			"export": "experimentalRequireModuleFlag",
 			"option": "--experimental-require-module",
 			"display": "--no-experimental-require-module",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Legacy alias for --require-module",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L701"
@@ -748,8 +728,8 @@
 		{
 			"export": "experimentalSeaConfigFlag",
 			"option": "--experimental-sea-config",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Generate a blob that can be embedded into the single executable application",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1804"
@@ -757,8 +737,8 @@
 		{
 			"export": "experimentalShadowRealmFlag",
 			"option": "--experimental-shadow-realm",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1590"
@@ -766,9 +746,9 @@
 		{
 			"export": "experimentalSpecifierResolutionFlag",
 			"option": "--experimental-specifier-resolution",
-			"factories": [
-				"stringFlag",
-				"undefinedFlag"
+			"types": [
+				"string",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L975"
@@ -777,8 +757,8 @@
 			"export": "experimentalSqliteFlag",
 			"option": "--experimental-sqlite",
 			"display": "--no-experimental-sqlite",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental node:sqlite module",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L778"
@@ -786,8 +766,8 @@
 		{
 			"export": "experimentalStorageInspectionFlag",
 			"option": "--experimental-storage-inspection",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental storage inspection support",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1069"
@@ -795,8 +775,8 @@
 		{
 			"export": "experimentalStreamIterFlag",
 			"option": "--experimental-stream-iter",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental iterable streams API (node:stream/iter)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L783"
@@ -805,8 +785,8 @@
 			"export": "experimentalStripTypesFlag",
 			"option": "--experimental-strip-types",
 			"display": "--no-experimental-strip-types",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Experimental type-stripping for TypeScript files.",
 			"url": "https://github.com/nodejs/node/blob/v25.1.0/src/node_options.cc#L1074"
@@ -814,8 +794,8 @@
 		{
 			"export": "experimentalTestCoverageFlag",
 			"option": "--experimental-test-coverage",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable code coverage in the test runner",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1207"
@@ -823,8 +803,8 @@
 		{
 			"export": "experimentalTestIsolationFlag",
 			"option": "--experimental-test-isolation",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "configures the type of test isolation used in the test runner",
 			"url": "https://github.com/nodejs/node/blob/v23.5.0/src/node_options.cc#L687"
@@ -832,8 +812,8 @@
 		{
 			"export": "experimentalTestModuleMocksFlag",
 			"option": "--experimental-test-module-mocks",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable module mocking in the test runner",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1235"
@@ -841,9 +821,9 @@
 		{
 			"export": "experimentalTestSnapshotsFlag",
 			"option": "--experimental-test-snapshots",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1241"
@@ -851,8 +831,8 @@
 		{
 			"export": "experimentalTestTagFilterFlag",
 			"option": "--experimental-test-tag-filter",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "run tests matching the given tag filter expression",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1277"
@@ -860,9 +840,9 @@
 		{
 			"export": "experimentalTopLevelAwaitFlag",
 			"option": "--experimental-top-level-await",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1588"
@@ -870,8 +850,8 @@
 		{
 			"export": "experimentalTransformTypesFlag",
 			"option": "--experimental-transform-types",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable transformation of TypeScript-onlysyntax into JavaScript code",
 			"url": "https://github.com/nodejs/node/blob/v25.9.0/src/node_options.cc#L1157"
@@ -879,8 +859,8 @@
 		{
 			"export": "experimentalVfsFlag",
 			"option": "--experimental-vfs",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental node:vfs module",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L796"
@@ -888,8 +868,8 @@
 		{
 			"export": "experimentalVmModulesFlag",
 			"option": "--experimental-vm-modules",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental ES Module support in vm module",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L937"
@@ -897,9 +877,9 @@
 		{
 			"export": "experimentalWasiUnstablePreview1Flag",
 			"option": "--experimental-wasi-unstable-preview1",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L943"
@@ -907,9 +887,9 @@
 		{
 			"export": "experimentalWasmModulesFlag",
 			"option": "--experimental-wasm-modules",
-			"factories": [
-				"booleanFlag",
-				"undefinedFlag"
+			"types": [
+				"boolean",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L845"
@@ -917,8 +897,8 @@
 		{
 			"export": "experimentalWebWorkerFlag",
 			"option": "--experimental-web-worker",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental Web Worker API",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L767"
@@ -927,8 +907,8 @@
 			"export": "experimentalWebsocketFlag",
 			"option": "--experimental-websocket",
 			"display": "--no-experimental-websocket",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental WebSocket API",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L772"
@@ -937,8 +917,8 @@
 			"export": "experimentalWebstorageFlag",
 			"option": "--experimental-webstorage",
 			"display": "--no-experimental-webstorage",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental Web Storage API",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L822"
@@ -946,8 +926,8 @@
 		{
 			"export": "experimentalWorkerInspectionFlag",
 			"option": "--experimental-worker-inspection",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental worker inspection support",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1072"
@@ -955,8 +935,8 @@
 		{
 			"export": "exposeInternalsFlag",
 			"option": "--expose-internals",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L951"
@@ -965,8 +945,8 @@
 			"export": "extraInfoOnFatalExceptionFlag",
 			"option": "--extra-info-on-fatal-exception",
 			"display": "--no-extra-info-on-fatal-exception",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "hide extra information on fatal exception that causes exit",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1391"
@@ -975,8 +955,8 @@
 			"export": "forceAsyncHooksChecksFlag",
 			"option": "--force-async-hooks-checks",
 			"display": "--no-force-async-hooks-checks",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "disable checks for async_hooks",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L984"
@@ -984,8 +964,8 @@
 		{
 			"export": "forceContextAwareFlag",
 			"option": "--force-context-aware",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "disable loading non-context-aware addons",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1014"
@@ -993,8 +973,8 @@
 		{
 			"export": "forceFipsFlag",
 			"option": "--force-fips",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "force FIPS crypto (optional mode: provider or strict)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1747"
@@ -1002,8 +982,8 @@
 		{
 			"export": "forceNodeApiUncaughtExceptionsPolicyFlag",
 			"option": "--force-node-api-uncaught-exceptions-policy",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enforces 'uncaughtException' event on Node API asynchronous callbacks",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L989"
@@ -1011,8 +991,8 @@
 		{
 			"export": "frozenIntrinsicsFlag",
 			"option": "--frozen-intrinsics",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "experimental frozen intrinsics support",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L952"
@@ -1021,8 +1001,8 @@
 			"export": "globalSearchPathsFlag",
 			"option": "--global-search-paths",
 			"display": "--no-global-search-paths",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "disable global module search paths",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1000"
@@ -1030,8 +1010,8 @@
 		{
 			"export": "heapProfFlag",
 			"option": "--heap-prof",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Start the V8 heap profiler on start up, and write the heap profile to disk before exit. If --heap-prof-dir is not specified, write the profile to the current working directory.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1078"
@@ -1039,8 +1019,8 @@
 		{
 			"export": "heapProfDirFlag",
 			"option": "--heap-prof-dir",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Directory where the V8 heap profiles generated by --heap-prof will be placed.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1090"
@@ -1048,8 +1028,8 @@
 		{
 			"export": "heapProfIntervalFlag",
 			"option": "--heap-prof-interval",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "specified sampling interval in bytes for the V8 heap profile generated with --heap-prof. (default: 512 * 1024)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1095"
@@ -1057,8 +1037,8 @@
 		{
 			"export": "heapProfNameFlag",
 			"option": "--heap-prof-name",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "specified file name of the V8 heap profile generated with --heap-prof",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1085"
@@ -1066,8 +1046,8 @@
 		{
 			"export": "heapsnapshotNearHeapLimitFlag",
 			"option": "--heapsnapshot-near-heap-limit",
-			"factories": [
-				"integerFlag"
+			"types": [
+				"number"
 			],
 			"description": "Generate heap snapshots whenever V8 is approaching the heap limit. No more than the specified number of heap snapshots will be generated.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L960"
@@ -1075,8 +1055,8 @@
 		{
 			"export": "heapsnapshotSignalFlag",
 			"option": "--heapsnapshot-signal",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Generate heap snapshot on specified signal",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L956"
@@ -1084,8 +1064,8 @@
 		{
 			"export": "helpFlag",
 			"option": "--help",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "print node command line options",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1664"
@@ -1093,8 +1073,8 @@
 		{
 			"export": "icuDataDirFlag",
 			"option": "--icu-data-dir",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set ICU data load path to dir (overrides NODE_ICU_DATA) (note: linked-in ICU data is present)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1696"
@@ -1102,8 +1082,8 @@
 		{
 			"export": "importFlag",
 			"option": "--import",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "ES module to preload (option can be repeated)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1457"
@@ -1111,8 +1091,8 @@
 		{
 			"export": "inputTypeFlag",
 			"option": "--input-type",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set module type for string input",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L971"
@@ -1120,8 +1100,8 @@
 		{
 			"export": "insecureHttpParserFlag",
 			"option": "--insecure-http-parser",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "use an insecure HTTP parser that accepts invalid HTTP headers",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L967"
@@ -1129,8 +1109,8 @@
 		{
 			"export": "inspectFlag",
 			"option": "--inspect",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "activate inspector on host:port (default: 127.0.0.1:9229)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L640"
@@ -1138,8 +1118,8 @@
 		{
 			"export": "inspectBrkFlag",
 			"option": "--inspect-brk",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "activate inspector on host:port and break at start of user script",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L651"
@@ -1147,8 +1127,8 @@
 		{
 			"export": "inspectBrkNodeFlag",
 			"option": "--inspect-brk-node",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L658"
@@ -1156,8 +1136,8 @@
 		{
 			"export": "inspectPortFlag",
 			"option": "--inspect-port",
-			"factories": [
-				"hostPortFlag"
+			"types": [
+				"HostPort"
 			],
 			"description": "set host:port for inspector",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L634"
@@ -1165,8 +1145,8 @@
 		{
 			"export": "inspectPublishUidFlag",
 			"option": "--inspect-publish-uid",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "comma separated list of destinations for inspector uid(default: stderr,http)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L670"
@@ -1174,8 +1154,8 @@
 		{
 			"export": "inspectWaitFlag",
 			"option": "--inspect-wait",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "activate inspector on host:port and wait for debugger to be attached",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L662"
@@ -1183,8 +1163,8 @@
 		{
 			"export": "interactiveFlag",
 			"option": "--interactive",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "always enter the REPL even if stdin does not appear to be a terminal",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1467"
@@ -1192,8 +1172,8 @@
 		{
 			"export": "localstorageFileFlag",
 			"option": "--localstorage-file",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "file used to persist localStorage data",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L828"
@@ -1201,8 +1181,8 @@
 		{
 			"export": "maxHttpHeaderSizeFlag",
 			"option": "--max-http-header-size",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "set the maximum size of HTTP headers (default: 16384 (16KB))",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1101"
@@ -1210,8 +1190,8 @@
 		{
 			"export": "maxOldSpaceSizePercentageFlag",
 			"option": "--max-old-space-size-percentage",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "set V8's max old space size as a percentage of available memory (e.g., '50%'). Takes precedence over --max-old-space-size.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1546"
@@ -1220,8 +1200,8 @@
 			"export": "networkFamilyAutoselectionFlag",
 			"option": "--network-family-autoselection",
 			"display": "--no-network-family-autoselection",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Disable network address family autodetection algorithm",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L725"
@@ -1229,8 +1209,8 @@
 		{
 			"export": "networkFamilyAutoselectionAttemptTimeoutFlag",
 			"option": "--network-family-autoselection-attempt-timeout",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "Sets the default value for the network family autoselection attempt timeout.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L730"
@@ -1239,8 +1219,8 @@
 			"export": "nodeSnapshotFlag",
 			"option": "--node-snapshot",
 			"display": "--no-node-snapshot",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1645"
@@ -1248,8 +1228,8 @@
 		{
 			"export": "opensslConfigFlag",
 			"option": "--openssl-config",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "load OpenSSL configuration from the specified file (overrides OPENSSL_CONF)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1707"
@@ -1257,8 +1237,8 @@
 		{
 			"export": "opensslLegacyProviderFlag",
 			"option": "--openssl-legacy-provider",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable OpenSSL 3.0 legacy provider",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1768"
@@ -1266,8 +1246,8 @@
 		{
 			"export": "opensslSharedConfigFlag",
 			"option": "--openssl-shared-config",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable OpenSSL shared configuration",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1772"
@@ -1275,8 +1255,8 @@
 		{
 			"export": "pendingDeprecationFlag",
 			"option": "--pending-deprecation",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "emit pending deprecation warnings",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1018"
@@ -1284,8 +1264,8 @@
 		{
 			"export": "permissionFlag",
 			"option": "--permission",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable the permission system",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L855"
@@ -1293,8 +1273,8 @@
 		{
 			"export": "permissionAuditFlag",
 			"option": "--permission-audit",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable audit only for the permission system",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L861"
@@ -1302,8 +1282,8 @@
 		{
 			"export": "policyIntegrityFlag",
 			"option": "--policy-integrity",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "ensure the security policy contents match the specified integrity",
 			"url": "https://github.com/nodejs/node/blob/v22.1.0/src/node_options.cc#L456"
@@ -1311,8 +1291,8 @@
 		{
 			"export": "preserveSymlinksFlag",
 			"option": "--preserve-symlinks",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "preserve symbolic links when resolving",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1028"
@@ -1320,8 +1300,8 @@
 		{
 			"export": "preserveSymlinksMainFlag",
 			"option": "--preserve-symlinks-main",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "preserve symbolic links when resolving the main module",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1032"
@@ -1329,8 +1309,8 @@
 		{
 			"export": "printFlag",
 			"option": "--print",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "evaluate script and print result",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1446"
@@ -1338,8 +1318,8 @@
 		{
 			"export": "processTimeoutFlag",
 			"option": "--process-timeout",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "print why the process is still running and exit with code 124 if it has not exited after the given duration (e.g. 30s)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1790"
@@ -1347,8 +1327,8 @@
 		{
 			"export": "profProcessFlag",
 			"option": "--prof-process",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "process V8 profiler output generated using --prof",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1039"
@@ -1356,8 +1336,8 @@
 		{
 			"export": "redirectWarningsFlag",
 			"option": "--redirect-warnings",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "write warnings to file instead of stderr",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1105"
@@ -1365,8 +1345,8 @@
 		{
 			"export": "reportCompactFlag",
 			"option": "--report-compact",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "output compact single-line JSON",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1672"
@@ -1374,8 +1354,8 @@
 		{
 			"export": "reportDirFlag",
 			"option": "--report-dir",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "define custom report pathname. (default: current working directory)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1676"
@@ -1383,8 +1363,8 @@
 		{
 			"export": "reportExcludeEnvFlag",
 			"option": "--report-exclude-env",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Exclude environment variables when generating report (default: false)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1509"
@@ -1392,8 +1372,8 @@
 		{
 			"export": "reportExcludeNetworkFlag",
 			"option": "--report-exclude-network",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "exclude network interface diagnostics. (default: false)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1514"
@@ -1401,8 +1381,8 @@
 		{
 			"export": "reportFilenameFlag",
 			"option": "--report-filename",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "define custom report file name. (default: YYYYMMDD.HHMMSS.PID.SEQUENCE#.txt)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1682"
@@ -1410,8 +1390,8 @@
 		{
 			"export": "reportOnFatalerrorFlag",
 			"option": "--report-on-fatalerror",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "generate diagnostic report on fatal (internal) errors",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1687"
@@ -1419,8 +1399,8 @@
 		{
 			"export": "reportOnProcessTimeoutFlag",
 			"option": "--report-on-process-timeout",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "generate diagnostic report when --process-timeout expires",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1691"
@@ -1428,8 +1408,8 @@
 		{
 			"export": "reportOnSignalFlag",
 			"option": "--report-on-signal",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "generate diagnostic report upon receiving signals",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1573"
@@ -1437,8 +1417,8 @@
 		{
 			"export": "reportSignalFlag",
 			"option": "--report-signal",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "causes diagnostic report to be produced on provided signal, unsupported in Windows. (default: SIGUSR2)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1577"
@@ -1446,8 +1426,8 @@
 		{
 			"export": "reportUncaughtExceptionFlag",
 			"option": "--report-uncaught-exception",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "generate diagnostic report on uncaught exceptions",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1569"
@@ -1455,8 +1435,8 @@
 		{
 			"export": "requireFlag",
 			"option": "--require",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "CommonJS module to preload (option can be repeated)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1452"
@@ -1465,8 +1445,8 @@
 			"export": "requireModuleFlag",
 			"option": "--require-module",
 			"display": "--no-require-module",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Allow loading synchronous ES Modules in require().",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L696"
@@ -1474,8 +1454,8 @@
 		{
 			"export": "runFlag",
 			"option": "--run",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Run a script specified in package.json",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1809"
@@ -1483,8 +1463,8 @@
 		{
 			"export": "secureHeapFlag",
 			"option": "--secure-heap",
-			"factories": [
-				"integerFlag"
+			"types": [
+				"number"
 			],
 			"description": "total size of the OpenSSL secure heap",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1757"
@@ -1492,8 +1472,8 @@
 		{
 			"export": "secureHeapMinFlag",
 			"option": "--secure-heap-min",
-			"factories": [
-				"integerFlag"
+			"types": [
+				"number"
 			],
 			"description": "minimum allocation size from the OpenSSL secure heap",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1761"
@@ -1501,8 +1481,8 @@
 		{
 			"export": "securityRevertFlag",
 			"option": "--security-revert",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1659"
@@ -1510,8 +1490,8 @@
 		{
 			"export": "snapshotBlobFlag",
 			"option": "--snapshot-blob",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Path to the snapshot blob that's either the result of snapshotbuilding, or the blob that is used to restore the application state",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1649"
@@ -1519,9 +1499,9 @@
 		{
 			"export": "stackTraceLimitFlag",
 			"option": "--stack-trace-limit",
-			"factories": [
-				"integerFlag",
-				"undefinedFlag"
+			"types": [
+				"number",
+				"undefined"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1557"
@@ -1530,8 +1510,8 @@
 			"export": "stripTypesFlag",
 			"option": "--strip-types",
 			"display": "--no-strip-types",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Type-stripping for TypeScript files.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1461"
@@ -1539,8 +1519,8 @@
 		{
 			"export": "testFlag",
 			"option": "--test",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "launch test runner on startup",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1179"
@@ -1548,8 +1528,8 @@
 		{
 			"export": "testConcurrencyFlag",
 			"option": "--test-concurrency",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "specify test runner concurrency",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1185"
@@ -1557,8 +1537,8 @@
 		{
 			"export": "testCoverageBranchesFlag",
 			"option": "--test-coverage-branches",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "the branch coverage minimum threshold",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1213"
@@ -1566,8 +1546,8 @@
 		{
 			"export": "testCoverageExcludeFlag",
 			"option": "--test-coverage-exclude",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "exclude files from coverage report that match this glob pattern",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1294"
@@ -1575,8 +1555,8 @@
 		{
 			"export": "testCoverageFunctionsFlag",
 			"option": "--test-coverage-functions",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "the function coverage minimum threshold",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1218"
@@ -1584,8 +1564,8 @@
 		{
 			"export": "testCoverageIncludeFlag",
 			"option": "--test-coverage-include",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "include files in coverage report that match this glob pattern",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1282"
@@ -1593,8 +1573,8 @@
 		{
 			"export": "testCoverageIncludeAllFlag",
 			"option": "--test-coverage-include-all",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "include source files that were never loaded in the coverage report",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1287"
@@ -1602,8 +1582,8 @@
 		{
 			"export": "testCoverageLinesFlag",
 			"option": "--test-coverage-lines",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "the line coverage minimum threshold",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1223"
@@ -1611,8 +1591,8 @@
 		{
 			"export": "testForceExitFlag",
 			"option": "--test-force-exit",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "force test runner to exit upon completion",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1190"
@@ -1620,8 +1600,8 @@
 		{
 			"export": "testGlobalSetupFlag",
 			"option": "--test-global-setup",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "specifies the path to the global setup file",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1299"
@@ -1629,8 +1609,8 @@
 		{
 			"export": "testIsolationFlag",
 			"option": "--test-isolation",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "configures the type of test isolation used in the test runner",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1228"
@@ -1638,8 +1618,8 @@
 		{
 			"export": "testNamePatternFlag",
 			"option": "--test-name-pattern",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "run tests whose name matches this regular expression",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1246"
@@ -1647,8 +1627,8 @@
 		{
 			"export": "testOnlyFlag",
 			"option": "--test-only",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "run tests with 'only' option set",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1261"
@@ -1656,8 +1636,8 @@
 		{
 			"export": "testRandomSeedFlag",
 			"option": "--test-random-seed",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "seed used to randomize test execution order",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1311"
@@ -1665,8 +1645,8 @@
 		{
 			"export": "testRandomizeFlag",
 			"option": "--test-randomize",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "run tests in a random order",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1304"
@@ -1674,8 +1654,8 @@
 		{
 			"export": "testReporterFlag",
 			"option": "--test-reporter",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "report test output using the given reporter",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1251"
@@ -1683,8 +1663,8 @@
 		{
 			"export": "testReporterDestinationFlag",
 			"option": "--test-reporter-destination",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "report given reporter to the given destination",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1256"
@@ -1692,8 +1672,8 @@
 		{
 			"export": "testRerunFailuresFlag",
 			"option": "--test-rerun-failures",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "specifies the path to the rerun state file",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1317"
@@ -1701,8 +1681,8 @@
 		{
 			"export": "testShardFlag",
 			"option": "--test-shard",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "run test at specific shard",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1267"
@@ -1710,8 +1690,8 @@
 		{
 			"export": "testSkipPatternFlag",
 			"option": "--test-skip-pattern",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "run tests whose name do not match this regular expression",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1272"
@@ -1719,8 +1699,8 @@
 		{
 			"export": "testTimeoutFlag",
 			"option": "--test-timeout",
-			"factories": [
-				"unsignedIntegerFlag"
+			"types": [
+				"number"
 			],
 			"description": "specify test runner timeout",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1196"
@@ -1728,8 +1708,8 @@
 		{
 			"export": "testUdpNoTrySendFlag",
 			"option": "--test-udp-no-try-send",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1322"
@@ -1737,8 +1717,8 @@
 		{
 			"export": "testUpdateSnapshotsFlag",
 			"option": "--test-update-snapshots",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "regenerate test snapshots",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1201"
@@ -1746,8 +1726,8 @@
 		{
 			"export": "throwDeprecationFlag",
 			"option": "--throw-deprecation",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "throw an exception on deprecations",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1326"
@@ -1755,8 +1735,8 @@
 		{
 			"export": "titleFlag",
 			"option": "--title",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "the process title to use on startup",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1614"
@@ -1764,8 +1744,8 @@
 		{
 			"export": "tlsCipherListFlag",
 			"option": "--tls-cipher-list",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "use an alternative default TLS cipher list",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1712"
@@ -1773,8 +1753,8 @@
 		{
 			"export": "tlsKeylogFlag",
 			"option": "--tls-keylog",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "log TLS decryption keys to named file for traffic analysis",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1475"
@@ -1782,8 +1762,8 @@
 		{
 			"export": "tlsMaxV12Flag",
 			"option": "--tls-max-v1.2",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "set default TLS maximum to TLSv1.2 (default: TLSv1.3)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1496"
@@ -1791,8 +1771,8 @@
 		{
 			"export": "tlsMaxV13Flag",
 			"option": "--tls-max-v1.3",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "set default TLS maximum to TLSv1.3 (default: TLSv1.3)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1504"
@@ -1800,8 +1780,8 @@
 		{
 			"export": "tlsMinV10Flag",
 			"option": "--tls-min-v1.0",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "set default TLS minimum to TLSv1.0 (default: TLSv1.2)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1480"
@@ -1809,8 +1789,8 @@
 		{
 			"export": "tlsMinV11Flag",
 			"option": "--tls-min-v1.1",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "set default TLS minimum to TLSv1.1 (default: TLSv1.2)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1484"
@@ -1818,8 +1798,8 @@
 		{
 			"export": "tlsMinV12Flag",
 			"option": "--tls-min-v1.2",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "set default TLS minimum to TLSv1.2 (default: TLSv1.2)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1488"
@@ -1827,8 +1807,8 @@
 		{
 			"export": "tlsMinV13Flag",
 			"option": "--tls-min-v1.3",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "set default TLS minimum to TLSv1.3 (default: TLSv1.2)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1492"
@@ -1836,8 +1816,8 @@
 		{
 			"export": "traceAtomicsWaitFlag",
 			"option": "--trace-atomics-wait",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "(deprecated) trace Atomics.wait() operations",
 			"url": "https://github.com/nodejs/node/blob/v22.23.4/src/node_options.cc#L830"
@@ -1845,8 +1825,8 @@
 		{
 			"export": "traceDeprecationFlag",
 			"option": "--trace-deprecation",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "show stack traces on deprecations",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1330"
@@ -1854,8 +1834,8 @@
 		{
 			"export": "traceEnvFlag",
 			"option": "--trace-env",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Print accesses to the environment variables",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1360"
@@ -1863,8 +1843,8 @@
 		{
 			"export": "traceEnvJsStackFlag",
 			"option": "--trace-env-js-stack",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Print accesses to the environment variables and the JavaScript stack trace",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1366"
@@ -1872,8 +1852,8 @@
 		{
 			"export": "traceEnvNativeStackFlag",
 			"option": "--trace-env-native-stack",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Print accesses to the environment variables and the native stack trace",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1371"
@@ -1881,8 +1861,8 @@
 		{
 			"export": "traceEventCategoriesFlag",
 			"option": "--trace-event-categories",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "comma separated list of trace event categories to record",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1618"
@@ -1890,8 +1870,8 @@
 		{
 			"export": "traceEventFilePatternFlag",
 			"option": "--trace-event-file-pattern",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Template string specifying the filepath for the trace-events data, it supports ${rotation} and ${pid}.",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1622"
@@ -1899,8 +1879,8 @@
 		{
 			"export": "traceExitFlag",
 			"option": "--trace-exit",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "show stack trace when an environment exits",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1334"
@@ -1908,8 +1888,8 @@
 		{
 			"export": "tracePromisesFlag",
 			"option": "--trace-promises",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "show stack traces on promise initialization and resolution",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1355"
@@ -1917,8 +1897,8 @@
 		{
 			"export": "traceRequireModuleFlag",
 			"option": "--trace-require-module",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "Print access to require(esm). Options are 'all' (print all usage) and 'no-node-modules' (excluding usage from the node_modules folder)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1384"
@@ -1926,8 +1906,8 @@
 		{
 			"export": "traceSigintFlag",
 			"option": "--trace-sigint",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "enable printing JavaScript stacktrace on SIGINT",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1785"
@@ -1935,8 +1915,8 @@
 		{
 			"export": "traceSyncIoFlag",
 			"option": "--trace-sync-io",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "show stack trace when use of sync IO is detected after the first tick",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1338"
@@ -1944,8 +1924,8 @@
 		{
 			"export": "traceTlsFlag",
 			"option": "--trace-tls",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "prints TLS packet trace information to stderr",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1343"
@@ -1953,8 +1933,8 @@
 		{
 			"export": "traceUncaughtFlag",
 			"option": "--trace-uncaught",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "show stack traces for the `throw` behind uncaught exceptions",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1347"
@@ -1962,8 +1942,8 @@
 		{
 			"export": "traceWarningsFlag",
 			"option": "--trace-warnings",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "show stack traces on process warnings",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1351"
@@ -1971,8 +1951,8 @@
 		{
 			"export": "trackHeapObjectsFlag",
 			"option": "--track-heap-objects",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "track heap object allocations for heap snapshots",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1529"
@@ -1980,8 +1960,8 @@
 		{
 			"export": "unhandledRejectionsFlag",
 			"option": "--unhandled-rejections",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "define unhandled rejections behavior. Options are 'strict' (always raise an error), 'throw' (raise an error unless 'unhandledRejection' hook is set), 'warn' (log a warning), 'none' (silence warnings), 'warn-with-error-code' (log a warning and set exit code 1 unless 'unhandledRejection' hook is set). (default: throw)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1396"
@@ -1989,8 +1969,8 @@
 		{
 			"export": "updateAssertSnapshotFlag",
 			"option": "--update-assert-snapshot",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "update assert snapshot files",
 			"url": "https://github.com/nodejs/node/blob/v19.4.0/src/node_options.cc#L660"
@@ -1998,8 +1978,8 @@
 		{
 			"export": "useBundledCaFlag",
 			"option": "--use-bundled-ca",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "use bundled CA store (default)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1724"
@@ -2007,8 +1987,8 @@
 		{
 			"export": "useEnvProxyFlag",
 			"option": "--use-env-proxy",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1022"
@@ -2016,8 +1996,8 @@
 		{
 			"export": "useLargepagesFlag",
 			"option": "--use-largepages",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "This option is no longer supported and a no-op. It still accepts these values for compatibility: 'off' (default), 'on' (report a warning to stderr), or 'silent' (same as 'off').",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1778"
@@ -2025,8 +2005,8 @@
 		{
 			"export": "useOpensslCaFlag",
 			"option": "--use-openssl-ca",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "use OpenSSL's default CA store",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1716"
@@ -2034,8 +2014,8 @@
 		{
 			"export": "useSystemCaFlag",
 			"option": "--use-system-ca",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "use system's CA store",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1378"
@@ -2043,8 +2023,8 @@
 		{
 			"export": "v8OptionsFlag",
 			"option": "--v8-options",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "print V8 command line options",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1669"
@@ -2052,8 +2032,8 @@
 		{
 			"export": "v8PoolSizeFlag",
 			"option": "--v8-pool-size",
-			"factories": [
-				"integerFlag"
+			"types": [
+				"number"
 			],
 			"description": "set V8's thread pool size",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1629"
@@ -2061,8 +2041,8 @@
 		{
 			"export": "verifyBaseObjectsFlag",
 			"option": "--verify-base-objects",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1405"
@@ -2070,8 +2050,8 @@
 		{
 			"export": "versionFlag",
 			"option": "--version",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "print Node.js version",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1667"
@@ -2079,9 +2059,9 @@
 		{
 			"export": "vfsLoadFlag",
 			"option": "--vfs-load",
-			"factories": [
-				"stringFlag",
-				"stringListFlag"
+			"types": [
+				"string",
+				"string[]"
 			],
 			"description": "mount a directory or archive as a virtual file system and run the entry point and module resolution against it instead of the real file system (may be given once; requires --experimental-vfs)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L805"
@@ -2089,8 +2069,8 @@
 		{
 			"export": "vfsMountFlag",
 			"option": "--vfs-mount",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "mount a directory or archive as a virtual file system (option can be repeated; requires --experimental-vfs)",
 			"url": "https://github.com/nodejs/node/blob/v26.10.0/src/node_options.cc#L702"
@@ -2099,8 +2079,8 @@
 			"export": "warningsFlag",
 			"option": "--warnings",
 			"display": "--no-warnings",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "silence all process warnings",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1005"
@@ -2108,8 +2088,8 @@
 		{
 			"export": "watchFlag",
 			"option": "--watch",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "run in watch mode",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1409"
@@ -2117,8 +2097,8 @@
 		{
 			"export": "watchKillSignalFlag",
 			"option": "--watch-kill-signal",
-			"factories": [
-				"stringFlag"
+			"types": [
+				"string"
 			],
 			"description": "kill signal to send to the process on watch mode restarts(default: SIGTERM)",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1420"
@@ -2126,8 +2106,8 @@
 		{
 			"export": "watchPathFlag",
 			"option": "--watch-path",
-			"factories": [
-				"stringListFlag"
+			"types": [
+				"string[]"
 			],
 			"description": "path to watch",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1415"
@@ -2135,8 +2115,8 @@
 		{
 			"export": "watchPreserveOutputFlag",
 			"option": "--watch-preserve-output",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "preserve outputs on watch mode restart",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1426"
@@ -2145,8 +2125,8 @@
 			"export": "webstorageFlag",
 			"option": "--webstorage",
 			"display": "--no-webstorage",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "Web Storage API",
 			"url": "https://github.com/nodejs/node/blob/v25.2.0/src/node_options.cc#L570"
@@ -2155,8 +2135,8 @@
 			"export": "workerSnapshotFlag",
 			"option": "--worker-snapshot",
 			"display": "--no-worker-snapshot",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "start worker threads from the bootstrapped context in the built-in startup snapshot",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1523"
@@ -2164,8 +2144,8 @@
 		{
 			"export": "zeroFillBuffersFlag",
 			"option": "--zero-fill-buffers",
-			"factories": [
-				"booleanFlag"
+			"types": [
+				"boolean"
 			],
 			"description": "automatically zero-fill all newly allocated Buffer instances",
 			"url": "https://github.com/nodejs/node/blob/v26.13.0/src/node_options.cc#L1633"

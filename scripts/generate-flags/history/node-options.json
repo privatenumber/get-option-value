@@ -823,7 +823,7 @@
 			["23.0.0",null]
 		],
 		"--icu-data-dir": [
-			["18.0.0",{"type":"string","default":"","helpText":"set ICU data load path to dir (overrides NODE_ICU_DATA) (note: linked-in ICU data is present)"}]
+			["18.0.0",{"type":"string","default":"","environment":"NODE_ICU_DATA","helpText":"set ICU data load path to dir (overrides NODE_ICU_DATA) (note: linked-in ICU data is present)"}]
 		],
 		"--import": [
 			["18.0.0",null],
@@ -924,7 +924,7 @@
 			["18.5.0",{"type":"boolean","default":false,"helpText":"enable OpenSSL shared configuration"}]
 		],
 		"--pending-deprecation": [
-			["18.0.0",{"type":"boolean","default":false,"helpText":"emit pending deprecation warnings"}]
+			["18.0.0",{"type":"boolean","default":false,"environment":"NODE_PENDING_DEPRECATION","helpText":"emit pending deprecation warnings"}]
 		],
 		"--perf-basic-prof": [
 			["18.0.0",{"type":"v8Option"}]
@@ -955,10 +955,10 @@
 			["22.2.0",null]
 		],
 		"--preserve-symlinks": [
-			["18.0.0",{"type":"boolean","default":false,"helpText":"preserve symbolic links when resolving"}]
+			["18.0.0",{"type":"boolean","default":false,"environment":"NODE_PRESERVE_SYMLINKS","helpText":"preserve symbolic links when resolving"}]
 		],
 		"--preserve-symlinks-main": [
-			["18.0.0",{"type":"boolean","default":false,"helpText":"preserve symbolic links when resolving the main module"}]
+			["18.0.0",{"type":"boolean","default":false,"environment":"NODE_PRESERVE_SYMLINKS_MAIN","helpText":"preserve symbolic links when resolving the main module"}]
 		],
 		"--print": [
 			["18.0.0",{"type":"boolean","default":false,"helpText":"evaluate script and print result"}]
@@ -974,7 +974,7 @@
 			["18.0.0",{"type":"boolean","default":false,"helpText":"process V8 profiler output generated using --prof"}]
 		],
 		"--redirect-warnings": [
-			["18.0.0",{"type":"string","default":"","helpText":"write warnings to file instead of stderr"}]
+			["18.0.0",{"type":"string","default":"","environment":"NODE_REDIRECT_WARNINGS","helpText":"write warnings to file instead of stderr"}]
 		],
 		"--report-compact": [
 			["18.0.0",{"type":"boolean","default":false,"helpText":"output compact single-line JSON"}]
@@ -1268,9 +1268,9 @@
 		],
 		"--use-env-proxy": [
 			["18.0.0",null],
-			["22.21.0",{"type":"boolean","default":false,"helpText":"parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients"}],
+			["22.21.0",{"type":"boolean","default":false,"environment":"NODE_USE_ENV_PROXY","helpText":"parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients"}],
 			["23.0.0",null],
-			["24.5.0",{"type":"boolean","default":false,"helpText":"parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients"}]
+			["24.5.0",{"type":"boolean","default":false,"environment":"NODE_USE_ENV_PROXY","helpText":"parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients"}]
 		],
 		"--use-largepages": [
 			["18.0.0",{"type":"string","default":"off","helpText":"Map the Node.js static code to large pages. Options are 'off' (the default value, meaning do not map), 'on' (map and ignore failure, reporting it to stderr), or 'silent' (map and silently ignore failure)"}],
@@ -1282,8 +1282,10 @@
 		"--use-system-ca": [
 			["18.0.0",null],
 			["22.15.0",{"type":"boolean","default":false,"helpText":"use system's CA store"}],
+			["22.19.0",{"type":"boolean","default":false,"environment":"NODE_USE_SYSTEM_CA","helpText":"use system's CA store"}],
 			["23.0.0",null],
-			["23.8.0",{"type":"boolean","default":false,"helpText":"use system's CA store"}]
+			["23.8.0",{"type":"boolean","default":false,"helpText":"use system's CA store"}],
+			["24.6.0",{"type":"boolean","default":false,"environment":"NODE_USE_SYSTEM_CA","helpText":"use system's CA store"}]
 		],
 		"--v8-options": [
 			["18.0.0",{"type":"boolean","default":false,"helpText":"print V8 command line options"}]

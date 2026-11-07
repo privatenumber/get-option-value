@@ -46,6 +46,12 @@ const factoryFor = (name: string, option: OptionSpec): { factory: string;
 			head: 'false, ',
 		};
 	}
+	if (option.environment) {
+		return {
+			factory: option.type === 'boolean' ? 'environmentBooleanFlag' : 'environmentStringFlag',
+			head: `${JSON.stringify(option.environment)}, `,
+		};
+	}
 	switch (option.type) {
 		case 'boolean': {
 			return {
@@ -185,6 +191,54 @@ export const deriveEntryForms = (
 	return forms;
 };
 
+/** Every option name and alias spelling a release's parser accepts. */
+const acceptedEntries = ({ options, aliases }: OptionsSchema) => {
+	const entries = new Set<string>(Object.keys(options));
+	for (const key of Object.keys(aliases)) {
+		entries.add(key.endsWith('=') ? key.slice(0, -1) : key.replace(/ <arg>$/, ''));
+	}
+	return entries;
+};
+
+/**
+ * Whether each spelling a release accepts consumes a value (`true`) or not.
+ * `--no-` negations never do. Conservative: every `--` entry counts as
+ * negatable, which can only add segments.
+ */
+const acceptedSpellings = (schema: OptionsSchema) => {
+	const { options, aliases } = schema;
+	const takesValue = (name: string) => {
+		const type = options[name]?.type;
+		return type !== undefined && type !== 'boolean' && type !== 'noOp' && type !== 'v8Option';
+	};
+	const spellings = new Map<string, boolean>();
+	for (const name of Object.keys(options)) {
+		spellings.set(name, takesValue(name));
+	}
+	for (const [key, expansion] of Object.entries(aliases)) {
+		const entry = key.endsWith('=') ? key.slice(0, -1) : key.replace(/ <arg>$/, '');
+		// A fixed-value alias supplies its own value; `<arg>` aliases consume one
+		const consumes = key.endsWith(' <arg>') || (expansion.length === 1 && takesValue(expansion[0]));
+		spellings.set(entry, spellings.get(entry) || consumes);
+	}
+	// Collected first: adding to a Map while iterating it visits the additions
+	const negations: string[] = [];
+	for (const entry of spellings.keys()) {
+		if (entry.startsWith('--')) {
+			negations.push(`--no-${entry.slice(2)}`);
+		}
+	}
+	for (const negation of negations) {
+		if (!spellings.has(negation)) {
+			spellings.set(negation, false);
+		}
+	}
+	return spellings;
+};
+
+/** Whether a form consumes a value: VALUE (0) and `=`-only VALUE (3). */
+const formTakesValue = (form: Form) => form[1] === 0 || form[1] === 3;
+
 /**
  * Derives, for every readable option in one schema, the complete set
  * of command-line forms that affect it — by resolving probe tokens (every
@@ -192,12 +246,9 @@ export const deriveEntryForms = (
  * which options each one affects and how.
  */
 const deriveForms = (schema: OptionsSchema) => {
-	const { options, aliases } = schema;
+	const { options } = schema;
 
-	const entryTokens = new Set<string>(Object.keys(options));
-	for (const key of Object.keys(aliases)) {
-		entryTokens.add(key.endsWith('=') ? key.slice(0, -1) : key.replace(/ <arg>$/, ''));
-	}
+	const entryTokens = acceptedEntries(schema);
 
 	// A resolved target only becomes a flag if it's readable; effects on
 	// non-readable targets (bracketed internals, pure V8/noOp options) are
@@ -278,13 +329,15 @@ const findOptionLine = (source: string, optionName: string) => {
  * - `'absent'`: the option doesn't exist here, so Node refuses to boot with
  *   it and no process can observe its value. We read the neighboring
  *   segment's default instead, so pure existence drift never forces a branch.
+ * - `'folded'`: an inexactBelow release, folded like an absent one even
+ *   though the option exists there.
  */
 type ReadableFlag = {
 	factory: string;
 	head: string;
 	forms: Form[];
 };
-type ReleaseFlag = ReadableFlag | 'undefined' | 'absent';
+type ReleaseFlag = ReadableFlag | 'undefined' | 'absent' | 'folded';
 
 /** Options tools read to understand their own invocation — must be a single
  * segment (no version branch), else a tool would see drift across releases. */
@@ -332,6 +385,36 @@ const sortForms = (forms: Form[]) => (
 	})
 );
 
+/**
+ * The value types a segment's flag returns, mirroring the factory signatures
+ * in src/flag/factories.ts: a string or integer flag without a default can
+ * also return undefined.
+ */
+const valueTypes = (flag: ReleaseFlag): string[] => {
+	if (typeof flag !== 'object') {
+		return ['undefined'];
+	}
+	const optional = flag.head.startsWith('undefined') ? ['undefined'] : [];
+	switch (flag.factory) {
+		case 'booleanFlag':
+		case 'environmentBooleanFlag': { return ['boolean'];
+		}
+		case 'environmentStringFlag': { return ['string'];
+		}
+		case 'stringListFlag': { return ['string[]'];
+		}
+		case 'hostPortFlag': { return ['HostPort'];
+		}
+		case 'stringFlag': { return ['string', ...optional];
+		}
+		case 'integerFlag':
+		case 'unsignedIntegerFlag': { return ['number', ...optional];
+		}
+		default: { throw new Error(`No value type for ${flag.factory}`);
+		}
+	}
+};
+
 const flagExpr = (flag: ReleaseFlag) => (
 	typeof flag === 'object'
 		? `${flag.factory}(${flag.head}${JSON.stringify(flag.forms)})`
@@ -344,10 +427,17 @@ const flagExpr = (flag: ReleaseFlag) => (
  * - an absent release folds in (see ReleaseFlag),
  * - a `'undefined'` (V8 option) release only folds into another `'undefined'`;
  * - a readable release needs the same shape/default and a superset of forms
- *   (the extra spellings are rejected by that release, so can't false-match).
+ *   whose extra spellings that release doesn't accept at all (Node rejects
+ *   them at startup, so they can't false-match). A spelling the release
+ *   accepts with another meaning, such as a separate option that a later
+ *   release turned into an alias, must not fold.
  */
-const coveredBy = (flag: ReleaseFlag, hiFlag: ReleaseFlag) => {
-	if (flag === 'absent') {
+const coveredBy = (
+	flag: ReleaseFlag,
+	hiFlag: ReleaseFlag,
+	accepted: Map<string, boolean>,
+) => {
+	if (flag === 'absent' || flag === 'folded') {
 		return true;
 	}
 	if (flag === 'undefined' || typeof hiFlag !== 'object') {
@@ -356,7 +446,50 @@ const coveredBy = (flag: ReleaseFlag, hiFlag: ReleaseFlag) => {
 	if (flag.factory !== hiFlag.factory || flag.head !== hiFlag.head) {
 		return false;
 	}
-	return flag.forms.every(form => hiFlag.forms.some(hiForm => sameForm(hiForm, form)));
+	return (
+		flag.forms.every(form => hiFlag.forms.some(hiForm => sameForm(hiForm, form)))
+		&& hiFlag.forms.every(hiForm => (
+			flag.forms.some(form => sameForm(form, hiForm))
+			|| !accepted.has(hiForm[0])
+		))
+	);
+};
+
+/**
+ * An absent release folds into the segment of its nearest existing release
+ * above (or below, at the top). Node's binding reads `undefined` there, so
+ * the fold is an approximation: a spelling the release accepts for a related
+ * option (such as a former name) answers the same question. But when a
+ * spelling consumes a value in the segment and not on the release (or the
+ * reverse), the scanner would capture an unrelated argument, so that release
+ * reads `undefined` like the binding instead.
+ */
+const markConflictingAbsences = (
+	releaseFlags: ReleaseFlag[],
+	acceptedPerRelease: Map<string, boolean>[],
+) => {
+	const existing = releaseFlags.flatMap((flag, index) => (
+		flag === 'absent' || flag === 'folded' ? [] : [index]
+	));
+	let next = 0;
+	for (const [index, flag] of releaseFlags.entries()) {
+		if (flag !== 'absent') {
+			continue;
+		}
+		while (next < existing.length && existing[next] < index) {
+			next += 1;
+		}
+		const neighbor = releaseFlags[existing[next] ?? existing.at(-1)!];
+		const accepted = acceptedPerRelease[index];
+		if (
+			typeof neighbor === 'object'
+			&& neighbor.forms.some(form => (
+				accepted.has(form[0]) && accepted.get(form[0]) !== formTakesValue(form)
+			))
+		) {
+			releaseFlags[index] = 'undefined';
+		}
+	}
 };
 
 /**
@@ -364,25 +497,41 @@ const coveredBy = (flag: ReleaseFlag, hiFlag: ReleaseFlag) => {
  * release first). Each segment's leading flag covers every release down to
  * `from`. A trailing run of absent releases folds into the segment above it.
  */
-const computeSegments = (releases: string[], releaseFlags: ReleaseFlag[]) => {
-	const segments: { from: string;
-		flag: ReleaseFlag; }[] = [];
+const computeSegments = (
+	releases: string[],
+	releaseFlags: ReleaseFlag[],
+	acceptedPerRelease: Map<string, boolean>[],
+) => {
+	const segments: {
+		from: string;
+		flag: ReleaseFlag;
+
+		/** Releases in the segment where the option exists (oracle candidates). */
+		existing: number[];
+	}[] = [];
 	// Absent releases can't lead a segment: a removed option's newest
 	// releases fold into the top segment, led by its last existing release.
 	// Below that, `lo` stops only at an uncovered (so non-absent) release.
 	let hi = releases.length - 1;
-	while (hi > 0 && releaseFlags[hi] === 'absent') {
+	while (hi > 0 && (releaseFlags[hi] === 'absent' || releaseFlags[hi] === 'folded')) {
 		hi -= 1;
 	}
 	while (hi >= 0) {
 		const hiFlag = releaseFlags[hi];
 		let lo = hi;
-		while (lo - 1 >= 0 && coveredBy(releaseFlags[lo - 1], hiFlag)) {
+		while (lo - 1 >= 0 && coveredBy(releaseFlags[lo - 1], hiFlag, acceptedPerRelease[lo - 1])) {
 			lo -= 1;
+		}
+		const existing: number[] = [];
+		for (let index = lo; index <= hi; index += 1) {
+			if (releaseFlags[index] !== 'absent' && releaseFlags[index] !== 'folded') {
+				existing.push(index);
+			}
 		}
 		segments.push({
 			from: releases[lo],
 			flag: hiFlag,
+			existing,
 		});
 		hi = lo - 1;
 	}
@@ -392,23 +541,24 @@ const computeSegments = (releases: string[], releaseFlags: ReleaseFlag[]) => {
 const docsPath = new URL('../../docs/flags.json', import.meta.url);
 
 /**
- * An export's type is the union of its segments' factories, so a new factory
- * on an existing export widens its published type: a breaking change. Compared
- * against the committed docs/flags.json, so a regeneration (such as the
- * scheduled release sync) fails instead of shipping it. Resolve by adding an
- * inexactBelow entry, or accept it in a major release by deleting the entry's
- * `factories` from docs/flags.json before regenerating.
+ * An export's value type is the union of its segments' value types, so a new
+ * member widens the published type: a breaking change. Compared against the
+ * `types` in the committed docs/flags.json, so a regeneration (such as the
+ * scheduled release sync) fails instead of shipping it. When the drift is in
+ * old releases below the published shape, an inexactBelow entry keeps the
+ * published shape there. A drift in a new release can only ship in a major
+ * release: delete the export's `types` from docs/flags.json and regenerate.
  */
-const assertNoWidening = async (factoriesByExport: Map<string, string[]>) => {
+const assertNoWidening = async (typesByExport: Map<string, string[]>) => {
 	const previous = JSON.parse(await fs.readFile(docsPath, 'utf8')) as {
 		flags: { export: string;
-			factories?: string[]; }[];
+			types?: string[]; }[];
 	};
 	const widened: string[] = [];
-	for (const { export: exportName, factories } of previous.flags) {
-		const next = factoriesByExport.get(exportName);
-		if (factories && next?.some(factory => !factories.includes(factory))) {
-			widened.push(`${exportName}: ${factories.join(' | ')} -> ${next.join(' | ')}`);
+	for (const { export: exportName, types } of previous.flags) {
+		const next = typesByExport.get(exportName);
+		if (types && next?.some(type => !types.includes(type))) {
+			widened.push(`${exportName}: ${types.join(' | ')} -> ${next.join(' | ')}`);
 		}
 	}
 	if (widened.length > 0) {
@@ -417,20 +567,50 @@ const assertNoWidening = async (factoriesByExport: Map<string, string[]>) => {
 };
 
 /**
+ * The fewest releases that run every flag segment on a real binary where its
+ * option exists, plus the newest release of each major. Each segment is a set
+ * of candidate release indexes; this is interval stabbing, solved greedily by
+ * taking the last candidate of the segment that ends first. Downloads and
+ * disk in CI scale with the result, so it matters.
+ */
+const pickTestReleases = (
+	releases: string[],
+	segmentReleases: number[][],
+	required: string[],
+) => {
+	const chosen = new Set(required.map(release => releases.indexOf(release)));
+	const bySegmentEnd = segmentReleases
+		.filter(candidates => candidates.length > 0)
+		.sort((a, b) => a.at(-1)! - b.at(-1)!);
+	for (const candidates of bySegmentEnd) {
+		if (!candidates.some(index => chosen.has(index))) {
+			chosen.add(candidates.at(-1)!);
+		}
+	}
+	return [...chosen].sort((a, b) => a - b).map(index => releases[index]);
+};
+
+/**
  * Derives forms once per distinct schema: consecutive releases often share an
  * identical schema, so this bounds derivation by the number of change points
  * rather than the number of releases.
  */
-const deriveFormsPerRelease = (schemas: OptionsSchema[]) => {
-	const cache = new Map<string, Map<string, Form[]>>();
+const derivePerRelease = (schemas: OptionsSchema[]) => {
+	const cache = new Map<string, {
+		forms: Map<string, Form[]>;
+		accepted: Map<string, boolean>;
+	}>();
 	return schemas.map((schema) => {
 		const key = JSON.stringify(schema);
-		let forms = cache.get(key);
-		if (!forms) {
-			forms = deriveForms(schema);
-			cache.set(key, forms);
+		let derived = cache.get(key);
+		if (!derived) {
+			derived = {
+				forms: deriveForms(schema),
+				accepted: acceptedSpellings(schema),
+			};
+			cache.set(key, derived);
 		}
-		return forms;
+		return derived;
 	});
 };
 
@@ -444,26 +624,75 @@ const deriveFormsPerRelease = (schemas: OptionsSchema[]) => {
  * that drifts becomes a `forVersion`-branched chain exact on each release.
  */
 export const emit = async ({ releases, schemas, readSource }: EmitInput) => {
-	const formsPerRelease = deriveFormsPerRelease(schemas);
+	const derived = derivePerRelease(schemas);
+	const formsPerRelease = derived.map(release => release.forms);
+	const acceptedPerRelease = derived.map(release => release.accepted);
 	const newestIndex = schemas.length - 1;
 
 	// Readable options are exactly the keys deriveForms emitted forms for
 	const names = [...new Set(formsPerRelease.flatMap(forms => [...forms.keys()]))]
 		.sort((a, b) => a.localeCompare(b));
 
+	// Each flag is documented (and source-linked) from the newest release that
+	// registers it as an option. The sources are the only network input, so
+	// they're fetched before any file is written: a failed fetch then leaves
+	// src/flags.ts, docs/flags.json, and the README consistent.
+	const lastOptionIndex = (name: string) => {
+		for (let index = newestIndex; index >= 0; index -= 1) {
+			if (Object.hasOwn(schemas[index].options, name)) {
+				return index;
+			}
+		}
+		throw new Error(`${name} is not an option in any release`);
+	};
+	const documentedIndexes = new Map(names.map(name => [name, lastOptionIndex(name)]));
+	const sourceReleases = new Set([...documentedIndexes.values()].map(index => releases[index]));
+	const sources = new Map(await Promise.all(
+		[...sourceReleases].map(async release => [release, await readSource(release)] as const),
+	));
+
+	// Renames, as Node declares them: a former option name that a later
+	// release keeps as a single-target alias of the new name (new -> former)
+	const formerNames = new Map<string, Set<string>>();
+	const newestType = new Map<string, string>();
+	for (const { options, aliases } of schemas) {
+		for (const [alias, target] of Object.entries(aliases)) {
+			if (target.length === 1 && target[0] !== alias && names.includes(alias)) {
+				let former = formerNames.get(target[0]);
+				if (!former) {
+					former = new Set();
+					formerNames.set(target[0], former);
+				}
+				former.add(alias);
+			}
+		}
+		for (const [name, option] of Object.entries(options)) {
+			newestType.set(name, option.type);
+		}
+	}
+
 	const releaseFlagFor = (name: string, index: number): ReleaseFlag => {
 		const floor = inexactBelow[name];
 		if (floor && compareVersions(releases[index], floor) < 0) {
-			return 'absent';
+			return 'folded';
 		}
 		const { options, aliases } = schemas[index];
 		const option = options[name];
 		if (!option) {
-			// A renamed option keeps its old name as a single-target alias
+			// After a rename, the former name reads through its new name
 			const target = aliases[name];
-			return target?.length === 1 && target[0] !== name && options[target[0]]
-				? releaseFlagFor(target[0], index)
-				: 'absent';
+			if (target?.length === 1 && target[0] !== name && options[target[0]]) {
+				return releaseFlagFor(target[0], index);
+			}
+			// Before a rename, the new name reads through its former name. A
+			// rename keeps the value type, which rules out unrelated aliases
+			// (e.g. the boolean --experimental-default-config-file)
+			for (const former of formerNames.get(name) ?? []) {
+				if (options[former]?.type === newestType.get(name)) {
+					return releaseFlagFor(former, index);
+				}
+			}
+			return 'absent';
 		}
 		const forms = formsPerRelease[index].get(name);
 		if (!forms) {
@@ -482,14 +711,11 @@ export const emit = async ({ releases, schemas, readSource }: EmitInput) => {
 	let usesVersion = false;
 	const seenExports = new Map<string, string>();
 	const exportByExpression = new Map<string, string>();
-	const factoriesByExport = new Map<string, string[]>();
-	const testReleases = new Set<string>();
+	const typesByExport = new Map<string, string[]>();
+	const segmentReleases: number[][] = [];
 	const lastMajor = new Map<number, string>();
 	for (const release of releases) {
 		lastMajor.set(majorOf(release), release);
-	}
-	for (const release of lastMajor.values()) {
-		testReleases.add(release);
 	}
 
 	const definitions = names.map((name) => {
@@ -501,18 +727,17 @@ export const emit = async ({ releases, schemas, readSource }: EmitInput) => {
 		seenExports.set(exportName, name);
 
 		const releaseFlags = releases.map((_release, index) => releaseFlagFor(name, index));
-		const segments = computeSegments(releases, releaseFlags);
-		const factories = new Set<string>();
-		for (const { from, flag } of segments) {
-			factories.add(typeof flag === 'object' ? flag.factory : 'undefinedFlag');
-			// Every segment gets a real-binary oracle run at its first release
-			testReleases.add(from);
+		markConflictingAbsences(releaseFlags, acceptedPerRelease);
+		const segments = computeSegments(releases, releaseFlags, acceptedPerRelease);
+		const types = new Set<string>();
+		for (const { flag, existing } of segments) {
+			usedFactories.add(typeof flag === 'object' ? flag.factory : 'undefinedFlag');
+			for (const type of valueTypes(flag)) {
+				types.add(type);
+			}
+			segmentReleases.push(existing);
 		}
-
-		for (const factory of factories) {
-			usedFactories.add(factory);
-		}
-		factoriesByExport.set(exportName, [...factories].sort());
+		typesByExport.set(exportName, [...types].sort());
 
 		if (readSet.has(name) && segments.length > 1) {
 			throw new Error(`Read-set flag ${name} drifts across releases (${segments.length} segments: ${segments.map(segment => segment.from).join(', ')})`);
@@ -582,29 +807,16 @@ ${imports.map(name => `\t${name},`).join('\n')}
 ${exports.join('\n')}
 `;
 
-	await assertNoWidening(factoriesByExport);
+	const testReleases = pickTestReleases(releases, segmentReleases, [...lastMajor.values()]);
+
+	await assertNoWidening(typesByExport);
 
 	const outputPath = new URL('../../src/flags.ts', import.meta.url);
 	await fs.writeFile(outputPath, output);
 	console.log(`Wrote ${outputPath.pathname} (${exports.length} flags, ${usesVersion ? 'some version-conditional' : 'all stable'})`);
 
 	// Flag metadata: the source of truth for the generated README table (via
-	// mdeval) and the oracle test's option-name -> export map. Each flag is
-	// documented from the newest release that registers it as an option.
-	const lastOptionIndex = (name: string) => {
-		for (let index = newestIndex; index >= 0; index -= 1) {
-			if (Object.hasOwn(schemas[index].options, name)) {
-				return index;
-			}
-		}
-		throw new Error(`${name} is not an option in any release`);
-	};
-	const documentedIndexes = new Map(names.map(name => [name, lastOptionIndex(name)]));
-	const sourceReleases = new Set([...documentedIndexes.values()].map(index => releases[index]));
-	const sources = new Map(await Promise.all(
-		[...sourceReleases].map(async release => [release, await readSource(release)] as const),
-	));
-
+	// mdeval) and the oracle test's option-name -> export map.
 	const missing: string[] = [];
 	const flags = [...seenExports]
 		.map(([exportName, name]) => {
@@ -627,7 +839,7 @@ ${exports.join('\n')}
 				export: exportName,
 				option: name,
 				...(display && { display }),
-				factories: factoriesByExport.get(exportName)!,
+				types: typesByExport.get(exportName)!,
 				...(inexactBelow[name] && { inexactBelow: inexactBelow[name] }),
 				description: option.helpText ?? '',
 				url: `https://github.com/nodejs/node/blob/v${release}/src/node_options.cc${line ? `#L${line}` : ''}`,
@@ -644,8 +856,8 @@ ${exports.join('\n')}
 		version: releases[newestIndex],
 		// Releases the oracle test runs on real binaries: the newest of each
 		// major, plus the first release of every flag's version segment
-		testReleases: [...testReleases].sort(compareVersions),
+		testReleases,
 		flags,
 	}, null, '\t')}\n`);
-	console.log(`Wrote ${docsPath.pathname} (${flags.length} flags, ${testReleases.size} test releases)`);
+	console.log(`Wrote ${docsPath.pathname} (${flags.length} flags, ${testReleases.length} test releases)`);
 };
