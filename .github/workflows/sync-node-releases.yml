@@ -1,0 +1,86 @@
+name: Sync Node.js releases
+
+# Records new Node.js releases into the option history, regenerates the
+# flags, and opens (or updates) a PR. The PR is opened with GH_TOKEN because
+# a PR created with GITHUB_TOKEN only gets approval-required Test runs:
+# https://docs.github.com/en/actions/concepts/security/github_token#when-github_token-triggers-workflow-runs
+
+on:
+  schedule:
+    - cron: '23 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          ref: develop
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Record new releases
+        run: pnpm record-releases
+
+      - name: Regenerate flags
+        run: pnpm generate
+
+      - name: Open or update PR
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          if git diff --quiet; then
+            echo 'No new Node.js releases'
+            exit 0
+          fi
+
+          history=scripts/generate-flags/history/node-options.json
+          releases=$(git diff -U0 -- "$history" | sed -nE 's/^\+\t\t"([0-9]+\.[0-9]+\.[0-9]+)",?$/v\1/p' | paste -sd ' ' -)
+
+          # New exports are a feature; changed flags alone are a fix (they now
+          # match Node); a history-only change ships nothing
+          if git diff -U0 -- src/flags.ts | grep -q '^+export const'; then
+            type=feat
+          elif ! git diff --quiet -- src/flags.ts; then
+            type=fix
+          else
+            type=chore
+          fi
+          title="$type: sync Node.js $releases"
+
+          branch=sync/node-releases
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c "$branch"
+          git add -- "$history" src/flags.ts docs/flags.json README.md
+          git commit -m "$title"
+          git push --force origin "$branch"
+
+          body="Recorded by the [Sync Node.js releases]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) workflow. Review the option history diff for the releases' changes."
+          if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$branch" --title "$title" --body "$body"
+          else
+            gh pr create --base develop --head "$branch" --title "$title" --body "$body"
+          fi
