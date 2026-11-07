@@ -28,6 +28,8 @@ jobs:
         with:
           ref: develop
           token: ${{ secrets.GH_TOKEN }}
+          # Full history, to check the sync branch for commits made by others
+          fetch-depth: 0
 
       - name: Install pnpm
         uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
@@ -59,11 +61,16 @@ jobs:
           history=scripts/generate-flags/history/node-options.json
           releases=$(git diff -U0 -- "$history" | sed -nE 's/^\+\t\t"([0-9]+\.[0-9]+\.[0-9]+)",?$/v\1/p' | paste -sd ' ' -)
 
-          # New exports are a feature; changed flags alone are a fix (they now
-          # match Node); a history-only change ships nothing
-          if git diff -U0 -- src/flags.ts | grep -q '^+export const'; then
+          # feat: an export was added. fix: an existing export's definition
+          # changed (it now matches Node). chore: only the history (and the
+          # generated header's release count) changed, so nothing ships.
+          export_lines() { grep -E '^export const ' | sort; }
+          export_names() { sed -E 's/^export const ([A-Za-z0-9_]+).*/\1/'; }
+          before=$(git show HEAD:src/flags.ts | export_lines)
+          after=$(export_lines < src/flags.ts)
+          if comm -13 <(echo "$before" | export_names) <(echo "$after" | export_names) | grep -q .; then
             type=feat
-          elif ! git diff --quiet -- src/flags.ts; then
+          elif [ "$before" != "$after" ]; then
             type=fix
           else
             type=chore
@@ -71,12 +78,25 @@ jobs:
           title="$type: sync Node.js $releases"
 
           branch=sync/node-releases
+          bot='41898282+github-actions[bot]@users.noreply.github.com'
+          lease="$branch:"
+          # Regenerating replaces the branch, so refuse when someone added
+          # commits to it; the lease also guards a push racing this run
+          if git fetch origin "$branch"; then
+            others=$(git log --format=%ae "HEAD..FETCH_HEAD" | grep -vxF "$bot" || true)
+            if [ -n "$others" ]; then
+              echo "::error::$branch has commits not made by this workflow. Merge or close its PR, then rerun."
+              exit 1
+            fi
+            lease="$branch:$(git rev-parse FETCH_HEAD)"
+          fi
+
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.email "$bot"
           git switch -c "$branch"
           git add -- "$history" src/flags.ts docs/flags.json README.md
           git commit -m "$title"
-          git push --force origin "$branch"
+          git push --force-with-lease="$lease" origin "$branch"
 
           body="Recorded by the [Sync Node.js releases]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID) workflow. Review the option history diff for the releases' changes."
           if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
