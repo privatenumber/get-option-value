@@ -47,6 +47,12 @@ export type OptionSpec = {
 
 	/** Default value reported by getOptionValue when unset. */
 	default?: OptionValue;
+
+	/**
+	 * Environment variable that sets the starting value (HandleEnvOptions in
+	 * src/node_options.cc): `"1"` for a boolean, the raw value for a string.
+	 */
+	environment?: string;
 };
 
 /** A full option schema for one Node major. */

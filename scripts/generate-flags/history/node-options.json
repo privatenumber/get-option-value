@@ -1,0 +1,1514 @@
+{
+	"releases": [
+		"18.0.0",
+		"18.1.0",
+		"18.2.0",
+		"18.3.0",
+		"18.4.0",
+		"18.5.0",
+		"18.6.0",
+		"18.7.0",
+		"18.8.0",
+		"18.9.0",
+		"18.9.1",
+		"18.10.0",
+		"18.11.0",
+		"18.12.0",
+		"18.12.1",
+		"18.13.0",
+		"18.14.0",
+		"18.14.1",
+		"18.14.2",
+		"18.15.0",
+		"18.16.0",
+		"18.16.1",
+		"18.17.0",
+		"18.17.1",
+		"18.18.0",
+		"18.18.1",
+		"18.18.2",
+		"18.19.0",
+		"18.19.1",
+		"18.20.0",
+		"18.20.1",
+		"18.20.2",
+		"18.20.3",
+		"18.20.4",
+		"18.20.5",
+		"18.20.6",
+		"18.20.7",
+		"18.20.8",
+		"19.0.0",
+		"19.0.1",
+		"19.1.0",
+		"19.2.0",
+		"19.3.0",
+		"19.4.0",
+		"19.5.0",
+		"19.6.0",
+		"19.6.1",
+		"19.7.0",
+		"19.8.0",
+		"19.8.1",
+		"19.9.0",
+		"20.0.0",
+		"20.1.0",
+		"20.2.0",
+		"20.3.0",
+		"20.3.1",
+		"20.4.0",
+		"20.5.0",
+		"20.5.1",
+		"20.6.0",
+		"20.6.1",
+		"20.7.0",
+		"20.8.0",
+		"20.8.1",
+		"20.9.0",
+		"20.10.0",
+		"20.11.0",
+		"20.11.1",
+		"20.12.0",
+		"20.12.1",
+		"20.12.2",
+		"20.13.0",
+		"20.13.1",
+		"20.14.0",
+		"20.15.0",
+		"20.15.1",
+		"20.16.0",
+		"20.17.0",
+		"20.18.0",
+		"20.18.1",
+		"20.18.2",
+		"20.18.3",
+		"20.19.0",
+		"20.19.1",
+		"20.19.2",
+		"20.19.3",
+		"20.19.4",
+		"20.19.5",
+		"20.19.6",
+		"20.20.0",
+		"20.20.1",
+		"20.20.2",
+		"21.0.0",
+		"21.1.0",
+		"21.2.0",
+		"21.3.0",
+		"21.4.0",
+		"21.5.0",
+		"21.6.0",
+		"21.6.1",
+		"21.6.2",
+		"21.7.0",
+		"21.7.1",
+		"21.7.2",
+		"21.7.3",
+		"22.0.0",
+		"22.1.0",
+		"22.2.0",
+		"22.3.0",
+		"22.4.0",
+		"22.4.1",
+		"22.5.0",
+		"22.5.1",
+		"22.6.0",
+		"22.7.0",
+		"22.8.0",
+		"22.9.0",
+		"22.10.0",
+		"22.11.0",
+		"22.12.0",
+		"22.13.0",
+		"22.13.1",
+		"22.14.0",
+		"22.15.0",
+		"22.15.1",
+		"22.16.0",
+		"22.17.0",
+		"22.17.1",
+		"22.18.0",
+		"22.19.0",
+		"22.20.0",
+		"22.21.0",
+		"22.21.1",
+		"22.22.0",
+		"22.22.1",
+		"22.22.2",
+		"22.22.3",
+		"22.23.0",
+		"22.23.1",
+		"22.23.2",
+		"22.23.3",
+		"22.23.4",
+		"23.0.0",
+		"23.1.0",
+		"23.2.0",
+		"23.3.0",
+		"23.4.0",
+		"23.5.0",
+		"23.6.0",
+		"23.6.1",
+		"23.7.0",
+		"23.8.0",
+		"23.9.0",
+		"23.10.0",
+		"23.11.0",
+		"23.11.1",
+		"24.0.0",
+		"24.0.1",
+		"24.0.2",
+		"24.1.0",
+		"24.2.0",
+		"24.3.0",
+		"24.4.0",
+		"24.4.1",
+		"24.5.0",
+		"24.6.0",
+		"24.7.0",
+		"24.8.0",
+		"24.9.0",
+		"24.10.0",
+		"24.11.0",
+		"24.11.1",
+		"24.12.0",
+		"24.13.0",
+		"24.13.1",
+		"24.14.0",
+		"24.14.1",
+		"24.15.0",
+		"24.16.0",
+		"24.17.0",
+		"24.18.0",
+		"24.18.1",
+		"24.19.0",
+		"24.20.0",
+		"24.21.0",
+		"24.22.0",
+		"24.22.1",
+		"24.22.2",
+		"25.0.0",
+		"25.1.0",
+		"25.2.0",
+		"25.2.1",
+		"25.3.0",
+		"25.4.0",
+		"25.5.0",
+		"25.6.0",
+		"25.6.1",
+		"25.7.0",
+		"25.8.0",
+		"25.8.1",
+		"25.8.2",
+		"25.9.0",
+		"26.0.0",
+		"26.1.0",
+		"26.2.0",
+		"26.3.0",
+		"26.3.1",
+		"26.4.0",
+		"26.5.0",
+		"26.5.1",
+		"26.6.0",
+		"26.7.0",
+		"26.8.0",
+		"26.8.1",
+		"26.8.2",
+		"26.9.0",
+		"26.10.0",
+		"26.11.0",
+		"26.11.1",
+		"26.12.0",
+		"26.12.1",
+		"26.13.0"
+	],
+	"options": {
+		"--abort-on-uncaught-exception": [
+			["18.0.0",{"type":"v8Option","default":false,"helpText":"aborting instead of exiting causes a core file to be generated for analysis"}]
+		],
+		"--addons": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"disable loading native addons"}]
+		],
+		"--allow-addons": [
+			["18.0.0",null],
+			["20.12.0",{"type":"boolean","default":false,"helpText":"allow use of addons when any permissions are set"}],
+			["21.0.0",null],
+			["21.6.0",{"type":"boolean","default":false,"helpText":"allow use of addons when any permissions are set"}]
+		],
+		"--allow-child-process": [
+			["18.0.0",null],
+			["20.0.0",{"type":"boolean","default":false,"helpText":"allow use of child process when any permissions are set"}]
+		],
+		"--allow-ffi": [
+			["18.0.0",null],
+			["26.1.0",{"type":"boolean","default":false,"helpText":"allow use of FFI when any permissions are set"}]
+		],
+		"--allow-fs-read": [
+			["18.0.0",null],
+			["20.0.0",{"type":"string","default":"","helpText":"allow permissions to read the filesystem"}],
+			["20.7.0",{"type":"stringList","default":[],"helpText":"allow permissions to read the filesystem"}]
+		],
+		"--allow-fs-vfs": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false,"helpText":"allow mounting a virtual file system when any permissions are set"}]
+		],
+		"--allow-fs-write": [
+			["18.0.0",null],
+			["20.0.0",{"type":"string","default":"","helpText":"allow permissions to write in the filesystem"}],
+			["20.7.0",{"type":"stringList","default":[],"helpText":"allow permissions to write in the filesystem"}]
+		],
+		"--allow-inspector": [
+			["18.0.0",null],
+			["24.12.0",{"type":"boolean","default":false,"helpText":"allow use of inspector when any permissions are set"}]
+		],
+		"--allow-net": [
+			["18.0.0",null],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"allow use of network when any permissions are set"}]
+		],
+		"--allow-openssl-store": [
+			["18.0.0",null],
+			["24.21.0",{"type":"boolean","default":false,"helpText":"allow use of OpenSSL STORE loaders when any permissions are set"}],
+			["25.0.0",null],
+			["26.7.0",{"type":"boolean","default":false,"helpText":"allow use of OpenSSL STORE loaders when any permissions are set"}]
+		],
+		"--allow-wasi": [
+			["18.0.0",null],
+			["20.16.0",{"type":"boolean","default":false,"helpText":"allow wasi when any permissions are set"}],
+			["21.0.0",null],
+			["22.3.0",{"type":"boolean","default":false,"helpText":"allow wasi when any permissions are set"}]
+		],
+		"--allow-worker": [
+			["18.0.0",null],
+			["20.0.0",{"type":"boolean","default":false,"helpText":"allow worker threads when any permissions are set"}]
+		],
+		"--async-context-frame": [
+			["18.0.0",null],
+			["24.0.0",{"type":"boolean","default":true,"helpText":"Improve AsyncLocalStorage performance with AsyncContextFrame"}]
+		],
+		"--bench": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false,"implies":["[has_bench_options]"],"helpText":"launch benchmark runner on startup"}]
+		],
+		"--bench-isolation": [
+			["18.0.0",null],
+			["26.9.0",{"type":"string","default":"process","implies":["[has_bench_options]"],"helpText":"configures the type of benchmark isolation used in the benchmark runner"}]
+		],
+		"--bench-name-pattern": [
+			["18.0.0",null],
+			["26.9.0",{"type":"string","default":"","implies":["[has_bench_options]"],"helpText":"run benchmarks whose name matches this regular expression"}]
+		],
+		"--bench-reporter": [
+			["18.0.0",null],
+			["26.9.0",{"type":"stringList","default":[],"implies":["[has_bench_options]"],"helpText":"report benchmark output using the given reporter"}]
+		],
+		"--bench-reporter-destination": [
+			["18.0.0",null],
+			["26.9.0",{"type":"stringList","default":[],"implies":["[has_bench_options]"],"helpText":"report the given benchmark reporter to the given destination"}]
+		],
+		"--bench-samples": [
+			["18.0.0",null],
+			["26.9.0",{"type":"uinteger","default":0,"implies":["[has_bench_options]","[has_bench_samples]"],"helpText":"specify the number of measured benchmark samples"}]
+		],
+		"--bench-warmup": [
+			["18.0.0",null],
+			["26.9.0",{"type":"uinteger","default":0,"implies":["[has_bench_options]","[has_bench_warmup]"],"helpText":"specify the number of unreported benchmark warmup samples"}]
+		],
+		"--build-sea": [
+			["18.0.0",null],
+			["25.5.0",{"type":"string","default":"","helpText":"Build a Node.js single executable application"}]
+		],
+		"--build-snapshot": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"Generate a snapshot blob when the process exits.Currently only supported in the node_mksnapshot binary."}],
+			["18.9.0",{"type":"boolean","default":false,"helpText":"Generate a snapshot blob when the process exits. Currently only supported in the node_mksnapshot binary."}],
+			["19.7.0",{"type":"boolean","default":false,"helpText":"Generate a snapshot blob when the process exits."}]
+		],
+		"--build-snapshot-config": [
+			["18.0.0",null],
+			["20.12.0",{"type":"string","default":"","implies":["--build-snapshot"],"helpText":"Generate a snapshot blob when the process exits using aJSON configuration in the specified path."}],
+			["21.0.0",null],
+			["21.6.0",{"type":"string","default":"","implies":["--build-snapshot"],"helpText":"Generate a snapshot blob when the process exits using aJSON configuration in the specified path."}]
+		],
+		"--check": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"syntax check script without executing"}]
+		],
+		"--completion-bash": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"print source-able bash completion script"}]
+		],
+		"--conditions": [
+			["18.0.0",{"type":"stringList","default":[],"helpText":"additional user conditions for conditional exports and imports"}]
+		],
+		"--config-file": [
+			["18.0.0",null],
+			["26.12.0",{"type":"string","default":"","helpText":"set config file path"}]
+		],
+		"--cpu-prof": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"Start the V8 CPU profiler on start up, and write the CPU profile to disk before exit. If --cpu-prof-dir is not specified, write the profile to the current working directory."}]
+		],
+		"--cpu-prof-dir": [
+			["18.0.0",{"type":"string","default":"","helpText":"Directory where the V8 profiles generated by --cpu-prof will be placed. Does not affect --prof."}]
+		],
+		"--cpu-prof-interval": [
+			["18.0.0",{"type":"uinteger","default":1000,"helpText":"specified sampling interval in microseconds for the V8 CPU profile generated with --cpu-prof. (default: 1000)"}]
+		],
+		"--cpu-prof-name": [
+			["18.0.0",{"type":"string","default":"","helpText":"specified file name of the V8 CPU profile generated with --cpu-prof"}]
+		],
+		"--debug": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"--debug-arraybuffer-allocations": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"--debug-brk": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"--deprecation": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"silence deprecation warnings"}]
+		],
+		"--diagnostic-dir": [
+			["18.0.0",{"type":"string","default":"","helpText":"set dir for all output files (default: current working directory)"}]
+		],
+		"--disable-proto": [
+			["18.0.0",{"type":"string","default":"","helpText":"disable Object.prototype.__proto__"}]
+		],
+		"--disable-sigusr1": [
+			["18.0.0",null],
+			["22.14.0",{"type":"boolean","default":false,"helpText":"Disable inspector thread to be listening for SIGUSR1 signal"}],
+			["23.0.0",null],
+			["23.7.0",{"type":"boolean","default":false,"helpText":"Disable inspector thread to be listening for SIGUSR1 signal"}]
+		],
+		"--disable-warning": [
+			["18.0.0",null],
+			["20.11.0",{"type":"stringList","default":[],"helpText":"silence specific process warnings"}],
+			["21.0.0",null],
+			["21.3.0",{"type":"stringList","default":[],"helpText":"silence specific process warnings"}]
+		],
+		"--disable-wasm-trap-handler": [
+			["18.0.0",null],
+			["20.15.0",{"type":"boolean","default":false,"helpText":"Disable trap-handler-based WebAssembly bound checks. V8 will insert inline bound checks when compiling WebAssembly which may slow down performance."}],
+			["21.0.0",null],
+			["22.2.0",{"type":"boolean","default":false,"helpText":"Disable trap-handler-based WebAssembly bound checks. V8 will insert inline bound checks when compiling WebAssembly which may slow down performance."}]
+		],
+		"--disallow-code-generation-from-strings": [
+			["18.0.0",{"type":"v8Option","helpText":"disallow eval and friends"}]
+		],
+		"--dns-result-order": [
+			["18.0.0",{"type":"string","default":"","helpText":"set default value of verbatim in dns.lookup. Options are 'ipv4first' (IPv4 addresses are placed before IPv6 addresses) 'verbatim' (addresses are in the order the DNS resolver returned)"}],
+			["20.13.0",{"type":"string","default":"","helpText":"set default value of verbatim in dns.lookup. Options are 'ipv4first' (IPv4 addresses are placed before IPv6 addresses) 'ipv6first' (IPv6 addresses are placed before IPv4 addresses) 'verbatim' (addresses are in the order the DNS resolver returned)"}],
+			["21.0.0",{"type":"string","default":"","helpText":"set default value of verbatim in dns.lookup. Options are 'ipv4first' (IPv4 addresses are placed before IPv6 addresses) 'verbatim' (addresses are in the order the DNS resolver returned)"}],
+			["22.1.0",{"type":"string","default":"","helpText":"set default value of verbatim in dns.lookup. Options are 'ipv4first' (IPv4 addresses are placed before IPv6 addresses) 'ipv6first' (IPv6 addresses are placed before IPv4 addresses) 'verbatim' (addresses are in the order the DNS resolver returned)"}]
+		],
+		"--enable-etw-stack-walking": [
+			["18.0.0",null],
+			["18.15.0",{"type":"v8Option","helpText":"provides heap data to ETW Windows native tracing"}],
+			["19.0.0",null],
+			["19.6.0",{"type":"v8Option","helpText":"provides heap data to ETW Windows native tracing"}]
+		],
+		"--enable-fips": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"enable FIPS crypto at startup"}]
+		],
+		"--enable-fips-indicator-events": [
+			["18.0.0",null],
+			["24.22.0",{"type":"boolean","default":false,"helpText":"publish FIPS indicator results to the crypto.fips.indicator diagnostics channel"}],
+			["25.0.0",null],
+			["26.9.0",{"type":"boolean","default":false,"helpText":"publish FIPS indicator results to the crypto.fips.indicator diagnostics channel"}]
+		],
+		"--enable-network-family-autoselection": [
+			["18.0.0",null],
+			["18.18.0",{"type":"boolean","default":false,"helpText":"Enable network address family autodetection algorithm"}],
+			["19.0.0",null],
+			["19.4.0",{"type":"boolean","default":false,"helpText":"Enable network address family autodetection algorithm"}],
+			["20.0.0",null]
+		],
+		"--enable-source-maps": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"Source Map V3 support for stack traces"}]
+		],
+		"--entry-url": [
+			["18.0.0",null],
+			["22.10.0",{"type":"boolean","default":false,"helpText":"Treat the entrypoint as a URL"}]
+		],
+		"--env-file": [
+			["18.0.0",null],
+			["20.6.0",{"type":"string","default":"","implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["24.12.0",{"type":"stringList","default":[],"implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["25.0.0",{"type":"string","default":"","implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["25.2.0",{"type":"stringList","default":[],"implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}]
+		],
+		"--env-file-if-exists": [
+			["18.0.0",null],
+			["20.19.0",{"type":"string","default":"","implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["21.0.0",null],
+			["22.9.0",{"type":"string","default":"","implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["24.12.0",{"type":"stringList","default":[],"implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["25.0.0",{"type":"string","default":"","implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}],
+			["25.2.0",{"type":"stringList","default":[],"implies":["[has_env_file_string]"],"helpText":"set environment variables from supplied file"}]
+		],
+		"--eval": [
+			["18.0.0",{"type":"string","default":"","implies":["[has_eval_string]"],"helpText":"evaluate script"}]
+		],
+		"--experimental-abortcontroller": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--experimental-addon-modules": [
+			["18.0.0",null],
+			["22.20.0",{"type":"boolean","default":false,"helpText":"experimental import support for addons"}],
+			["23.0.0",null],
+			["23.6.0",{"type":"boolean","default":false,"helpText":"experimental import support for addons"}],
+			["24.19.0",{"type":"boolean","default":true,"helpText":"experimental import support for addons"}],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"experimental import support for addons"}],
+			["26.5.0",{"type":"boolean","default":true,"helpText":"experimental import support for addons"}]
+		],
+		"--experimental-async-context-frame": [
+			["18.0.0",null],
+			["22.7.0",{"type":"boolean","default":false,"helpText":"Improve AsyncLocalStorage performance with AsyncContextFrame"}],
+			["24.0.0",null]
+		],
+		"--experimental-bench": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false,"helpText":"experimental node:bench module and benchmark runner"}]
+		],
+		"--experimental-config-file": [
+			["18.0.0",null],
+			["22.16.0",{"type":"string","default":"","helpText":"set config file from supplied file"}],
+			["23.0.0",null],
+			["23.10.0",{"type":"string","default":"","helpText":"set config file from supplied file"}],
+			["24.19.0",{"type":"string","default":"","helpText":"set config file path"}],
+			["25.0.0",{"type":"string","default":"","helpText":"set config file from supplied file"}],
+			["26.1.0",{"type":"string","default":"","helpText":"set config file path"}],
+			["26.12.0",null]
+		],
+		"--experimental-default-config-file": [
+			["18.0.0",null],
+			["22.16.0",{"type":"boolean","default":false,"helpText":"set config file from default config file"}],
+			["23.0.0",null],
+			["23.10.0",{"type":"boolean","default":false,"helpText":"set config file from default config file"}],
+			["24.19.0",null],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"set config file from default config file"}],
+			["26.1.0",null]
+		],
+		"--experimental-default-type": [
+			["18.0.0",null],
+			["18.19.0",{"type":"string","default":"","helpText":"set module system to use by default"}],
+			["19.0.0",null],
+			["20.10.0",{"type":"string","default":"","helpText":"set module system to use by default"}],
+			["23.4.0",null]
+		],
+		"--experimental-detect-module": [
+			["18.0.0",null],
+			["20.10.0",{"type":"boolean","default":false,"helpText":"when ambiguous modules fail to evaluate because they contain ES module syntax, try again to evaluate them as ES modules"}],
+			["20.19.0",{"type":"boolean","default":true,"helpText":"when ambiguous modules fail to evaluate because they contain ES module syntax, try again to evaluate them as ES modules"}],
+			["21.0.0",null],
+			["21.1.0",{"type":"boolean","default":false,"helpText":"when ambiguous modules fail to evaluate because they contain ES module syntax, try again to evaluate them as ES modules"}],
+			["22.7.0",{"type":"boolean","default":true,"helpText":"when ambiguous modules fail to evaluate because they contain ES module syntax, try again to evaluate them as ES modules"}]
+		],
+		"--experimental-dtls": [
+			["18.0.0",null],
+			["26.9.0",{"type":"noOp"}]
+		],
+		"--experimental-eventsource": [
+			["18.0.0",null],
+			["20.18.0",{"type":"boolean","default":false,"helpText":"experimental EventSource API"}],
+			["21.0.0",null],
+			["22.3.0",{"type":"boolean","default":false,"helpText":"experimental EventSource API"}]
+		],
+		"--experimental-fetch": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"experimental Fetch API"}],
+			["23.0.0",{"type":"noOp"}]
+		],
+		"--experimental-ffi": [
+			["18.0.0",null],
+			["26.1.0",{"type":"boolean","default":false,"helpText":"experimental node:ffi module"}],
+			["26.9.0",{"type":"boolean","default":true,"helpText":"experimental node:ffi module"}]
+		],
+		"--experimental-global-customevent": [
+			["18.0.0",null],
+			["18.7.0",{"type":"boolean","default":false,"helpText":"expose experimental CustomEvent on the global scope"}],
+			["19.0.0",{"type":"boolean","default":true,"helpText":"expose experimental CustomEvent on the global scope"}],
+			["23.0.0",{"type":"noOp"}]
+		],
+		"--experimental-global-navigator": [
+			["18.0.0",null],
+			["21.2.0",{"type":"boolean","default":true,"helpText":"expose experimental Navigator API on the global scope"}]
+		],
+		"--experimental-global-webcrypto": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"expose experimental Web Crypto API on the global scope"}],
+			["19.0.0",{"type":"boolean","default":true,"helpText":"expose experimental Web Crypto API on the global scope"}],
+			["23.0.0",{"type":"noOp"}]
+		],
+		"--experimental-import-meta-resolve": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"experimental ES Module import.meta.resolve() support"}],
+			["18.19.0",{"type":"boolean","default":false,"helpText":"experimental ES Module import.meta.resolve() parentURL support"}],
+			["19.0.0",{"type":"boolean","default":false,"helpText":"experimental ES Module import.meta.resolve() support"}],
+			["20.6.0",{"type":"boolean","default":false,"helpText":"experimental ES Module import.meta.resolve() parentURL support"}]
+		],
+		"--experimental-import-text": [
+			["18.0.0",null],
+			["24.19.0",{"type":"boolean","default":false,"helpText":"experimental support for importing source as text with import attributes"}],
+			["25.0.0",null],
+			["26.5.0",{"type":"boolean","default":false,"helpText":"experimental support for importing source as text with import attributes"}]
+		],
+		"--experimental-inspector-network-resource": [
+			["18.0.0",null],
+			["22.19.0",{"type":"boolean","default":false,"helpText":"experimental load network resources via the inspector"}],
+			["23.0.0",null],
+			["24.5.0",{"type":"boolean","default":false,"helpText":"experimental load network resources via the inspector"}]
+		],
+		"--experimental-json-modules": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--experimental-loader": [
+			["18.0.0",{"type":"string","default":"","helpText":"use the specified module as a custom loader"}],
+			["18.6.0",{"type":"stringList","default":[],"helpText":"use the specified module as a custom loader"}]
+		],
+		"--experimental-modules": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--experimental-network-imports": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"experimental https: support for the ES Module loader"}],
+			["22.6.0",null]
+		],
+		"--experimental-network-inspection": [
+			["18.0.0",null],
+			["20.18.0",{"type":"boolean","default":false,"helpText":"experimental network inspection support"}],
+			["21.0.0",null],
+			["22.6.0",{"type":"boolean","default":false,"helpText":"experimental network inspection support"}]
+		],
+		"--experimental-package-map": [
+			["18.0.0",null],
+			["24.20.0",{"type":"string","default":"","helpText":"use the specified file for package map resolution"}],
+			["25.0.0",null],
+			["26.4.0",{"type":"string","default":"","helpText":"use the specified file for package map resolution"}]
+		],
+		"--experimental-permission": [
+			["18.0.0",null],
+			["20.0.0",{"type":"boolean","default":false,"helpText":"enable the permission system"}],
+			["22.13.0",null],
+			["23.0.0",{"type":"boolean","default":false,"helpText":"enable the permission system"}],
+			["23.5.0",null]
+		],
+		"--experimental-policy": [
+			["18.0.0",{"type":"string","default":"","helpText":"use the specified file as a security policy"}],
+			["22.2.0",null]
+		],
+		"--experimental-print-required-tla": [
+			["18.0.0",null],
+			["20.17.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --experimental-require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to to find and print top-level await in the graph"}],
+			["21.0.0",null],
+			["22.0.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --experimental-require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to to find and print top-level await in the graph"}],
+			["24.15.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to to find and print top-level await in the graph"}],
+			["24.20.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to find and print top-level await in the graph"}],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --experimental-require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to to find and print top-level await in the graph"}],
+			["25.4.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to to find and print top-level await in the graph"}],
+			["26.5.0",{"type":"boolean","default":false,"helpText":"Print pending top-level await. If --require-module is true, evaluate asynchronous graphs loaded by `require()` but do not run the microtasks, in order to find and print top-level await in the graph"}]
+		],
+		"--experimental-quic": [
+			["18.0.0",null],
+			["23.8.0",{"type":"boolean","default":false,"helpText":"experimental QUIC API"}],
+			["23.9.0",{"type":"noOp"}],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"experimental QUIC support"}],
+			["25.5.0",{"type":"noOp"}]
+		],
+		"--experimental-repl-await": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"experimental await keyword support in REPL"}]
+		],
+		"--experimental-report": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--experimental-require-module": [
+			["18.0.0",null],
+			["20.17.0",{"type":"boolean","default":false,"helpText":"Allow loading explicit ES Modules in require()."}],
+			["20.19.0",{"type":"boolean","default":true,"helpText":"Allow loading synchronous ES Modules in require()."}],
+			["21.0.0",null],
+			["22.0.0",{"type":"boolean","default":false,"helpText":"Allow loading explicit ES Modules in require()."}],
+			["22.12.0",{"type":"boolean","default":true,"helpText":"Allow loading synchronous ES Modules in require()."}],
+			["24.15.0",{"type":"boolean","default":true,"implies":["--require-module"],"helpText":"Legacy alias for --require-module"}],
+			["25.0.0",{"type":"boolean","default":true,"helpText":"Allow loading synchronous ES Modules in require()."}],
+			["25.4.0",{"type":"boolean","default":true,"implies":["--require-module"],"helpText":"Legacy alias for --require-module"}]
+		],
+		"--experimental-sea-config": [
+			["18.0.0",null],
+			["20.0.0",{"type":"string","default":"","helpText":"Generate a blob that can be embedded into the single executable application"}]
+		],
+		"--experimental-shadow-realm": [
+			["18.0.0",null],
+			["18.13.0",{"type":"boolean","default":false,"implies":["--harmony-shadow-realm"]}]
+		],
+		"--experimental-specifier-resolution": [
+			["18.0.0",{"type":"string","default":"","helpText":"Select extension resolution algorithm for es modules; either 'explicit' (default) or 'node'"}],
+			["19.0.0",{"type":"noOp"}]
+		],
+		"--experimental-sqlite": [
+			["18.0.0",null],
+			["22.5.0",{"type":"boolean","default":false,"helpText":"experimental node:sqlite module"}],
+			["22.13.0",{"type":"boolean","default":true,"helpText":"experimental node:sqlite module"}],
+			["23.0.0",{"type":"boolean","default":false,"helpText":"experimental node:sqlite module"}],
+			["23.4.0",{"type":"boolean","default":true,"helpText":"experimental node:sqlite module"}]
+		],
+		"--experimental-storage-inspection": [
+			["18.0.0",null],
+			["24.16.0",{"type":"boolean","default":false,"helpText":"experimental storage inspection support"}],
+			["25.0.0",null],
+			["25.5.0",{"type":"boolean","default":false,"helpText":"experimental storage inspection support"}]
+		],
+		"--experimental-stream-iter": [
+			["18.0.0",null],
+			["24.20.0",{"type":"boolean","default":false,"helpText":"experimental iterable streams API (node:stream/iter)"}],
+			["25.0.0",null],
+			["25.9.0",{"type":"boolean","default":false,"helpText":"experimental iterable streams API (node:stream/iter)"}]
+		],
+		"--experimental-strip-types": [
+			["18.0.0",null],
+			["22.6.0",{"type":"boolean","default":false,"implies":["--experimental-detect-module"],"helpText":"Experimental type-stripping for TypeScript files."}],
+			["22.18.0",{"type":"boolean","default":true,"implies":["--experimental-detect-module"],"helpText":"Experimental type-stripping for TypeScript files."}],
+			["23.0.0",{"type":"boolean","default":false,"helpText":"Experimental type-stripping for TypeScript files."}],
+			["23.6.0",{"type":"boolean","default":true,"helpText":"Experimental type-stripping for TypeScript files."}],
+			["24.12.0",null],
+			["25.0.0",{"type":"boolean","default":true,"helpText":"Experimental type-stripping for TypeScript files."}],
+			["25.2.0",null]
+		],
+		"--experimental-test-coverage": [
+			["18.0.0",null],
+			["18.15.0",{"type":"boolean","default":false,"helpText":"enable code coverage in the test runner"}],
+			["19.0.0",null],
+			["19.7.0",{"type":"boolean","default":false,"helpText":"enable code coverage in the test runner"}]
+		],
+		"--experimental-test-isolation": [
+			["18.0.0",null],
+			["22.8.0",{"type":"string","default":"process","helpText":"configures the type of test isolation used in the test runner"}],
+			["23.6.0",null]
+		],
+		"--experimental-test-module-mocks": [
+			["18.0.0",null],
+			["20.18.0",{"type":"boolean","default":false,"helpText":"enable module mocking in the test runner"}],
+			["21.0.0",null],
+			["22.3.0",{"type":"boolean","default":false,"helpText":"enable module mocking in the test runner"}]
+		],
+		"--experimental-test-snapshots": [
+			["18.0.0",null],
+			["22.3.0",{"type":"boolean","default":false,"helpText":"enable snapshot testing in the test runner"}],
+			["22.13.0",{"type":"noOp"}],
+			["23.0.0",{"type":"boolean","default":false,"helpText":"enable snapshot testing in the test runner"}],
+			["23.4.0",{"type":"noOp"}]
+		],
+		"--experimental-test-tag-filter": [
+			["18.0.0",null],
+			["24.19.0",{"type":"stringList","default":[],"helpText":"run tests matching the given tag filter expression"}],
+			["25.0.0",null],
+			["26.2.0",{"type":"stringList","default":[],"helpText":"run tests matching the given tag filter expression"}]
+		],
+		"--experimental-top-level-await": [
+			["18.0.0",{"type":"boolean","default":true,"implies":["--harmony-top-level-await"]}],
+			["18.1.0",{"type":"noOp"}]
+		],
+		"--experimental-transform-types": [
+			["18.0.0",null],
+			["22.7.0",{"type":"boolean","default":false,"implies":["--experimental-strip-types","--enable-source-maps"],"helpText":"enable transformation of TypeScript-onlysyntax into JavaScript code"}],
+			["24.12.0",{"type":"boolean","default":false,"implies":["--strip-types","--enable-source-maps"],"helpText":"enable transformation of TypeScript-onlysyntax into JavaScript code"}],
+			["25.0.0",{"type":"boolean","default":false,"implies":["--experimental-strip-types","--enable-source-maps"],"helpText":"enable transformation of TypeScript-onlysyntax into JavaScript code"}],
+			["25.2.0",{"type":"boolean","default":false,"implies":["--strip-types","--enable-source-maps"],"helpText":"enable transformation of TypeScript-onlysyntax into JavaScript code"}],
+			["26.0.0",null]
+		],
+		"--experimental-vfs": [
+			["18.0.0",null],
+			["26.4.0",{"type":"boolean","default":false,"helpText":"experimental node:vfs module"}]
+		],
+		"--experimental-vm-modules": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"experimental ES Module support in vm module"}]
+		],
+		"--experimental-wasi-unstable-preview1": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"experimental WASI support"}],
+			["18.17.0",{"type":"noOp"}],
+			["19.0.0",{"type":"boolean","default":false,"helpText":"experimental WASI support"}],
+			["20.0.0",{"type":"noOp"}]
+		],
+		"--experimental-wasm-modules": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"experimental ES Module support for webassembly modules"}],
+			["22.19.0",{"type":"noOp"}],
+			["23.0.0",{"type":"boolean","default":false,"helpText":"experimental ES Module support for webassembly modules"}],
+			["24.5.0",{"type":"noOp"}]
+		],
+		"--experimental-web-worker": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false,"helpText":"experimental Web Worker API"}]
+		],
+		"--experimental-websocket": [
+			["18.0.0",null],
+			["20.10.0",{"type":"boolean","default":false,"helpText":"experimental WebSocket API"}],
+			["22.0.0",{"type":"boolean","default":true,"helpText":"experimental WebSocket API"}]
+		],
+		"--experimental-webstorage": [
+			["18.0.0",null],
+			["22.4.0",{"type":"boolean","default":false,"helpText":"experimental Web Storage API"}],
+			["25.0.0",null],
+			["25.2.1",{"type":"boolean","default":true,"helpText":"experimental Web Storage API"}]
+		],
+		"--experimental-worker": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--experimental-worker-inspection": [
+			["18.0.0",null],
+			["22.17.0",{"type":"boolean","default":false,"helpText":"experimental worker inspection support"}],
+			["23.0.0",null],
+			["24.1.0",{"type":"boolean","default":false,"helpText":"experimental worker inspection support"}]
+		],
+		"--expose-gc": [
+			["18.0.0",null],
+			["20.18.0",{"type":"v8Option","helpText":"expose gc extension"}],
+			["21.0.0",null],
+			["22.3.0",{"type":"v8Option","helpText":"expose gc extension"}]
+		],
+		"--expose-internals": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"--extra-info-on-fatal-exception": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"hide extra information on fatal exception that causes exit"}]
+		],
+		"--force-async-hooks-checks": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"disable checks for async_hooks"}]
+		],
+		"--force-context-aware": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"disable loading non-context-aware addons"}]
+		],
+		"--force-fips": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"force FIPS crypto (cannot be disabled)"}],
+			["24.22.0",{"type":"boolean","default":false,"helpText":"force FIPS crypto (optional mode: provider or strict)"}],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"force FIPS crypto (cannot be disabled)"}],
+			["26.9.0",{"type":"boolean","default":false,"helpText":"force FIPS crypto (optional mode: provider or strict)"}]
+		],
+		"--force-node-api-uncaught-exceptions-policy": [
+			["18.0.0",null],
+			["18.3.0",{"type":"boolean","default":false,"helpText":"enforces 'uncaughtException' event on Node API asynchronous callbacks"}]
+		],
+		"--frozen-intrinsics": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"experimental frozen intrinsics support"}]
+		],
+		"--global-search-paths": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"disable global module search paths"}]
+		],
+		"--harmony-shadow-realm": [
+			["18.0.0",null],
+			["18.13.0",{"type":"v8Option","implies":["--experimental-shadow-realm"],"negationImpliesNot":["--experimental-shadow-realm"]}]
+		],
+		"--harmony-top-level-await": [
+			["18.0.0",{"type":"v8Option","implies":["--experimental-top-level-await"],"negationImpliesNot":["--experimental-top-level-await"]}],
+			["18.1.0",null]
+		],
+		"--heap-prof": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"Start the V8 heap profiler on start up, and write the heap profile to disk before exit. If --heap-prof-dir is not specified, write the profile to the current working directory."}]
+		],
+		"--heap-prof-dir": [
+			["18.0.0",{"type":"string","default":"","helpText":"Directory where the V8 heap profiles generated by --heap-prof will be placed."}]
+		],
+		"--heap-prof-interval": [
+			["18.0.0",{"type":"uinteger","default":524288,"helpText":"specified sampling interval in bytes for the V8 heap profile generated with --heap-prof. (default: 512 * 1024)"}]
+		],
+		"--heap-prof-name": [
+			["18.0.0",{"type":"string","default":"","helpText":"specified file name of the V8 heap profile generated with --heap-prof"}]
+		],
+		"--heapsnapshot-near-heap-limit": [
+			["18.0.0",{"type":"integer","default":0,"helpText":"Generate heap snapshots whenever V8 is approaching the heap limit. No more than the specified number of heap snapshots will be generated."}]
+		],
+		"--heapsnapshot-signal": [
+			["18.0.0",{"type":"string","default":"","helpText":"Generate heap snapshot on specified signal"}]
+		],
+		"--help": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"print node command line options"}]
+		],
+		"--http-parser": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--huge-max-old-generation-size": [
+			["18.0.0",{"type":"v8Option","helpText":"increase default maximum heap size on machines with 16GB memory or more"}],
+			["23.0.0",null]
+		],
+		"--icu-data-dir": [
+			["18.0.0",{"type":"string","default":"","environment":"NODE_ICU_DATA","helpText":"set ICU data load path to dir (overrides NODE_ICU_DATA) (note: linked-in ICU data is present)"}]
+		],
+		"--import": [
+			["18.0.0",null],
+			["18.18.0",{"type":"stringList","default":[],"helpText":"ES module to preload (option can be repeated)"}]
+		],
+		"--input-type": [
+			["18.0.0",{"type":"string","default":"","helpText":"set module type for string input"}]
+		],
+		"--insecure-http-parser": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"use an insecure HTTP parser that accepts invalid HTTP headers"}]
+		],
+		"--inspect": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"activate inspector on host:port (default: 127.0.0.1:9229)"}]
+		],
+		"--inspect-brk": [
+			["18.0.0",{"type":"boolean","default":false,"implies":["--inspect"],"helpText":"activate inspector on host:port and break at start of user script"}]
+		],
+		"--inspect-brk-node": [
+			["18.0.0",{"type":"boolean","default":false,"implies":["--inspect"]}]
+		],
+		"--inspect-port": [
+			["18.0.0",{"type":"hostPort","default":{"host":"127.0.0.1","port":9229},"helpText":"set host:port for inspector"}]
+		],
+		"--inspect-publish-uid": [
+			["18.0.0",{"type":"string","default":"stderr,http","helpText":"comma separated list of destinations for inspector uid(default: stderr,http)"}]
+		],
+		"--inspect-wait": [
+			["18.0.0",null],
+			["20.15.0",{"type":"boolean","default":false,"implies":["--inspect"],"helpText":"activate inspector on host:port and wait for debugger to be attached"}],
+			["21.0.0",null],
+			["22.2.0",{"type":"boolean","default":false,"implies":["--inspect"],"helpText":"activate inspector on host:port and wait for debugger to be attached"}]
+		],
+		"--interactive": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"always enter the REPL even if stdin does not appear to be a terminal"}]
+		],
+		"--interpreted-frames-native-stack": [
+			["18.0.0",{"type":"v8Option","helpText":"help system profilers to translate JavaScript interpreted frames"}]
+		],
+		"--jitless": [
+			["18.0.0",{"type":"v8Option","helpText":"disable runtime allocation of executable memory"}]
+		],
+		"--localstorage-file": [
+			["18.0.0",null],
+			["22.4.0",{"type":"string","default":"","helpText":"file used to persist localStorage data"}]
+		],
+		"--max-heap-size": [
+			["18.0.0",null],
+			["24.15.0",{"type":"v8Option"}],
+			["25.0.0",null],
+			["25.9.0",{"type":"v8Option"}]
+		],
+		"--max-http-header-size": [
+			["18.0.0",{"type":"uinteger","default":16384,"helpText":"set the maximum size of HTTP headers (default: 16384 (16KB))"}]
+		],
+		"--max-old-space-size": [
+			["18.0.0",{"type":"v8Option"}]
+		],
+		"--max-old-space-size-percentage": [
+			["18.0.0",null],
+			["22.21.0",{"type":"string","default":"","helpText":"set V8's max old space size as a percentage of available memory (e.g., '50%'). Takes precedence over --max-old-space-size."}],
+			["23.0.0",null],
+			["24.6.0",{"type":"string","default":"","helpText":"set V8's max old space size as a percentage of available memory (e.g., '50%'). Takes precedence over --max-old-space-size."}]
+		],
+		"--max-semi-space-size": [
+			["18.0.0",null],
+			["18.13.0",{"type":"v8Option"}],
+			["19.0.0",null],
+			["19.2.0",{"type":"v8Option"}]
+		],
+		"--napi-modules": [
+			["18.0.0",{"type":"noOp"}]
+		],
+		"--network-family-autoselection": [
+			["18.0.0",null],
+			["20.0.0",{"type":"boolean","default":true,"helpText":"Disable network address family autodetection algorithm"}]
+		],
+		"--network-family-autoselection-attempt-timeout": [
+			["18.0.0",null],
+			["20.13.0",{"type":"uinteger","default":250,"helpText":"Sets the default value for the network family autoselection attempt timeout."}],
+			["21.0.0",null],
+			["22.1.0",{"type":"uinteger","default":250,"helpText":"Sets the default value for the network family autoselection attempt timeout."}],
+			["25.2.0",{"type":"uinteger","default":500,"helpText":"Sets the default value for the network family autoselection attempt timeout."}]
+		],
+		"--node-memory-debug": [
+			["18.0.0",{"type":"noOp","implies":["--debug-arraybuffer-allocations","--verify-base-objects"],"helpText":"Run with extra debug checks for memory leaks in Node.js itself"}]
+		],
+		"--node-snapshot": [
+			["18.0.0",{"type":"boolean","default":true}]
+		],
+		"--openssl-config": [
+			["18.0.0",{"type":"string","default":"","helpText":"load OpenSSL configuration from the specified file (overrides OPENSSL_CONF)"}]
+		],
+		"--openssl-legacy-provider": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"enable OpenSSL 3.0 legacy provider"}]
+		],
+		"--openssl-shared-config": [
+			["18.0.0",null],
+			["18.5.0",{"type":"boolean","default":false,"helpText":"enable OpenSSL shared configuration"}]
+		],
+		"--pending-deprecation": [
+			["18.0.0",{"type":"boolean","default":false,"environment":"NODE_PENDING_DEPRECATION","helpText":"emit pending deprecation warnings"}]
+		],
+		"--perf-basic-prof": [
+			["18.0.0",{"type":"v8Option"}]
+		],
+		"--perf-basic-prof-only-functions": [
+			["18.0.0",{"type":"v8Option"}]
+		],
+		"--perf-prof": [
+			["18.0.0",{"type":"v8Option"}]
+		],
+		"--perf-prof-unwinding-info": [
+			["18.0.0",{"type":"v8Option"}]
+		],
+		"--permission": [
+			["18.0.0",null],
+			["22.13.0",{"type":"boolean","default":false,"helpText":"enable the permission system"}],
+			["23.0.0",null],
+			["23.5.0",{"type":"boolean","default":false,"helpText":"enable the permission system"}]
+		],
+		"--permission-audit": [
+			["18.0.0",null],
+			["24.20.0",{"type":"boolean","default":false,"helpText":"enable audit only for the permission system"}],
+			["25.0.0",null],
+			["25.8.0",{"type":"boolean","default":false,"helpText":"enable audit only for the permission system"}]
+		],
+		"--policy-integrity": [
+			["18.0.0",{"type":"string","default":"","implies":["[has_policy_integrity_string]"],"helpText":"ensure the security policy contents match the specified integrity"}],
+			["22.2.0",null]
+		],
+		"--preserve-symlinks": [
+			["18.0.0",{"type":"boolean","default":false,"environment":"NODE_PRESERVE_SYMLINKS","helpText":"preserve symbolic links when resolving"}]
+		],
+		"--preserve-symlinks-main": [
+			["18.0.0",{"type":"boolean","default":false,"environment":"NODE_PRESERVE_SYMLINKS_MAIN","helpText":"preserve symbolic links when resolving the main module"}]
+		],
+		"--print": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"evaluate script and print result"}]
+		],
+		"--process-timeout": [
+			["18.0.0",null],
+			["26.11.0",{"type":"string","default":"","helpText":"print why the process is still running and exit with code 124 if it has not exited after the given duration (e.g. 30s)"}]
+		],
+		"--prof": [
+			["18.0.0",{"type":"v8Option","helpText":"Generate V8 profiler output."}]
+		],
+		"--prof-process": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"process V8 profiler output generated using --prof"}]
+		],
+		"--redirect-warnings": [
+			["18.0.0",{"type":"string","default":"","environment":"NODE_REDIRECT_WARNINGS","helpText":"write warnings to file instead of stderr"}]
+		],
+		"--report-compact": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"output compact single-line JSON"}]
+		],
+		"--report-dir": [
+			["18.0.0",{"type":"string","default":"","helpText":"define custom report pathname. (default: current working directory)"}]
+		],
+		"--report-exclude-env": [
+			["18.0.0",null],
+			["22.13.0",{"type":"boolean","default":false,"helpText":"Exclude environment variables when generating report (default: false)"}],
+			["23.0.0",null],
+			["23.3.0",{"type":"boolean","default":false,"helpText":"Exclude environment variables when generating report (default: false)"}]
+		],
+		"--report-exclude-network": [
+			["18.0.0",null],
+			["20.13.0",{"type":"boolean","default":false,"helpText":"exclude network interface diagnostics. (default: false)"}],
+			["21.0.0",null],
+			["22.0.0",{"type":"boolean","default":false,"helpText":"exclude network interface diagnostics. (default: false)"}]
+		],
+		"--report-filename": [
+			["18.0.0",{"type":"string","default":"","helpText":"define custom report file name. (default: YYYYMMDD.HHMMSS.PID.SEQUENCE#.txt)"}]
+		],
+		"--report-on-fatalerror": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"generate diagnostic report on fatal (internal) errors"}]
+		],
+		"--report-on-process-timeout": [
+			["18.0.0",null],
+			["26.11.0",{"type":"boolean","default":false,"helpText":"generate diagnostic report when --process-timeout expires"}]
+		],
+		"--report-on-signal": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"generate diagnostic report upon receiving signals"}]
+		],
+		"--report-signal": [
+			["18.0.0",{"type":"string","default":"SIGUSR2","implies":["--report-on-signal"],"helpText":"causes diagnostic report to be produced on provided signal, unsupported in Windows. (default: SIGUSR2)"}]
+		],
+		"--report-uncaught-exception": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"generate diagnostic report on uncaught exceptions"}]
+		],
+		"--require": [
+			["18.0.0",{"type":"stringList","default":[],"helpText":"module to preload (option can be repeated)"}],
+			["18.18.0",{"type":"stringList","default":[],"helpText":"CommonJS module to preload (option can be repeated)"}]
+		],
+		"--require-module": [
+			["18.0.0",null],
+			["24.15.0",{"type":"boolean","default":true,"helpText":"Allow loading synchronous ES Modules in require()."}],
+			["25.0.0",null],
+			["25.4.0",{"type":"boolean","default":true,"helpText":"Allow loading synchronous ES Modules in require()."}]
+		],
+		"--run": [
+			["18.0.0",null],
+			["22.0.0",{"type":"string","default":"","helpText":"Run a script specified in package.json"}]
+		],
+		"--secure-heap": [
+			["18.0.0",{"type":"integer","default":0,"helpText":"total size of the OpenSSL secure heap"}]
+		],
+		"--secure-heap-min": [
+			["18.0.0",{"type":"integer","default":2,"helpText":"minimum allocation size from the OpenSSL secure heap"}]
+		],
+		"--security-revert": [
+			["18.0.0",{"type":"stringList","default":[]}]
+		],
+		"--snapshot-blob": [
+			["18.0.0",null],
+			["18.8.0",{"type":"string","default":"","helpText":"Path to the snapshot blob that's either the result of snapshotbuilding, or the blob that is used to restore the application state"}]
+		],
+		"--stack-trace-limit": [
+			["18.0.0",{"type":"v8Option"}],
+			["22.10.0",{"type":"integer","default":10}]
+		],
+		"--strip-types": [
+			["18.0.0",null],
+			["24.12.0",{"type":"boolean","default":true,"helpText":"Type-stripping for TypeScript files."}],
+			["25.0.0",null],
+			["25.2.0",{"type":"boolean","default":true,"helpText":"Type-stripping for TypeScript files."}]
+		],
+		"--test": [
+			["18.0.0",null],
+			["18.1.0",{"type":"boolean","default":false,"helpText":"launch test runner on startup"}]
+		],
+		"--test-concurrency": [
+			["18.0.0",null],
+			["18.19.0",{"type":"uinteger","default":0,"helpText":"specify test runner concurrency"}],
+			["19.0.0",null],
+			["20.10.0",{"type":"uinteger","default":0,"helpText":"specify test runner concurrency"}]
+		],
+		"--test-coverage-branches": [
+			["18.0.0",null],
+			["22.8.0",{"type":"uinteger","default":0,"helpText":"the branch coverage minimum threshold"}]
+		],
+		"--test-coverage-exclude": [
+			["18.0.0",null],
+			["22.5.0",{"type":"stringList","default":[],"helpText":"exclude files from coverage report that match this glob pattern"}]
+		],
+		"--test-coverage-functions": [
+			["18.0.0",null],
+			["22.8.0",{"type":"uinteger","default":0,"helpText":"the function coverage minimum threshold"}]
+		],
+		"--test-coverage-include": [
+			["18.0.0",null],
+			["22.5.0",{"type":"stringList","default":[],"helpText":"include files in coverage report that match this glob pattern"}]
+		],
+		"--test-coverage-include-all": [
+			["18.0.0",null],
+			["26.7.0",{"type":"boolean","default":false,"helpText":"include source files that were never loaded in the coverage report"}]
+		],
+		"--test-coverage-lines": [
+			["18.0.0",null],
+			["22.8.0",{"type":"uinteger","default":0,"helpText":"the line coverage minimum threshold"}]
+		],
+		"--test-force-exit": [
+			["18.0.0",null],
+			["20.14.0",{"type":"boolean","default":false,"helpText":"force test runner to exit upon completion"}],
+			["21.0.0",null],
+			["22.0.0",{"type":"boolean","default":false,"helpText":"force test runner to exit upon completion"}]
+		],
+		"--test-global-setup": [
+			["18.0.0",null],
+			["24.0.0",{"type":"string","default":"","helpText":"specifies the path to the global setup file"}]
+		],
+		"--test-isolation": [
+			["18.0.0",null],
+			["23.6.0",{"type":"string","default":"process","helpText":"configures the type of test isolation used in the test runner"}]
+		],
+		"--test-name-pattern": [
+			["18.0.0",null],
+			["18.11.0",{"type":"stringList","default":[],"helpText":"run tests whose name matches this regular expression"}]
+		],
+		"--test-only": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"run tests with 'only' option set"}]
+		],
+		"--test-random-seed": [
+			["18.0.0",null],
+			["24.16.0",{"type":"uinteger","default":0,"implies":["[has_test_random_seed]"],"helpText":"seed used to randomize test execution order"}],
+			["25.0.0",null],
+			["26.1.0",{"type":"uinteger","default":0,"implies":["[has_test_random_seed]"],"helpText":"seed used to randomize test execution order"}]
+		],
+		"--test-randomize": [
+			["18.0.0",null],
+			["24.16.0",{"type":"boolean","default":false,"helpText":"run tests in a random order"}],
+			["25.0.0",null],
+			["26.1.0",{"type":"boolean","default":false,"helpText":"run tests in a random order"}]
+		],
+		"--test-reporter": [
+			["18.0.0",null],
+			["18.15.0",{"type":"stringList","default":[],"helpText":"report test output using the given reporter"}],
+			["19.0.0",null],
+			["19.6.0",{"type":"stringList","default":[],"helpText":"report test output using the given reporter"}]
+		],
+		"--test-reporter-destination": [
+			["18.0.0",null],
+			["18.15.0",{"type":"stringList","default":[],"helpText":"report given reporter to the given destination"}],
+			["19.0.0",null],
+			["19.6.0",{"type":"stringList","default":[],"helpText":"report given reporter to the given destination"}]
+		],
+		"--test-rerun-failures": [
+			["18.0.0",null],
+			["24.7.0",{"type":"string","default":"","helpText":"specifies the path to the rerun state file"}]
+		],
+		"--test-shard": [
+			["18.0.0",null],
+			["18.19.0",{"type":"string","default":"","helpText":"run test at specific shard"}],
+			["19.0.0",null],
+			["20.5.0",{"type":"string","default":"","helpText":"run test at specific shard"}]
+		],
+		"--test-skip-pattern": [
+			["18.0.0",null],
+			["22.1.0",{"type":"stringList","default":[],"helpText":"run tests whose name do not match this regular expression"}]
+		],
+		"--test-timeout": [
+			["18.0.0",null],
+			["20.11.0",{"type":"uinteger","default":0,"helpText":"specify test runner timeout"}],
+			["21.0.0",null],
+			["21.2.0",{"type":"uinteger","default":0,"helpText":"specify test runner timeout"}]
+		],
+		"--test-udp-no-try-send": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"--test-update-snapshots": [
+			["18.0.0",null],
+			["22.3.0",{"type":"boolean","default":false,"helpText":"regenerate test snapshots"}]
+		],
+		"--throw-deprecation": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"throw an exception on deprecations"}]
+		],
+		"--title": [
+			["18.0.0",{"type":"string","default":"","helpText":"the process title to use on startup"}]
+		],
+		"--tls-cipher-list": [
+			["18.0.0",{"type":"string","default":"TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA256:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!SRP:!CAMELLIA","helpText":"use an alternative default TLS cipher list"}]
+		],
+		"--tls-keylog": [
+			["18.0.0",{"type":"string","default":"","helpText":"log TLS decryption keys to named file for traffic analysis"}]
+		],
+		"--tls-max-v1.2": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"set default TLS maximum to TLSv1.2 (default: TLSv1.3)"}]
+		],
+		"--tls-max-v1.3": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"set default TLS maximum to TLSv1.3 (default: TLSv1.3)"}]
+		],
+		"--tls-min-v1.0": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"set default TLS minimum to TLSv1.0 (default: TLSv1.2)"}]
+		],
+		"--tls-min-v1.1": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"set default TLS minimum to TLSv1.1 (default: TLSv1.2)"}]
+		],
+		"--tls-min-v1.2": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"set default TLS minimum to TLSv1.2 (default: TLSv1.2)"}]
+		],
+		"--tls-min-v1.3": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"set default TLS minimum to TLSv1.3 (default: TLSv1.2)"}]
+		],
+		"--trace-atomics-wait": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"trace Atomics.wait() operations"}],
+			["18.8.0",{"type":"boolean","default":false,"helpText":"(deprecated) trace Atomics.wait() operations"}],
+			["23.0.0",null]
+		],
+		"--trace-deprecation": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"show stack traces on deprecations"}]
+		],
+		"--trace-env": [
+			["18.0.0",null],
+			["22.13.0",{"type":"boolean","default":false,"helpText":"Print accesses to the environment variables"}],
+			["23.0.0",null],
+			["23.4.0",{"type":"boolean","default":false,"helpText":"Print accesses to the environment variables"}]
+		],
+		"--trace-env-js-stack": [
+			["18.0.0",null],
+			["22.13.0",{"type":"boolean","default":false,"implies":["--trace-env"],"helpText":"Print accesses to the environment variables and the JavaScript stack trace"}],
+			["23.0.0",null],
+			["23.4.0",{"type":"boolean","default":false,"implies":["--trace-env"],"helpText":"Print accesses to the environment variables and the JavaScript stack trace"}]
+		],
+		"--trace-env-native-stack": [
+			["18.0.0",null],
+			["22.13.0",{"type":"boolean","default":false,"implies":["--trace-env"],"helpText":"Print accesses to the environment variables and the native stack trace"}],
+			["23.0.0",null],
+			["23.4.0",{"type":"boolean","default":false,"implies":["--trace-env"],"helpText":"Print accesses to the environment variables and the native stack trace"}]
+		],
+		"--trace-event-categories": [
+			["18.0.0",{"type":"string","default":"","helpText":"comma separated list of trace event categories to record"}]
+		],
+		"--trace-event-file-pattern": [
+			["18.0.0",{"type":"string","default":"node_trace.${rotation}.log","helpText":"Template string specifying the filepath for the trace-events data, it supports ${rotation} and ${pid}."}]
+		],
+		"--trace-exit": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"show stack trace when an environment exits"}]
+		],
+		"--trace-promises": [
+			["18.0.0",null],
+			["20.12.0",{"type":"boolean","default":false,"helpText":"show stack traces on promise initialization and resolution"}],
+			["21.0.0",null],
+			["21.5.0",{"type":"boolean","default":false,"helpText":"show stack traces on promise initialization and resolution"}]
+		],
+		"--trace-require-module": [
+			["18.0.0",null],
+			["20.19.0",{"type":"string","default":"","helpText":"Print access to require(esm). Options are 'all' (print all usage) and 'no-node-modules' (excluding usage from the node_modules folder)"}],
+			["21.0.0",null],
+			["22.13.0",{"type":"string","default":"","helpText":"Print access to require(esm). Options are 'all' (print all usage) and 'no-node-modules' (excluding usage from the node_modules folder)"}],
+			["23.0.0",null],
+			["23.5.0",{"type":"string","default":"","helpText":"Print access to require(esm). Options are 'all' (print all usage) and 'no-node-modules' (excluding usage from the node_modules folder)"}]
+		],
+		"--trace-sigint": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"enable printing JavaScript stacktrace on SIGINT"}]
+		],
+		"--trace-sync-io": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"show stack trace when use of sync IO is detected after the first tick"}]
+		],
+		"--trace-tls": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"prints TLS packet trace information to stderr"}]
+		],
+		"--trace-uncaught": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"show stack traces for the `throw` behind uncaught exceptions"}]
+		],
+		"--trace-warnings": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"show stack traces on process warnings"}]
+		],
+		"--track-heap-objects": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"track heap object allocations for heap snapshots"}]
+		],
+		"--unhandled-rejections": [
+			["18.0.0",{"type":"string","default":"","helpText":"define unhandled rejections behavior. Options are 'strict' (always raise an error), 'throw' (raise an error unless 'unhandledRejection' hook is set), 'warn' (log a warning), 'none' (silence warnings), 'warn-with-error-code' (log a warning and set exit code 1 unless 'unhandledRejection' hook is set). (default: throw)"}]
+		],
+		"--update-assert-snapshot": [
+			["18.0.0",null],
+			["18.8.0",{"type":"boolean","default":false,"helpText":"update assert snapshot files"}],
+			["18.14.0",null],
+			["19.0.0",{"type":"boolean","default":false,"helpText":"update assert snapshot files"}],
+			["19.5.0",null]
+		],
+		"--use-bundled-ca": [
+			["18.0.0",{"type":"boolean","default":false,"impliesNot":["[ssl_openssl_cert_store]"],"helpText":"use bundled CA store (default)"}]
+		],
+		"--use-env-proxy": [
+			["18.0.0",null],
+			["22.21.0",{"type":"boolean","default":false,"environment":"NODE_USE_ENV_PROXY","helpText":"parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients"}],
+			["23.0.0",null],
+			["24.5.0",{"type":"boolean","default":false,"environment":"NODE_USE_ENV_PROXY","helpText":"parse proxy settings from HTTP_PROXY/HTTPS_PROXY/NO_PROXYenvironment variables and apply the setting in global HTTP/HTTPS clients"}]
+		],
+		"--use-largepages": [
+			["18.0.0",{"type":"string","default":"off","helpText":"Map the Node.js static code to large pages. Options are 'off' (the default value, meaning do not map), 'on' (map and ignore failure, reporting it to stderr), or 'silent' (map and silently ignore failure)"}],
+			["26.9.0",{"type":"string","default":"off","helpText":"This option is no longer supported and a no-op. It still accepts these values for compatibility: 'off' (default), 'on' (report a warning to stderr), or 'silent' (same as 'off')."}]
+		],
+		"--use-openssl-ca": [
+			["18.0.0",{"type":"boolean","default":false,"implies":["[ssl_openssl_cert_store]"],"helpText":"use OpenSSL's default CA store"}]
+		],
+		"--use-system-ca": [
+			["18.0.0",null],
+			["22.15.0",{"type":"boolean","default":false,"helpText":"use system's CA store"}],
+			["22.19.0",{"type":"boolean","default":false,"environment":"NODE_USE_SYSTEM_CA","helpText":"use system's CA store"}],
+			["23.0.0",null],
+			["23.8.0",{"type":"boolean","default":false,"helpText":"use system's CA store"}],
+			["24.6.0",{"type":"boolean","default":false,"environment":"NODE_USE_SYSTEM_CA","helpText":"use system's CA store"}]
+		],
+		"--v8-options": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"print V8 command line options"}]
+		],
+		"--v8-pool-size": [
+			["18.0.0",{"type":"integer","default":4,"helpText":"set V8's thread pool size"}]
+		],
+		"--verify-base-objects": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"--version": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"print Node.js version"}]
+		],
+		"--vfs-load": [
+			["18.0.0",null],
+			["26.10.0",{"type":"stringList","default":[],"implies":["[vfs_load_set]"],"helpText":"mount a directory or archive as a virtual file system and run the entry point and module resolution against it instead of the real file system (may be given once; requires --experimental-vfs)"}],
+			["26.11.0",{"type":"string","default":"","implies":["[vfs_load_set]"],"helpText":"mount a directory or archive as a virtual file system and run the entry point and module resolution against it instead of the real file system (may be given once; requires --experimental-vfs)"}]
+		],
+		"--vfs-mount": [
+			["18.0.0",null],
+			["26.10.0",{"type":"stringList","default":[],"helpText":"mount a directory or archive as a virtual file system (option can be repeated; requires --experimental-vfs)"}],
+			["26.11.0",null]
+		],
+		"--warnings": [
+			["18.0.0",{"type":"boolean","default":true,"helpText":"silence all process warnings"}]
+		],
+		"--watch": [
+			["18.0.0",null],
+			["18.11.0",{"type":"boolean","default":false,"helpText":"run in watch mode"}]
+		],
+		"--watch-kill-signal": [
+			["18.0.0",null],
+			["22.18.0",{"type":"string","default":"SIGTERM","helpText":"kill signal to send to the process on watch mode restarts(default: SIGTERM)"}],
+			["23.0.0",null],
+			["24.4.0",{"type":"string","default":"SIGTERM","helpText":"kill signal to send to the process on watch mode restarts(default: SIGTERM)"}]
+		],
+		"--watch-path": [
+			["18.0.0",null],
+			["18.11.0",{"type":"stringList","default":[],"implies":["--watch"],"helpText":"path to watch"}]
+		],
+		"--watch-preserve-output": [
+			["18.0.0",null],
+			["18.13.0",{"type":"boolean","default":false,"helpText":"preserve outputs on watch mode restart"}],
+			["19.0.0",null],
+			["19.3.0",{"type":"boolean","default":false,"helpText":"preserve outputs on watch mode restart"}]
+		],
+		"--webstorage": [
+			["18.0.0",null],
+			["25.0.0",{"type":"boolean","default":true,"helpText":"Web Storage API"}],
+			["25.2.1",null]
+		],
+		"--worker-snapshot": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":true,"helpText":"start worker threads from the bootstrapped context in the built-in startup snapshot"}]
+		],
+		"--zero-fill-buffers": [
+			["18.0.0",{"type":"boolean","default":false,"helpText":"automatically zero-fill all newly allocated Buffer and SlowBuffer instances"}],
+			["24.0.0",{"type":"boolean","default":false,"helpText":"automatically zero-fill all newly allocated Buffer instances"}],
+			["24.0.1",{"type":"boolean","default":false,"helpText":"automatically zero-fill all newly allocated Buffer and SlowBuffer instances"}],
+			["25.0.0",{"type":"boolean","default":false,"helpText":"automatically zero-fill all newly allocated Buffer instances"}]
+		],
+		"[force_fips_crypto_policy]": [
+			["18.0.0",null],
+			["24.22.0",{"type":"string","default":"provider"}],
+			["25.0.0",null],
+			["26.9.0",{"type":"string","default":"provider"}]
+		],
+		"[has_bench_options]": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false}]
+		],
+		"[has_bench_samples]": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false}]
+		],
+		"[has_bench_warmup]": [
+			["18.0.0",null],
+			["26.9.0",{"type":"boolean","default":false}]
+		],
+		"[has_env_file_string]": [
+			["18.0.0",null],
+			["20.6.0",{"type":"boolean","default":false}]
+		],
+		"[has_eval_string]": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"[has_policy_integrity_string]": [
+			["18.0.0",{"type":"boolean","default":false}],
+			["22.2.0",null]
+		],
+		"[has_test_random_seed]": [
+			["18.0.0",null],
+			["24.16.0",{"type":"boolean","default":false}],
+			["25.0.0",null],
+			["26.1.0",{"type":"boolean","default":false}]
+		],
+		"[ssl_openssl_cert_store]": [
+			["18.0.0",{"type":"boolean","default":false}]
+		],
+		"[vfs_load_set]": [
+			["18.0.0",null],
+			["26.10.0",{"type":"boolean","default":false}]
+		]
+	},
+	"aliases": {
+		"--debug-brk=": [
+			["18.0.0",["--debug-brk"]]
+		],
+		"--debug-port": [
+			["18.0.0",["--inspect-port"]]
+		],
+		"--debug=": [
+			["18.0.0",["--debug"]]
+		],
+		"--enable-network-family-autoselection": [
+			["18.0.0",null],
+			["20.0.0",["--network-family-autoselection"]]
+		],
+		"--es-module-specifier-resolution": [
+			["18.0.0",["--experimental-specifier-resolution"]]
+		],
+		"--experimental-config-file": [
+			["18.0.0",null],
+			["26.12.0",["--config-file"]]
+		],
+		"--experimental-default-config-file": [
+			["18.0.0",null],
+			["24.19.0",["--experimental-config-file"]],
+			["25.0.0",null],
+			["26.1.0",["--experimental-config-file"]],
+			["26.12.0",["--config-file"]]
+		],
+		"--experimental-permission": [
+			["18.0.0",null],
+			["22.13.0",["--permission"]],
+			["23.0.0",null],
+			["23.5.0",["--permission"]],
+			["24.0.0",null]
+		],
+		"--experimental-strip-types": [
+			["18.0.0",null],
+			["24.12.0",["--strip-types"]],
+			["25.0.0",null],
+			["25.2.0",["--strip-types"]]
+		],
+		"--experimental-test-isolation": [
+			["18.0.0",null],
+			["23.6.0",["--test-isolation"]]
+		],
+		"--experimental-webstorage": [
+			["18.0.0",null],
+			["25.0.0",["--webstorage"]],
+			["25.2.1",null]
+		],
+		"--force-fips=": [
+			["18.0.0",null],
+			["24.22.0",["[force_fips_crypto_policy]","--force-fips"]],
+			["25.0.0",null],
+			["26.9.0",["[force_fips_crypto_policy]","--force-fips"]]
+		],
+		"--inspect-brk-node=": [
+			["18.0.0",["--inspect-port","--inspect-brk-node"]]
+		],
+		"--inspect-brk=": [
+			["18.0.0",["--inspect-port","--inspect-brk"]]
+		],
+		"--inspect-wait=": [
+			["18.0.0",null],
+			["20.15.0",["--inspect-port","--inspect-wait"]],
+			["21.0.0",null],
+			["22.2.0",["--inspect-port","--inspect-wait"]]
+		],
+		"--inspect=": [
+			["18.0.0",["--inspect-port","--inspect"]]
+		],
+		"--loader": [
+			["18.0.0",["--experimental-loader"]]
+		],
+		"--print <arg>": [
+			["18.0.0",["-pe"]]
+		],
+		"--prof-process": [
+			["18.0.0",["--prof-process","--"]]
+		],
+		"--report-directory": [
+			["18.0.0",["--report-dir"]]
+		],
+		"--security-reverts": [
+			["18.0.0",["--security-revert"]]
+		],
+		"--trace-events-enabled": [
+			["18.0.0",["--trace-event-categories","v8,node,node.async_hooks"]]
+		],
+		"--webstorage": [
+			["18.0.0",null],
+			["25.2.1",["--experimental-webstorage"]]
+		],
+		"-C": [
+			["18.0.0",["--conditions"]]
+		],
+		"-c": [
+			["18.0.0",["--check"]]
+		],
+		"-e": [
+			["18.0.0",["--eval"]]
+		],
+		"-h": [
+			["18.0.0",["--help"]]
+		],
+		"-i": [
+			["18.0.0",["--interactive"]]
+		],
+		"-p": [
+			["18.0.0",["--print"]]
+		],
+		"-pe": [
+			["18.0.0",["--print","--eval"]]
+		],
+		"-r": [
+			["18.0.0",["--require"]]
+		],
+		"-v": [
+			["18.0.0",["--version"]]
+		]
+	}
+}

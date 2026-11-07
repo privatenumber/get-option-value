@@ -11,9 +11,16 @@ import * as flags from '#get-option-value/flags';
 
 const require = createRequire(import.meta.url);
 const internalOptions = require('internal/options');
-const options = typeof internalOptions.getCLIOptionsInfo === 'function'
-	? internalOptions.getCLIOptionsInfo().options
-	: internalOptions.options;
+const { options, aliases } = typeof internalOptions.getCLIOptionsInfo === 'function'
+	? internalOptions.getCLIOptionsInfo()
+	: internalOptions;
+
+// A renamed option's former name is a single-target alias on newer releases;
+// its flag reads the option it now aliases
+const canonicalName = (name) => {
+	const target = options.has(name) ? undefined : aliases.get(name);
+	return target?.length === 1 ? target[0] : name;
+};
 
 const wrapUndefined = value => (value === undefined ? '<undefined>' : value);
 
@@ -46,10 +53,11 @@ for (const [name, exportName] of Object.entries(flagMap)) {
 	if (!flag) {
 		throw new Error(`Unknown flag export "${exportName}" mapped from ${name}`);
 	}
+	const canonical = canonicalName(name);
 	comparison[name] = {
 		ours: wrapUndefined(getOptionValue(flag)),
-		oracle: wrapUndefined(internalOptions.getOptionValue(name)),
-		exists: options.has(name),
+		oracle: wrapUndefined(internalOptions.getOptionValue(canonical)),
+		exists: options.has(canonical),
 	};
 }
 

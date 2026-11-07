@@ -1,29 +1,31 @@
 /**
- * Generates src/flags.ts from real Node.js binaries.
+ * Generates src/flags.ts and docs/flags.json from the committed option
+ * history (history/node-options.json), which `pnpm record-releases` fills by
+ * dumping the internal option schema (names, types, aliases, defaults) of
+ * every Node release in the supported range. Implications are not exposed at
+ * runtime, so the recorder extracts them from each release's
+ * src/node_options.cc.
  *
- * For every major (18-26), the latest release is downloaded via get-node
- * and spawned with --expose-internals to dump its internal option schema
- * (names, types, aliases) and the default value of every
- * option. Implications are not exposed at runtime, so they are extracted
- * from the exact version's src/node_options.cc.
- *
- * The schemas are held in memory (not committed) and passed to emit, which
- * snapshots the newest major and branches the few flags that drift across
- * majors. Read-set drift is a hard error there.
+ * Generation needs no binaries: emit derives each flag's forms per release
+ * and branches the flags that drift on the exact release they changed.
+ * Read-set drift is a hard error there. Only the source links in
+ * docs/flags.json need the network.
  *
  * Run: pnpm generate
  */
-import { buildSchema } from './build-schema.ts';
+import { readHistory } from './history/index.ts';
+import { readNodeSource } from './implications.ts';
+import { compareVersions } from './version.ts';
 import { emit } from './emit.ts';
 
-const majors = [18, 19, 20, 21, 22, 23, 24, 25, 26];
-
-// Each major's schema is dumped from an independent Node binary, so build
-// them concurrently rather than serializing the subprocess waits
-const builds = await Promise.all(majors.map(buildSchema));
+const history = await readHistory();
+if (history.size === 0) {
+	throw new Error('The option history is empty; run `pnpm record-releases` first');
+}
+const releases = [...history.keys()].sort(compareVersions);
 
 await emit({
-	versions: builds.map(build => build.version),
-	schemas: builds.map(build => build.schema),
-	sources: builds.map(build => build.source),
+	releases,
+	schemas: releases.map(release => history.get(release)!),
+	readSource: readNodeSource,
 });

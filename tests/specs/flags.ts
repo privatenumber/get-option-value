@@ -1,13 +1,23 @@
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, test, expect } from 'manten';
 import getNode from 'get-node';
 import spawn from 'nano-spawn';
 import flagsMeta from '../../docs/flags.json' with { type: 'json' };
+import { compareVersions } from '../../scripts/generate-flags/version.ts';
 
 // Derived from the generated flag metadata: option name -> flag export name.
 const flagMap = JSON.stringify(
 	Object.fromEntries(flagsMeta.flags.map(flag => [flag.option, flag.export])),
+);
+
+const inexactBelow = new Map(
+	flagsMeta.flags.flatMap(flag => ('inexactBelow' in flag ? [[flag.option, flag.inexactBelow]] : [])),
+);
+
+const isOlder = (version: string, than: string | undefined) => (
+	than !== undefined && compareVersions(version, than) < 0
 );
 
 const fixturesDirectory = fileURLToPath(new URL('../fixtures', import.meta.url));
@@ -28,6 +38,7 @@ const readFlags = async (
 	flags: string[],
 	environment = '',
 	requireComplete = false,
+	variables: Record<string, string> = {},
 ): Promise<Comparison> => {
 	const { stdout } = await spawn(
 		nodePath,
@@ -35,6 +46,7 @@ const readFlags = async (
 		{
 			cwd: fixturesDirectory,
 			env: {
+				...variables,
 				NODE_OPTIONS: environment,
 				FLAG_MAP: flagMap,
 				REQUIRE_COMPLETE_FLAG_MAP: requireComplete ? '1' : '',
@@ -45,15 +57,14 @@ const readFlags = async (
 };
 
 /**
- * Asserts every flag resolves exactly to the binding. On older majors, options
- * newer than the runtime read our newest-major default where the binding has
- * no value — a documented, unobservable gap (that major can't boot with the
- * option), so those are skipped. Everything else — stable flags and
- * version-conditional flags on the majors where the option exists — must match.
+ * Asserts every flag resolves exactly to the binding. Options that don't
+ * exist on the running release read a neighboring release's default where
+ * the binding has no value — an unobservable gap (that release can't boot
+ * with the option), so those are skipped. Everything else must match.
  */
 const assertParity = (
 	comparison: Comparison,
-	allowNewer: boolean,
+	version: string,
 	expectedCount = flagsMeta.flags.length,
 ) => {
 	// Exact: the harness must return a record for every generated flag, so a
@@ -63,10 +74,13 @@ const assertParity = (
 	const oracle: Record<string, unknown> = {};
 	for (const [name, record] of Object.entries(comparison)) {
 		if (
-			allowNewer
-			&& !record.exists
-			&& record.oracle === '<undefined>'
-			&& record.ours !== '<undefined>'
+			(
+				!record.exists
+				&& record.oracle === '<undefined>'
+				&& record.ours !== '<undefined>'
+			)
+			// A documented generator exception: reads its newest shape here
+			|| isOlder(version, inexactBelow.get(name))
 		) {
 			continue;
 		}
@@ -76,14 +90,14 @@ const assertParity = (
 	expect(ours).toStrictEqual(oracle);
 };
 
-test('older-major parity does not skip an existing unreadable option', () => {
+test('parity does not skip an existing unreadable option', () => {
 	expect(() => assertParity({
 		'--stack-trace-limit': {
 			ours: 10,
 			oracle: '<undefined>',
 			exists: true,
 		},
-	}, true, 1)).toThrow();
+	}, flagsMeta.version, 1)).toThrow();
 });
 
 // Non-blocking flags only (--inspect-brk / --inspect-wait pause for a debugger)
@@ -93,35 +107,63 @@ const setFlags = [
 	'--conditions=b',
 	'--require',
 	'./noop.cjs',
-	'--import',
-	'./noop.mjs',
 	'--inspect=127.0.0.1:0',
 ];
+const importFlags = ['--import', './noop.mjs'];
 
-const majors = ['18', '19', '20', '21', '22', '23', '24', '25', '26'];
+// Every variable Node reads into an option in some recorded release; a release
+// that doesn't read one ignores it, which the parity check also covers
+const optionVariables = {
+	// Any directory: official builds embed ICU data and ignore a missing file
+	NODE_ICU_DATA: os.tmpdir(),
+	NODE_PENDING_DEPRECATION: '1',
+	NODE_PRESERVE_SYMLINKS: '1',
+	NODE_PRESERVE_SYMLINKS_MAIN: '1',
+	NODE_REDIRECT_WARNINGS: os.devNull,
+	NODE_USE_ENV_PROXY: '1',
+	NODE_USE_SYSTEM_CA: '1',
+};
 
-for (const major of majors) {
-	describe(`Node ${major}: full oracle parity`, async () => {
-		const { path: nodePath } = await getNode(major);
-		// The newest major snapshots every option, so nothing is "newer" there
-		const allowNewer = major !== majors.at(-1);
+// Pinned by the generator: the newest release of each major plus the first
+// release of every flag's version segment, so each emitted branch runs
+// against a real binary and a new Node release can't change the test matrix.
+for (const version of flagsMeta.testReleases) {
+	describe(`Node ${version}: full oracle parity`, async () => {
+		const { path: nodePath } = await getNode(version);
 
 		test('every flag matches the binding (defaults)', async () => {
-			assertParity(await readFlags(nodePath, [], '', !allowNewer), allowNewer);
+			assertParity(await readFlags(nodePath, [], '', true), version);
 		});
 
 		test('every flag matches under set flags + NODE_OPTIONS', async () => {
+			// Node exits with "bad option" on --import before it existed
+			const hasImport = !isOlder(version, '18.18.0');
 			const comparison = await readFlags(
 				nodePath,
-				setFlags,
+				hasImport ? [...setFlags, ...importFlags] : setFlags,
 				'--conditions=env -C envc',
-				!allowNewer,
+				true,
 			);
 			expect(comparison['--conditions'].ours).toStrictEqual(['env', 'envc', 'a', 'b']);
 			expect(comparison['--require'].ours).toStrictEqual(['./noop.cjs']);
-			expect(comparison['--import'].ours).toStrictEqual(['./noop.mjs']);
+			expect(comparison['--import'].ours).toStrictEqual(hasImport ? ['./noop.mjs'] : []);
 			expect(comparison['--inspect'].ours).toBe(true);
-			assertParity(comparison, allowNewer);
+			assertParity(comparison, version);
+		});
+
+		// Node reads these before NODE_OPTIONS and argv, which still override
+		test('every flag matches under option environment variables', async () => {
+			const comparison = await readFlags(
+				nodePath,
+				['--no-preserve-symlinks'],
+				'',
+				true,
+				optionVariables,
+			);
+			expect(comparison['--pending-deprecation'].ours).toBe(true);
+			expect(comparison['--preserve-symlinks'].ours).toBe(false);
+			expect(comparison['--redirect-warnings'].ours).toBe(optionVariables.NODE_REDIRECT_WARNINGS);
+			assertParity(comparison, version);
 		});
 	});
 }
@@ -153,7 +195,7 @@ describe('flag metadata', () => {
 });
 
 describe('oracle harness', async () => {
-	const { path: nodePath } = await getNode(majors.at(-1)!);
+	const { path: nodePath } = await getNode(flagsMeta.version);
 	const expectHarnessFailure = async (
 		map: Record<string, string>,
 		expected: RegExp,

@@ -1,10 +1,12 @@
 import getNode from 'get-node';
 import type { OptionsSchema, OptionType, OptionSpec } from './schema-types.ts';
 import { dumpOptions, type DumpedOption } from './dump-options/index.ts';
-import { attachImplications, extractImplications, readNodeOptionsSource } from './implications.ts';
+import {
+	attachEnvironment, attachImplications, extractImplications, readNodeSource, type Sources,
+} from './implications.ts';
 
 /**
- * enum OptionType, index → name. Identical across v18.20.8-v26.4.0
+ * enum OptionType, index → name. Identical across every release v18.0.0-v26.13.0
  * (https://github.com/nodejs/node/blob/v24.15.0/src/node_options.h#L395-L404),
  * and re-validated per version by the type fingerprint below.
  */
@@ -27,7 +29,6 @@ const optionTypeByIndex: OptionType[] = [
  */
 const validateFingerprint = (
 	version: string,
-	major: number,
 	options: Map<string, DumpedOption>,
 ) => {
 	const expectations: [string, OptionType][] = [
@@ -35,8 +36,9 @@ const validateFingerprint = (
 		['--title', 'string'],
 		['--addons', 'boolean'],
 		['--inspect-port', 'hostPort'],
-		// Became a readable integer option in 22.x; a pure V8 option before
-		['--stack-trace-limit', major >= 22 ? 'integer' : 'v8Option'],
+		// An integer on every release since 18.0.0 (unlike --stack-trace-limit,
+		// which became one partway through 22.x)
+		['--secure-heap', 'integer'],
 		['--max-http-header-size', 'uinteger'],
 		// emit.ts special-cases this v8 option as a boolean flag
 		['--abort-on-uncaught-exception', 'v8Option'],
@@ -68,20 +70,49 @@ const buildOption = (name: string, dumped: DumpedOption): OptionSpec => {
 	return option;
 };
 
-/** Downloads a major's latest release, dumps its option schema, and validates it. */
-export const buildSchema = async (major: number) => {
-	const { path: binaryPath, version } = await getNode(String(major));
-	console.log(`Node ${version}: dumping option schema`);
+/**
+ * Attaches what only the release's source (node_options.cc, node.cc) reveals: implications
+ * and environment variables. Clears earlier values first, so it can re-apply
+ * an improved parser to recorded releases (pnpm record-releases
+ * --refresh-sources) without downloading their binaries again.
+ */
+export const applySource = (
+	version: string,
+	options: Map<string, OptionSpec>,
+	sources: Sources,
+) => {
+	for (const option of options.values()) {
+		delete option.implies;
+		delete option.impliesNot;
+		delete option.negationImplies;
+		delete option.negationImpliesNot;
+		delete option.environment;
+	}
+	attachImplications(version, options, extractImplications(sources.nodeOptions));
+	attachEnvironment(version, options, sources);
+};
 
-	// Dumping the binary (spawn) and fetching node_options.cc both depend only
-	// on the resolved version, not each other, so overlap them
-	const [dump, source] = await Promise.all([
+/**
+ * Downloads one exact release into `outputDirectory`, dumps its option
+ * schema, and validates it. The caller owns the directory's lifetime: a
+ * backfill touches every release, so binaries must not pile up in a cache.
+ */
+export const buildSchema = async (version: string, outputDirectory: string) => {
+	const { path: binaryPath } = await getNode(version, {
+		output: outputDirectory,
+		progress: false,
+	});
+
+	// Dumping the binary (spawn) and fetching its sources all depend only
+	// on the version, not each other, so overlap them
+	const [dump, nodeOptions, node] = await Promise.all([
 		dumpOptions(binaryPath),
-		readNodeOptionsSource(version),
+		readNodeSource(version),
+		readNodeSource(version, 'node.cc'),
 	]);
 	const dumpedOptions = new Map(dump.options);
 
-	validateFingerprint(version, major, dumpedOptions);
+	validateFingerprint(version, dumpedOptions);
 
 	const options = new Map<string, OptionSpec>();
 	for (const [name, dumped] of dumpedOptions) {
@@ -95,7 +126,10 @@ export const buildSchema = async (major: number) => {
 	 */
 	options.get('--expose-internals')!.default = false;
 
-	attachImplications(version, options, extractImplications(source));
+	applySource(version, options, {
+		nodeOptions,
+		node,
+	});
 
 	const sortedNames = [...options.keys()].sort();
 	const sortedAliases = [...dump.aliases].sort(([a], [b]) => a.localeCompare(b));
@@ -103,10 +137,5 @@ export const buildSchema = async (major: number) => {
 		options: Object.fromEntries(sortedNames.map(name => [name, options.get(name)!])),
 		aliases: Object.fromEntries(sortedAliases),
 	};
-	return {
-		version,
-		schema,
-		// Kept for the flag-table generator: line anchors into node_options.cc
-		source,
-	};
+	return schema;
 };
