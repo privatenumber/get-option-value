@@ -1,3 +1,5 @@
+import type { Flag } from '../types.ts';
+
 let version: number | undefined;
 
 /**
@@ -13,12 +15,16 @@ let version: number | undefined;
  * an unused `@__PURE__` call (and this module with it), but keep a top-level
  * version constant a bare ternary would need. So stable flags never pull in
  * `process`.
+ *
+ * Returns one Flag with a union value (`Flag<A | B>`), not a union of Flags:
+ * `getOptionValue<T>(flag: Flag<T>)` can't infer `T` from
+ * `Flag<string[]> | Flag<string>`, so such a flag couldn't be passed at all.
  */
 export const forVersion = <A, B>(
 	minimumVersion: number,
-	atOrAbove: A,
-	below: B,
-): A | B => {
+	atOrAbove: Flag<A>,
+	below: Flag<B>,
+): Flag<A | B> => {
 	if (version === undefined) {
 		// parseInt tolerates prerelease suffixes such as "27.0.0-pre"
 		const [major, minor, patch] = process.versions.node.split('.').map(part => Number.parseInt(part, 10));
