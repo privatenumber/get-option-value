@@ -5,6 +5,7 @@ import { describe, test, expect } from 'manten';
 import getNode from 'get-node';
 import spawn from 'nano-spawn';
 import flagsMeta from '../../docs/flags.json' with { type: 'json' };
+import { compareVersions } from '../../scripts/generate-flags/version.ts';
 
 // Derived from the generated flag metadata: option name -> flag export name.
 const flagMap = JSON.stringify(
@@ -15,14 +16,9 @@ const inexactBelow = new Map(
 	flagsMeta.flags.flatMap(flag => ('inexactBelow' in flag ? [[flag.option, flag.inexactBelow]] : [])),
 );
 
-const isOlder = (version: string, than: string | undefined) => {
-	if (!than) {
-		return false;
-	}
-	const a = version.split('.').map(Number);
-	const b = than.split('.').map(Number);
-	return ((a[0] - b[0]) || (a[1] - b[1]) || (a[2] - b[2])) < 0;
-};
+const isOlder = (version: string, than: string | undefined) => (
+	than !== undefined && compareVersions(version, than) < 0
+);
 
 const fixturesDirectory = fileURLToPath(new URL('../fixtures', import.meta.url));
 const harnessPath = path.join(fixturesDirectory, 'read-flags.mjs');
@@ -115,13 +111,7 @@ const setFlags = [
 ];
 const importFlags = ['--import', './noop.mjs'];
 
-// Node exits with "bad option" on --import before it existed (18.18.0)
-const supportsImport = async (nodePath: string) => {
-	const { stdout } = await spawn(nodePath, ['-p', 'process.allowedNodeEnvironmentFlags.has("--import")']);
-	return stdout === 'true';
-};
-
-// Every variable HandleEnvOptions reads in some recorded release; a release
+// Every variable Node reads into an option in some recorded release; a release
 // that doesn't read one ignores it, which the parity check also covers
 const optionVariables = {
 	// Any directory: official builds embed ICU data and ignore a missing file
@@ -146,7 +136,8 @@ for (const version of flagsMeta.testReleases) {
 		});
 
 		test('every flag matches under set flags + NODE_OPTIONS', async () => {
-			const hasImport = await supportsImport(nodePath);
+			// Node exits with "bad option" on --import before it existed
+			const hasImport = !isOlder(version, '18.18.0');
 			const comparison = await readFlags(
 				nodePath,
 				hasImport ? [...setFlags, ...importFlags] : setFlags,

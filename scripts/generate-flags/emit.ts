@@ -34,22 +34,36 @@ const sameForm = (a: Form, b: Form) => (
 );
 
 /**
+ * One factory call: the factory, its leading arguments (the typed default or
+ * environment variable), and the value types it returns, which mirror the
+ * factory signatures in src/flag/factories.ts.
+ */
+type FactoryCall = {
+	factory: string;
+	head: string;
+	types: string[];
+};
+
+/**
  * The factory + typed default literal for each value shape. Booleans and
  * hostPorts carry a default; string/integer defaults are emitted only when
  * present (so the phantom type narrows to non-undefined).
  */
-const factoryFor = (name: string, option: OptionSpec): { factory: string;
-	head: string; } => {
+const factoryFor = (name: string, option: OptionSpec): FactoryCall => {
+	// A string or integer flag without a default can also return undefined
+	const optional = option.default === undefined ? ['undefined'] : [];
 	if (name === abortOnUncaughtException) {
 		return {
 			factory: 'booleanFlag',
 			head: 'false, ',
+			types: ['boolean'],
 		};
 	}
 	if (option.environment) {
 		return {
 			factory: option.type === 'boolean' ? 'environmentBooleanFlag' : 'environmentStringFlag',
 			head: `${JSON.stringify(option.environment)}, `,
+			types: [option.type === 'boolean' ? 'boolean' : 'string'],
 		};
 	}
 	switch (option.type) {
@@ -57,36 +71,42 @@ const factoryFor = (name: string, option: OptionSpec): { factory: string;
 			return {
 				factory: 'booleanFlag',
 				head: `${option.default === true}, `,
+				types: ['boolean'],
 			};
 		}
 		case 'stringList': {
 			return {
 				factory: 'stringListFlag',
 				head: '',
+				types: ['string[]'],
 			};
 		}
 		case 'string': {
 			return {
 				factory: 'stringFlag',
 				head: `${JSON.stringify(option.default)}, `,
+				types: ['string', ...optional],
 			};
 		}
 		case 'integer': {
 			return {
 				factory: 'integerFlag',
 				head: `${JSON.stringify(option.default)}, `,
+				types: ['number', ...optional],
 			};
 		}
 		case 'uinteger': {
 			return {
 				factory: 'unsignedIntegerFlag',
 				head: `${JSON.stringify(option.default)}, `,
+				types: ['number', ...optional],
 			};
 		}
 		case 'hostPort': {
 			return {
 				factory: 'hostPortFlag',
 				head: `${JSON.stringify(option.default)}, `,
+				types: ['HostPort'],
 			};
 		}
 		default: {
@@ -191,11 +211,16 @@ export const deriveEntryForms = (
 	return forms;
 };
 
+/** The entry spelling of an alias key: `--x=` and `--x <arg>` are `--x`. */
+const aliasEntry = (key: string) => (
+	key.endsWith('=') ? key.slice(0, -1) : key.replace(/ <arg>$/, '')
+);
+
 /** Every option name and alias spelling a release's parser accepts. */
 const acceptedEntries = ({ options, aliases }: OptionsSchema) => {
 	const entries = new Set<string>(Object.keys(options));
 	for (const key of Object.keys(aliases)) {
-		entries.add(key.endsWith('=') ? key.slice(0, -1) : key.replace(/ <arg>$/, ''));
+		entries.add(aliasEntry(key));
 	}
 	return entries;
 };
@@ -216,7 +241,7 @@ const acceptedSpellings = (schema: OptionsSchema) => {
 		spellings.set(name, takesValue(name));
 	}
 	for (const [key, expansion] of Object.entries(aliases)) {
-		const entry = key.endsWith('=') ? key.slice(0, -1) : key.replace(/ <arg>$/, '');
+		const entry = aliasEntry(key);
 		// A fixed-value alias supplies its own value; `<arg>` aliases consume one
 		const consumes = key.endsWith(' <arg>') || (expansion.length === 1 && takesValue(expansion[0]));
 		spellings.set(entry, spellings.get(entry) || consumes);
@@ -332,9 +357,7 @@ const findOptionLine = (source: string, optionName: string) => {
  * - `'folded'`: an inexactBelow release, folded like an absent one even
  *   though the option exists there.
  */
-type ReadableFlag = {
-	factory: string;
-	head: string;
+type ReadableFlag = FactoryCall & {
 	forms: Form[];
 };
 type ReleaseFlag = ReadableFlag | 'undefined' | 'absent' | 'folded';
@@ -384,36 +407,6 @@ const sortForms = (forms: Form[]) => (
 		return aFixed < bFixed ? -1 : 1;
 	})
 );
-
-/**
- * The value types a segment's flag returns, mirroring the factory signatures
- * in src/flag/factories.ts: a string or integer flag without a default can
- * also return undefined.
- */
-const valueTypes = (flag: ReleaseFlag): string[] => {
-	if (typeof flag !== 'object') {
-		return ['undefined'];
-	}
-	const optional = flag.head.startsWith('undefined') ? ['undefined'] : [];
-	switch (flag.factory) {
-		case 'booleanFlag':
-		case 'environmentBooleanFlag': { return ['boolean'];
-		}
-		case 'environmentStringFlag': { return ['string'];
-		}
-		case 'stringListFlag': { return ['string[]'];
-		}
-		case 'hostPortFlag': { return ['HostPort'];
-		}
-		case 'stringFlag': { return ['string', ...optional];
-		}
-		case 'integerFlag':
-		case 'unsignedIntegerFlag': { return ['number', ...optional];
-		}
-		default: { throw new Error(`No value type for ${flag.factory}`);
-		}
-	}
-};
 
 const flagExpr = (flag: ReleaseFlag) => (
 	typeof flag === 'object'
@@ -699,10 +692,8 @@ export const emit = async ({ releases, schemas, readSource }: EmitInput) => {
 			// present but non-readable (pure V8 option) — reads undefined
 			return 'undefined';
 		}
-		const { factory, head } = factoryFor(name, option);
 		return {
-			factory,
-			head,
+			...factoryFor(name, option),
 			forms: sortForms(forms),
 		};
 	};
@@ -732,7 +723,7 @@ export const emit = async ({ releases, schemas, readSource }: EmitInput) => {
 		const types = new Set<string>();
 		for (const { flag, existing } of segments) {
 			usedFactories.add(typeof flag === 'object' ? flag.factory : 'undefinedFlag');
-			for (const type of valueTypes(flag)) {
+			for (const type of (typeof flag === 'object' ? flag.types : ['undefined'])) {
 				types.add(type);
 			}
 			segmentReleases.push(existing);
