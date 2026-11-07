@@ -1,18 +1,29 @@
 import type { OptionSpec } from './schema-types.ts';
 
+const sourceUrls = (version: string) => [
+	// jsDelivr fronts the nodejs/node repo by tag over a CDN
+	`https://cdn.jsdelivr.net/gh/nodejs/node@v${version}/src/node_options.cc`,
+	`https://raw.githubusercontent.com/nodejs/node/v${version}/src/node_options.cc`,
+];
+
 /**
- * Reads src/node_options.cc for an exact version from jsDelivr, which fronts
- * the nodejs/node repo by tag over a CDN (implications aren't exposed at
- * runtime, so they must come from source). jsDelivr isn't rate-limited at this
- * volume, unlike raw.githubusercontent.com fetched concurrently per major.
+ * Reads src/node_options.cc for an exact version (implications aren't
+ * exposed at runtime, so they must come from source). Either host
+ * intermittently rejects bursts of concurrent requests (jsDelivr with 403,
+ * raw.githubusercontent.com with 429), so each is tried twice.
  */
 export const readNodeOptionsSource = async (version: string) => {
-	const url = `https://cdn.jsdelivr.net/gh/nodejs/node@v${version}/src/node_options.cc`;
-	const response = await fetch(url);
-	if (!response.ok) {
-		throw new Error(`Failed to fetch ${url}: ${response.status}`);
+	const failures: string[] = [];
+	for (const url of sourceUrls(version)) {
+		for (let attempt = 0; attempt < 2; attempt += 1) {
+			const response = await fetch(url);
+			if (response.ok) {
+				return response.text();
+			}
+			failures.push(`${url}: ${response.status}`);
+		}
 	}
-	return response.text();
+	throw new Error(`Failed to fetch node_options.cc for ${version}:\n${failures.join('\n')}`);
 };
 
 type Implication = {

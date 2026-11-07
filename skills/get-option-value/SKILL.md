@@ -34,7 +34,8 @@ getOptionValue(inspectPortFlag)      // { host, port } — null-prototype, e.g. 
 ## Semantics
 
 - Value = real default + `process.env.NODE_OPTIONS` (env) then `process.execArgv` (cli), in Node's startup order.
-- **Exact on every supported major (18-26)**, including options whose type, default, or spelling changed across versions (e.g. `--env-file` became a list in Node 24, `--stack-trace-limit` became readable in Node 22) — each resolves correctly for the running version. Only gap: an option newer than the running Node reads its newest-known default instead of `undefined` (unobservable — that Node can't boot with the option).
+- **Exact on every Node release since 18.0.0** (every minor and patch), including options whose type, default, or spelling changed within a major (e.g. `--env-file` became a list in 24.12.0 and 25.2.0, `--stack-trace-limit` became readable in 22.10.0) — each resolves correctly for the running release. Gaps: an option that doesn't exist on the running release reads a neighboring release's default instead of `undefined` (unobservable — that release can't boot with the option); `--experimental-loader` below 18.6.0 and `--allow-fs-read`/`--allow-fs-write` below 20.7.0 read `["x"]` where Node has `"x"`.
+- Renamed options keep their export: `experimentalConfigFileFlag` is the same flag as `configFileFlag`.
 - **Full fidelity**: alias expansion (`--inspect=host:port` → `--inspect-port` + `--inspect`), implications (`--inspect-brk` implies `--inspect`), underscore normalization (`--no_addons`), boolean last-wins, C numeric semantics, hostPort merge into a null-prototype object.
 - **Tree-shakable**: importing `conditionsFlag` + `addonsFlag` bundles ~1 KB minified; the host:port / integer converters and other flags drop out. Ship unminified so consumers' bundlers can DCE (the package sets `sideEffects: false`).
 

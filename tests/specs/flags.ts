@@ -10,6 +10,19 @@ const flagMap = JSON.stringify(
 	Object.fromEntries(flagsMeta.flags.map(flag => [flag.option, flag.export])),
 );
 
+const inexactBelow = new Map(
+	flagsMeta.flags.flatMap(flag => ('inexactBelow' in flag ? [[flag.option, flag.inexactBelow]] : [])),
+);
+
+const isOlder = (version: string, than: string | undefined) => {
+	if (!than) {
+		return false;
+	}
+	const a = version.split('.').map(Number);
+	const b = than.split('.').map(Number);
+	return ((a[0] - b[0]) || (a[1] - b[1]) || (a[2] - b[2])) < 0;
+};
+
 const fixturesDirectory = fileURLToPath(new URL('../fixtures', import.meta.url));
 const harnessPath = path.join(fixturesDirectory, 'read-flags.mjs');
 
@@ -45,15 +58,14 @@ const readFlags = async (
 };
 
 /**
- * Asserts every flag resolves exactly to the binding. On older majors, options
- * newer than the runtime read our newest-major default where the binding has
- * no value — a documented, unobservable gap (that major can't boot with the
- * option), so those are skipped. Everything else — stable flags and
- * version-conditional flags on the majors where the option exists — must match.
+ * Asserts every flag resolves exactly to the binding. Options that don't
+ * exist on the running release read a neighboring release's default where
+ * the binding has no value — an unobservable gap (that release can't boot
+ * with the option), so those are skipped. Everything else must match.
  */
 const assertParity = (
 	comparison: Comparison,
-	allowNewer: boolean,
+	version: string,
 	expectedCount = flagsMeta.flags.length,
 ) => {
 	// Exact: the harness must return a record for every generated flag, so a
@@ -63,10 +75,13 @@ const assertParity = (
 	const oracle: Record<string, unknown> = {};
 	for (const [name, record] of Object.entries(comparison)) {
 		if (
-			allowNewer
-			&& !record.exists
-			&& record.oracle === '<undefined>'
-			&& record.ours !== '<undefined>'
+			(
+				!record.exists
+				&& record.oracle === '<undefined>'
+				&& record.ours !== '<undefined>'
+			)
+			// A documented generator exception: reads its newest shape here
+			|| isOlder(version, inexactBelow.get(name))
 		) {
 			continue;
 		}
@@ -76,14 +91,14 @@ const assertParity = (
 	expect(ours).toStrictEqual(oracle);
 };
 
-test('older-major parity does not skip an existing unreadable option', () => {
+test('parity does not skip an existing unreadable option', () => {
 	expect(() => assertParity({
 		'--stack-trace-limit': {
 			ours: 10,
 			oracle: '<undefined>',
 			exists: true,
 		},
-	}, true, 1)).toThrow();
+	}, flagsMeta.version, 1)).toThrow();
 });
 
 // Non-blocking flags only (--inspect-brk / --inspect-wait pause for a debugger)
@@ -93,35 +108,40 @@ const setFlags = [
 	'--conditions=b',
 	'--require',
 	'./noop.cjs',
-	'--import',
-	'./noop.mjs',
 	'--inspect=127.0.0.1:0',
 ];
+const importFlags = ['--import', './noop.mjs'];
 
-const majors = ['18', '19', '20', '21', '22', '23', '24', '25', '26'];
+// Node exits with "bad option" on --import before it existed (18.18.0)
+const supportsImport = async (nodePath: string) => {
+	const { stdout } = await spawn(nodePath, ['-p', 'process.allowedNodeEnvironmentFlags.has("--import")']);
+	return stdout === 'true';
+};
 
-for (const major of majors) {
-	describe(`Node ${major}: full oracle parity`, async () => {
-		const { path: nodePath } = await getNode(major);
-		// The newest major snapshots every option, so nothing is "newer" there
-		const allowNewer = major !== majors.at(-1);
+// Pinned by the generator: the newest release of each major plus the first
+// release of every flag's version segment, so each emitted branch runs
+// against a real binary and a new Node release can't change the test matrix.
+for (const version of flagsMeta.testReleases) {
+	describe(`Node ${version}: full oracle parity`, async () => {
+		const { path: nodePath } = await getNode(version);
 
 		test('every flag matches the binding (defaults)', async () => {
-			assertParity(await readFlags(nodePath, [], '', !allowNewer), allowNewer);
+			assertParity(await readFlags(nodePath, [], '', true), version);
 		});
 
 		test('every flag matches under set flags + NODE_OPTIONS', async () => {
+			const hasImport = await supportsImport(nodePath);
 			const comparison = await readFlags(
 				nodePath,
-				setFlags,
+				hasImport ? [...setFlags, ...importFlags] : setFlags,
 				'--conditions=env -C envc',
-				!allowNewer,
+				true,
 			);
 			expect(comparison['--conditions'].ours).toStrictEqual(['env', 'envc', 'a', 'b']);
 			expect(comparison['--require'].ours).toStrictEqual(['./noop.cjs']);
-			expect(comparison['--import'].ours).toStrictEqual(['./noop.mjs']);
+			expect(comparison['--import'].ours).toStrictEqual(hasImport ? ['./noop.mjs'] : []);
 			expect(comparison['--inspect'].ours).toBe(true);
-			assertParity(comparison, allowNewer);
+			assertParity(comparison, version);
 		});
 	});
 }
@@ -153,7 +173,7 @@ describe('flag metadata', () => {
 });
 
 describe('oracle harness', async () => {
-	const { path: nodePath } = await getNode(majors.at(-1)!);
+	const { path: nodePath } = await getNode(flagsMeta.version);
 	const expectHarnessFailure = async (
 		map: Record<string, string>,
 		expected: RegExp,

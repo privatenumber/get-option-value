@@ -16,13 +16,18 @@ pnpm install
 | `pnpm test` | Build, then run the test suite against real Node binaries. |
 | `pnpm type-check` | Type-check with `tsc`. |
 | `pnpm lint` | Lint with [lintroll](https://github.com/privatenumber/lintroll). |
-| `pnpm generate` | Regenerate `src/flags.ts`, `docs/flags.json`, and the README flag table. |
+| `pnpm record-releases` | Record unrecorded Node releases into the option history (downloads one binary per new release). |
+| `pnpm generate` | Regenerate `src/flags.ts`, `docs/flags.json`, and the README flag table from the history. |
 
 ## Architecture
 
 Two layers, both pinned to real Node behavior:
 
-1. **Generated flags** (`scripts/generate-flags`). For every supported major (18-26), the latest release is downloaded via [get-node](https://github.com/ehmicky/get-node) and spawned with `--expose-internals` to dump its internal option schema (names, types, aliases, defaults, help text), plus implications extracted from that version's `src/node_options.cc` (fetched from jsDelivr). It then derives each flag's forms by *resolving probe arguments* through Node's alias, negation, implication, and argument-consumption rules — so a flag knows every spelling that affects it, without hand-inverting Node's tables. Flags are emitted to `src/flags.ts`: a plain factory call when the option resolves the same on every major, or a `nodeMajor`-branched call (via `flag/for-major.ts`) when it drifts.
+1. **Generated flags** (`scripts/generate-flags`). `pnpm record-releases` downloads every Node release since `engines.node` (every minor and patch, from the [release index](https://nodejs.org/dist/index.json), prereleases excluded) via [get-node](https://github.com/ehmicky/get-node) into a temporary directory. It spawns each with `--expose-internals` to dump its internal option schema (names, types, aliases, defaults, help text), adds implications extracted from that release's `src/node_options.cc`, and deletes the binary. The schemas are committed as change points in `scripts/generate-flags/history/node-options.json`. Released binaries are immutable, so a recorded release is never dumped again.
+
+   `pnpm generate` reads only the history. It derives each flag's forms per release by *resolving probe arguments* through Node's alias, negation, implication, and argument-consumption rules, so a flag knows every spelling that affects it without hand-inverting Node's tables. Flags are emitted to `src/flags.ts`: a plain factory call when the option resolves the same on every release, or a `forVersion`-branched chain (via `flag/for-version.ts`) that switches on the exact release where it changed. Node changes options in minor and patch releases, so a per-major branch would be wrong inside a major.
+
+   The export set is every option name that any recorded release registers as a readable option, so an export exists while a supported release accepts its name. A name that a later release turned into an alias (a rename) reads through its target there, and is re-exported as the same `Flag` when both resolve identically. See [notes/get-option-value/version-model.md](./notes/get-option-value/version-model.md) for the rationale and rejected alternatives.
 
    This data is generated rather than read from the running process because Node exposes no public API for it: `process.allowedNodeEnvironmentFlags` is names-only, and the internal binding needs `--expose-internals`, reachable only by re-spawning Node.
 
@@ -56,27 +61,24 @@ Behaviors preserved, anchored to [`v24.15.0`](https://github.com/nodejs/node/blo
 
 Every flag is asserted against real Node, not hand-written expectations:
 
-- **Full parity across 18-26** (`tests/specs/flags.ts`): a child process compares `getOptionValue` against the internal options binding for *every* generated flag (~190), under defaults and representative flags, on every supported major.
+- **Full parity on pinned releases** (`tests/specs/flags.ts`): a child process compares `getOptionValue` against the internal options binding for *every* generated flag (~230), under defaults and representative flags. The releases are pinned by the generator in `docs/flags.json` (`testReleases`): the first release of every flag's version segment, so each emitted branch runs on a real binary, plus the newest release of each major. A new Node release can't change the matrix.
 - **Scanner units** (`tests/specs/scanner.ts`): the fold behavior per value shape (accumulation, last-wins, `host:port` merge, `\-` escapes, `=`-only forms).
 - **Derivation guards** (`tests/specs/derive-forms.ts`): the generate-time representability checks that reject forms the `[match, mode]` encoding can't express.
 - **Tree-shaking** (`tests/specs/bundleable.ts`): bundling a two-flag consumer is asserted to drop the other flags and unused converters, then run standalone, with byte budgets.
 
 ## Regenerating flags
 
-Run `pnpm generate` after any generator change, and commit the resulting `src/flags.ts`, `docs/flags.json`, and `README.md` together. The output is deterministic — a re-run should be byte-identical.
+Run `pnpm generate` after any generator change, and commit the resulting `src/flags.ts`, `docs/flags.json`, and `README.md` together. The output is deterministic, so a re-run should be byte-identical. It needs no Node binaries.
 
-When a **new Node major** ships:
-
-1. Add it to the `majors` array in `scripts/generate-flags/index.ts`.
-2. Add it to the `majors` array in `tests/specs/flags.ts`.
-3. Run `pnpm generate` and `pnpm test`.
+New Node releases, including new majors, are recorded by the scheduled [Sync Node.js releases](./.github/workflows/sync-node-releases.yml) workflow. It runs `pnpm record-releases` and `pnpm generate`, then opens a PR. The PR title is `feat:` when exports were added, `fix:` when existing flags changed, and `chore:` when only the history changed. To record releases locally, run `pnpm record-releases` and then `pnpm generate`.
 
 ### Codegen invariants
 
 Generation hard-errors (rather than emitting a subtly-wrong flag) on:
 
-- **Type-enum drift** — the `OptionType` fingerprint no longer matches known options.
+- **Type-enum drift** — the `OptionType` fingerprint no longer matches known options (checked on every recorded release).
 - **Spelling-dependent effects** — the same flag resolves differently across its bare/space/`=` spellings, which one `[match, mode]` form can't represent.
 - **`=`-only non-value effects** — an `=`-only spelling that isn't a plain value consumer.
-- **Read-set drift** — an option that tools read to understand their own invocation (`--conditions`, `--import`, the `--inspect` family, …) drifts across majors, where a newest-major snapshot would be inexact.
+- **Read-set drift** — an option that tools read to understand their own invocation (`--conditions`, `--import`, the `--inspect` family, …) drifts across releases. These flags must keep one shape on every release, so a drift needs an explicit decision, such as an `inexactBelow` entry in `emit.ts`.
+- **Published type widening** — a regeneration adds a value shape to an existing export (for example `Flag<string[]>` becoming `Flag<string[]> | Flag<string>`), compared against the `factories` recorded in the committed `docs/flags.json`. That is a breaking change. Resolve it with an `inexactBelow` entry in `emit.ts`, which makes the flag read its newest shape below a release, or accept it in a major release.
 - **Export-name collisions** — two option names map to the same camelCased export.
