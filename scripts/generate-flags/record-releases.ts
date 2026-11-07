@@ -10,10 +10,10 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import packageJson from '../../package.json' with { type: 'json' };
 import { buildSchema } from './build-schema.ts';
 import { readHistory, writeHistory } from './history/index.ts';
 import { majorOf } from './version.ts';
-import packageJson from '../../package.json' with { type: 'json' };
 
 // Each job holds one extracted binary (~110-190 MB) until it is dumped
 const concurrency = 6;
